@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<a href="/home">Home</a><br><br>
+<form action="/login" method="post">
+  <input name="username" placeholder="email"><br>
+  <input name="password" type="password" placeholder="password"><br>
+  <input type="submit" value="Log in">
+</form>
+</body>
+</html>
