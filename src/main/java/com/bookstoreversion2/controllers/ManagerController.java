@@ -3,14 +3,11 @@ package com.bookstoreversion2.controllers;
 import com.bookstoreversion2.entities.Book;
 import com.bookstoreversion2.entities.Discount;
 import com.bookstoreversion2.services.DiscountServiceImp;
-import com.bookstoreversion2.services.ProductServiceImp;
+import com.bookstoreversion2.services.BookServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +15,7 @@ import java.util.List;
 public class ManagerController {
 
     @Autowired
-    private ProductServiceImp productServiceImp;
+    private BookServiceImp productServiceImp;
 
     @Autowired
     private DiscountServiceImp discountServiceImp;
@@ -33,39 +30,43 @@ public class ManagerController {
 
     @GetMapping("/manager/catalog")
     public String catalogPage(Model model){
-        List<Book> books = productServiceImp.getAllProducts();
+        List<Book> books = productServiceImp.getAllBooks();
         model.addAttribute("books", books);
         return "manager_catalog";
     }
 
     @GetMapping("/manager/book/add")
     public String addBookPage(){
-        return "add_book";
+        return "add_book_form";
     }
 
     @PostMapping("/manager/book/add")
-    public String addBook(Model model){
+    public String addBook(@RequestParam String title, @RequestParam String author, @RequestParam
+    String price , Model model){
         Book book = new Book();
-        productServiceImp.addNewProduct(book);
+        book.setTitle(title);
+        book.setAuthor(author);
+        book.setPrice(Double.parseDouble(price));
+        productServiceImp.addNewBook(book);
         return "redirect:/manager/catalog";
     }
 
     @GetMapping("/manager/book/{id}/edit")
     public String bookPage(@RequestParam Long id, Model model){
-        Book book = productServiceImp.getProductById(id);
+        Book book = productServiceImp.getBookById(id);
         model.addAttribute("book", book);
         return "manager_book_page";
     }
 
     @PostMapping("/manager/book/{id}/edit")
     public String editBook(@RequestAttribute Book book, Model model){
-        productServiceImp.updateProduct(book);
+        productServiceImp.updateBook(book);
         return "redirect:/manager/catalog";
     }
 
     @GetMapping("/manager/product/{id}/delete")
     public String deleteBook(@RequestParam Book book, Model model){
-        productServiceImp.deleteProduct(book);
+        productServiceImp.deleteBook(book);
         return "redirect:/manager/catalog";
     }
 

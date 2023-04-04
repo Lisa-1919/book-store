@@ -13,29 +13,41 @@ public class Book implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    @Column(name = "title")
+    private String title;
+    @Column(name = "author")
     private String author;
+    @Column(name = "genre")
     private String genre;
+    @Column(name = "publisher")
     private String publisher;
+    @Column(name = "free_book_excerpt_url")
     private String freeBookExcerptURL;
+    @Column(name = "e_book_url")
     private String eBookURL;
+    @Column(name = "book_type")
     private String bookType;
+    @Column(name = "cover_type")
     private String bookCoverType;
+    @Column(name = "description")
     private String description;
+    @Column(name = "price")
     private double price;
+    @Column(name = "sales_number")
     private int salesNumber;
+    @Column(name = "stock_quantity")
     private int stockQuantity;
-    @OneToMany
-    @JoinTable(name = "book_images", joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "image"))
-    private List<ProductImage> images;
+//    @OneToMany
+//    @JoinTable(name = "book_images", joinColumns = @JoinColumn(name = "book_id"),
+//            inverseJoinColumns = @JoinColumn(name = "image"))
+//    private List<ProductImage> images;
 
     public Book() {
     }
 
-    public Book(Long id, String name, String author, String genre, String publisher, String freeBookExcerptURL, String eBookURL, String bookType, String bookCoverType, String description, double price, int salesNumber, int stockQuantity, List<ProductImage> images) {
+    public Book(Long id, String title, String author, String genre, String publisher, String freeBookExcerptURL, String eBookURL, String bookType, String bookCoverType, String description, double price, int salesNumber, int stockQuantity, List<ProductImage> images) {
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.author = author;
         this.genre = genre;
         this.publisher = publisher;
@@ -47,7 +59,7 @@ public class Book implements Serializable {
         this.price = price;
         this.salesNumber = salesNumber;
         this.stockQuantity = stockQuantity;
-        this.images = images;
+     //   this.images = images;
     }
 
     public Long getId() {
@@ -58,12 +70,12 @@ public class Book implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String name) {
+        this.title = name;
     }
 
     public String getDescription() {
@@ -154,11 +166,11 @@ public class Book implements Serializable {
         this.bookCoverType = bookCoverType;
     }
 
-    public List<ProductImage> getImages() {
-        return new ArrayList<>(images);
-    }
-
-    public void setImages(List<ProductImage> images) {
-        this.images = images;
-    }
+//    public List<ProductImage> getImages() {
+//        return new ArrayList<>(images);
+//    }
+//
+//    public void setImages(List<ProductImage> images) {
+//        this.images = images;
+//    }
 }

@@ -3,6 +3,7 @@ package com.bookstoreversion2.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,10 +11,10 @@ import java.util.List;
 public class Basket implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
     @ManyToMany
     @JoinTable(name = "book_in_basket",  joinColumns = @JoinColumn(name = "basket_id"),
@@ -21,6 +22,7 @@ public class Basket implements Serializable {
     private List<BookInBasket> productsInBasket;
 
     public Basket() {
+        this.productsInBasket = new ArrayList<>();
     }
 
     public Basket(Long id, User user, List<BookInBasket> productsInBasket) {

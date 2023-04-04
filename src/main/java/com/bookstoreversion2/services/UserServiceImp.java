@@ -1,10 +1,11 @@
 package com.bookstoreversion2.services;
 
+import com.bookstoreversion2.entities.Basket;
 import com.bookstoreversion2.entities.Role;
 import com.bookstoreversion2.entities.User;
+import com.bookstoreversion2.repo.BasketRepository;
 import com.bookstoreversion2.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,6 +17,8 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BasketRepository basketRepository;
 
     @Override
     public User getUserById(Long id) {
@@ -35,6 +38,12 @@ public class UserServiceImp implements UserService, UserDetailsService {
     @Override
     public void createNewAccount(User user) {
         userRepository.save(user);
+        if(user.getRoles().stream().toList().get(0).getRole().equals("USER")){
+            Basket basket = new Basket();
+          //  user.setBasket(basket);
+            basket.setUser(user);
+            basketRepository.save(basket);
+        }
     }
 
     @Override
@@ -66,16 +75,17 @@ public class UserServiceImp implements UserService, UserDetailsService {
     }
 
     public String getRoleName() {
-        String roleName = "";
-        for (Role role : getAuthorizedUser().getRoles().stream().toList()) {
-            if (role.getRole().equals("USER")) {
-                roleName = "user";
-            }else if(role.getRole().equals("MANAGER")) {
-                roleName = "manager";
-            } else if(role.getRole().equals("ADMIN")) {
-                roleName = "admin";
-            }
-        }
-        return roleName;
+        return getAuthorizedUser().getRoles().stream().toList().get(0).getRole();
+//        String roleName = "";
+//        for (Role role : getAuthorizedUser().getRoles().stream().toList()) {
+//            if (role.getRole().equals("USER")) {
+//                roleName = "user";
+//            }else if(role.getRole().equals("MANAGER")) {
+//                roleName = "manager";
+//            } else if(role.getRole().equals("ADMIN")) {
+//                roleName = "admin";
+//            }
+//        }
+//        return roleName;
     }
 }

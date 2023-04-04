@@ -9,23 +9,27 @@ public class BookInBasket extends Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long bookId;
-    private Long basketId;
+
+    @Column(name = "book_id")
+    private Long book;
+    @Column(name = "basket_id")
+    private Long basket;
+    @Column(name = "quantity")
     private int quantity;
 
     public BookInBasket() {
     }
 
-    public BookInBasket(Long id, Long bookId, Long basketId, int quantity) {
+    public BookInBasket(Long id, Long book, Long basket, int quantity) {
         this.id = id;
-        this.bookId = bookId;
-        this.basketId = basketId;
+        this.book = book;
+        this.basket = basket;
         this.quantity = quantity;
     }
 
-    public BookInBasket(Long basketId, Long bookId, int quantity){
-        this.basketId = basketId;
-        this.bookId = bookId;
+    public BookInBasket(Long basket, Long book, int quantity){
+        this.basket = basket;
+        this.book = book;
         this.quantity = quantity;
     }
 
@@ -37,12 +41,12 @@ public class BookInBasket extends Book {
         this.id = id;
     }
 
-    public Long getBasketId() {
-        return basketId;
+    public Long getBasket() {
+        return basket;
     }
 
-    public void setBasketId(Long basketId) {
-        this.basketId = basketId;
+    public void setBasket(Long basket) {
+        this.basket = basket;
     }
 
     public int getQuantity() {
@@ -53,11 +57,11 @@ public class BookInBasket extends Book {
         this.quantity = quantity;
     }
 
-    public Long getBookId() {
-        return bookId;
+    public Long getBook() {
+        return book;
     }
 
-    public void setBookId(Long productId) {
-        this.bookId = productId;
+    public void setBook(Long book) {
+        this.book = book;
     }
 }

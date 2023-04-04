@@ -33,7 +33,8 @@ public class User implements UserDetails, Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    //  private Basket basket;
+//    @OneToOne(mappedBy = "id")
+//    private Basket basket;
     public User() {
     }
 
@@ -137,4 +138,12 @@ public class User implements UserDetails, Serializable {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+//    public Basket getBasket() {
+//        return basket;
+//    }
+//
+//    public void setBasket(Basket basket) {
+//        this.basket = basket;
+//    }
 }

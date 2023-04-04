@@ -36,11 +36,11 @@ public class BasketServiceImp implements BasketService {
     @Override
     public void addProductToBasket(Long basketId, Book book, int quantity) {
         Basket basket = basketRepository.findById(basketId).get();
-        for (BookInBasket productInBasket : basket.getProductsInBasket()) {
-            if (productInBasket.getBookId().equals(book.getId()))
-                basket.getProductsInBasket().add(new BookInBasket(basketId, book.getId(), quantity));
+        for (BookInBasket bookInBasket : basket.getProductsInBasket()) {
+            if (bookInBasket.getBook().equals(book.getId()))
+                basket.getProductsInBasket().add(new BookInBasket(basket.getId(), book.getId(), quantity));
             else
-                productInBasket.setQuantity(productInBasket.getQuantity() + quantity);
+                bookInBasket.setQuantity(bookInBasket.getQuantity() + quantity);
         }
     }
 

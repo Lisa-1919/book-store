@@ -43,9 +43,9 @@ public class AccountController {
     public String authenticationSuccess(Model model) {
         String roleName = userServiceImp.getRoleName();
         return switch (roleName) {
-            case "admin" -> "account_admin";
-            case "manager" -> "account_manager";
-            case "user" -> "account_user";
+            case "ADMIN" -> "account_admin";
+            case "MANAGER" -> "account_manager";
+            case "USER" -> "account_user";
             default -> "home";
         };
     }
