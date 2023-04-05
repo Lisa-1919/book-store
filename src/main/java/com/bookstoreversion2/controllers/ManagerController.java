@@ -28,7 +28,7 @@ public class ManagerController {
         return "account_manager";
     }
 
-    @GetMapping("/manager/catalog")
+    @GetMapping("/manager/book/catalog")
     public String catalogPage(Model model){
         List<Book> books = productServiceImp.getAllBooks();
         model.addAttribute("books", books);
@@ -48,7 +48,7 @@ public class ManagerController {
         book.setAuthor(author);
         book.setPrice(Double.parseDouble(price));
         productServiceImp.addNewBook(book);
-        return "redirect:/manager/catalog";
+        return "redirect:/manager/book/catalog";
     }
 
     @GetMapping("/manager/book/{id}/edit")

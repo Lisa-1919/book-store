@@ -3,23 +3,23 @@ package com.bookstoreversion2.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "product_images")
-public class ProductImage {
+@Table(name = "book_images")
+public class BookImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "image")
+  //  @Column(name = "image")
     private String imageURL;
 
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
 
-    public ProductImage() {
+    public BookImage() {
     }
 
-    public ProductImage(Long id, String imageURL, Book book) {
+    public BookImage(Long id, String imageURL, Book book) {
         this.id = id;
         this.imageURL = imageURL;
         this.book = book;

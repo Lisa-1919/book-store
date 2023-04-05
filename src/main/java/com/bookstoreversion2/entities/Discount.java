@@ -5,13 +5,16 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table()
+@Table(name="discounts")
 public class Discount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "discount_amount")
     private double discountAmount;
+    @Column(name="start_date")
     private LocalDateTime startDate;
+    @Column(name="end_date")
     private LocalDateTime endDate;
 
     public Discount() {

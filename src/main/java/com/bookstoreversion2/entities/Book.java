@@ -37,15 +37,15 @@ public class Book implements Serializable {
     private int salesNumber;
     @Column(name = "stock_quantity")
     private int stockQuantity;
-//    @OneToMany
-//    @JoinTable(name = "book_images", joinColumns = @JoinColumn(name = "book_id"),
-//            inverseJoinColumns = @JoinColumn(name = "image"))
-//    private List<ProductImage> images;
+    @OneToMany
+    @JoinTable(name = "book_images", joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "image"))
+    private List<BookImage> images;
 
     public Book() {
     }
 
-    public Book(Long id, String title, String author, String genre, String publisher, String freeBookExcerptURL, String eBookURL, String bookType, String bookCoverType, String description, double price, int salesNumber, int stockQuantity, List<ProductImage> images) {
+    public Book(Long id, String title, String author, String genre, String publisher, String freeBookExcerptURL, String eBookURL, String bookType, String bookCoverType, String description, double price, int salesNumber, int stockQuantity, List<BookImage> images) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -59,7 +59,7 @@ public class Book implements Serializable {
         this.price = price;
         this.salesNumber = salesNumber;
         this.stockQuantity = stockQuantity;
-     //   this.images = images;
+        this.images = images;
     }
 
     public Long getId() {
@@ -166,11 +166,11 @@ public class Book implements Serializable {
         this.bookCoverType = bookCoverType;
     }
 
-//    public List<ProductImage> getImages() {
-//        return new ArrayList<>(images);
-//    }
-//
-//    public void setImages(List<ProductImage> images) {
-//        this.images = images;
-//    }
+    public List<BookImage> getImages() {
+        return new ArrayList<>(images);
+    }
+
+    public void setImages(List<BookImage> images) {
+        this.images = images;
+    }
 }
