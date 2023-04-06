@@ -51,23 +51,29 @@ public class ManagerController {
         return "redirect:/manager/book/catalog";
     }
 
-    @GetMapping("/manager/book/{id}/edit")
-    public String bookPage(@RequestParam Long id, Model model){
+    @GetMapping("/manager/book/{id}")
+    public String bookPage(@PathVariable(name = "id") Long id, Model model){
         Book book = productServiceImp.getBookById(id);
         model.addAttribute("book", book);
         return "manager_book_page";
     }
 
-    @PostMapping("/manager/book/{id}/edit")
-    public String editBook(@RequestAttribute Book book, Model model){
+    @PostMapping("/manager/book/{id}")
+    public String editBook(@PathVariable("id") Long id,@RequestParam("title") String title, @RequestParam("author") String author,
+                           @RequestParam("price") double price, Model model){
+        Book book = new Book();
+        book.setId(id);
+        book.setTitle(title);
+        book.setAuthor(author);
+        book.setPrice(price);
         productServiceImp.updateBook(book);
-        return "redirect:/manager/catalog";
+        return "redirect:/manager/book/catalog";
     }
 
-    @GetMapping("/manager/product/{id}/delete")
-    public String deleteBook(@RequestParam Book book, Model model){
-        productServiceImp.deleteBook(book);
-        return "redirect:/manager/catalog";
+    @GetMapping("/manager/book/{id}/delete")
+    public String deleteBook(@PathVariable("id") Long id, Model model){
+        productServiceImp.deleteBook(id);
+        return "redirect:/manager/book/catalog";
     }
 
 

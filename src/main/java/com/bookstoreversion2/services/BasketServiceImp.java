@@ -35,24 +35,24 @@ public class BasketServiceImp implements BasketService {
 
     @Override
     public void addProductToBasket(Long basketId, Book book, int quantity) {
-        Basket basket = basketRepository.findById(basketId).get();
-        for (BookInBasket bookInBasket : basket.getProductsInBasket()) {
-            if (bookInBasket.getBook().equals(book.getId()))
-                basket.getProductsInBasket().add(new BookInBasket(basket.getId(), book.getId(), quantity));
-            else
-                bookInBasket.setQuantity(bookInBasket.getQuantity() + quantity);
-        }
+//        Basket basket = basketRepository.findById(basketId).get();
+//        for (BookInBasket bookInBasket : basket.getProductsInBasket()) {
+//            if (bookInBasket.getBook().equals(book.getId()))
+//                basket.getProductsInBasket().add(new BookInBasket(basket.getId(), book.getId(), quantity));
+//            else
+//                bookInBasket.setQuantity(bookInBasket.getQuantity() + quantity);
+//        }
     }
 
     @Override
     public void deleteProductsFromBasket(Long basketId, List<Book> books) {
-        basketRepository.findById(basketId).get().getProductsInBasket().removeAll(books);
+     //   basketRepository.findById(basketId).get().getProductsInBasket().removeAll(books);
     }
 
     @Override
     public void clearBasket(Long id) {
-        Basket basket = basketRepository.findById(id).get();
-        basket.getProductsInBasket().clear();
+//        Basket basket = basketRepository.findById(id).get();
+//        basket.getProductsInBasket().clear();
     }
 
 

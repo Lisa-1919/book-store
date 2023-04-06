@@ -7,8 +7,7 @@
 <body>
 <p>catalog</p>
 <div th:each="book : ${books}">
-    <p th:text="${book.title}"></p>
+    <a th:href="'/manager/book/' + ${book.id}" th:text="${book.title}"></a>
 </div>
-
 </body>
 </html>

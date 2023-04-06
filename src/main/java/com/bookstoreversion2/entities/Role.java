@@ -56,4 +56,10 @@ public class Role implements GrantedAuthority {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+
+//    @Override
+//    public boolean equals(Object obj) {
+//
+//        return super.equals(obj);
+//    }
 }

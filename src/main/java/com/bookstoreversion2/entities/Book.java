@@ -37,10 +37,12 @@ public class Book implements Serializable {
     private int salesNumber;
     @Column(name = "stock_quantity")
     private int stockQuantity;
-    @OneToMany
-    @JoinTable(name = "book_images", joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "image"))
-    private List<BookImage> images;
+
+    //What is it?
+//    @OneToMany
+//    @JoinTable(name = "book_images", joinColumns = @JoinColumn(name = "book_id"),
+//            inverseJoinColumns = @JoinColumn(name = "image"))
+//    private List<BookImage> images;
 
     public Book() {
     }
@@ -59,7 +61,7 @@ public class Book implements Serializable {
         this.price = price;
         this.salesNumber = salesNumber;
         this.stockQuantity = stockQuantity;
-        this.images = images;
+      //  this.images = images;
     }
 
     public Long getId() {
@@ -166,11 +168,11 @@ public class Book implements Serializable {
         this.bookCoverType = bookCoverType;
     }
 
-    public List<BookImage> getImages() {
-        return new ArrayList<>(images);
-    }
-
-    public void setImages(List<BookImage> images) {
-        this.images = images;
-    }
+//    public List<BookImage> getImages() {
+//        return new ArrayList<>(images);
+//    }
+//
+//    public void setImages(List<BookImage> images) {
+//        this.images = images;
+//    }
 }
