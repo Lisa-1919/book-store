@@ -3,6 +3,10 @@ package com.bookstoreversion2.controllers;
 import com.bookstoreversion2.entities.Role;
 import com.bookstoreversion2.entities.User;
 import com.bookstoreversion2.services.UserServiceImp;
+import org.passay.CharacterData;
+import org.passay.CharacterRule;
+import org.passay.EnglishCharacterData;
+import org.passay.PasswordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,6 +23,8 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+import static org.passay.DigestDictionaryRule.ERROR_CODE;
+
 @Controller
 public class AdminController {
 
@@ -33,26 +39,23 @@ public class AdminController {
     }
 
     @GetMapping("/admin")
-    public String adminHomePage(Model model){
+    public String adminHomePage(Model model) {
         model.addAttribute("user", userServiceImp.getAuthorizedUser());
         return "account_admin";
     }
 
 
     @GetMapping("/admin/managers/add")
-    public String addManagerPage(Model model){
+    public String addManagerPage(Model model) {
         return "manager_registration";
     }
 
     @PostMapping("/admin/managers/add")
     public String addManager(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String phone,
-                             @RequestParam String email, Model model){
-        Random random = new SecureRandom();
-        IntStream specialChars = random.ints(8, 33, 45);
-        specialChars.mapToObj(data -> (char) data);
-        String password = specialChars.toString();
+                             @RequestParam String email, Model model) {
+       String password = userServiceImp.generatePassword();
         try {
-            Writer writer = new FileWriter("D:/book-store-version-2/managers/"+firstName + "_" + lastName +".txt", true);
+            Writer writer = new FileWriter("D:/book-store-version-2/managers/" + firstName + "_" + lastName + ".txt", false);
             writer.write(email + " " + password + "\n");
             writer.flush();
             writer.close();
@@ -64,8 +67,9 @@ public class AdminController {
 
         return "redirect:/admin";
     }
+
     @PostMapping("/admin/managers/{id}/delete")
-    public String deleteManager(@RequestParam User user, Model model){
+    public String deleteManager(@RequestParam User user, Model model) {
         userServiceImp.deleteUserById(user.getId());
         return "redirect:/admin";
     }
