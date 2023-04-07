@@ -92,7 +92,6 @@ public class UserServiceImp implements UserService, UserDetailsService {
             public String getErrorCode() {
                 return ERROR_CODE;
             }
-
             public String getCharacters() {
                 return "!@#$%^&*()_+";
             }
@@ -118,16 +117,5 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     public String getRoleName() {
         return getAuthorizedUser().getRoles().stream().toList().get(0).getRole();
-//        String roleName = "";
-//        for (Role role : getAuthorizedUser().getRoles().stream().toList()) {
-//            if (role.getRole().equals("USER")) {
-//                roleName = "user";
-//            }else if(role.getRole().equals("MANAGER")) {
-//                roleName = "manager";
-//            } else if(role.getRole().equals("ADMIN")) {
-//                roleName = "admin";
-//            }
-//        }
-//        return roleName;
     }
 }

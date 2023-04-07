@@ -3,10 +3,6 @@ package com.bookstoreversion2.controllers;
 import com.bookstoreversion2.entities.Role;
 import com.bookstoreversion2.entities.User;
 import com.bookstoreversion2.services.UserServiceImp;
-import org.passay.CharacterData;
-import org.passay.CharacterRule;
-import org.passay.EnglishCharacterData;
-import org.passay.PasswordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,12 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.security.SecureRandom;
 import java.util.Collections;
-import java.util.Random;
-import java.util.stream.IntStream;
-
-import static org.passay.DigestDictionaryRule.ERROR_CODE;
 
 @Controller
 public class AdminController {
