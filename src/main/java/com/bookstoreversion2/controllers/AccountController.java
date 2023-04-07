@@ -50,12 +50,8 @@ public class AccountController {
         };
     }
 
-
-
-    /*
-    * Добавить:
-    *  смену пароля
-    * ? редактирование профиля
-    * */
-
+    @GetMapping("/account/password")
+    public String passwordUpdatePage(Model model){
+        return "password_page";
+    }
 }

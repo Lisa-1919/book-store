@@ -5,11 +5,13 @@
     <title>Title</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
 <form action="/manager/book/add" method="post">
     <input name="title" type="text" placeholder="title"><br>
     <input name="author" type="text" placeholder="author"><br>
     <input name="price" type="text" placeholder="price">
     <input type="submit" value="add">
 </form>
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>
