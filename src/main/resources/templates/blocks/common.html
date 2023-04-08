@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="search">
+    <form action="/catalog" method="get">
+        <input name="query" placeholder="search">
+        <input type="submit" value="find">
+    </form>
+</div>
+<div th:fragment="sort">
+    <form action="/catalog" method="get">
+        <select name="sort">
+            <option disabled>sort</option>
+            <option value="popular">popular</option>
+            <option value="priceUp">price (min)</option>
+            <option value="priceDown">price (max)</option>
+        </select>
+        <input type="submit" value="sort">
+    </form>
+</div>
+<div th:fragment="filter">
+    <form action="/catalog" method="get">
+
+    </form>
+</div>
+
+
+</body>
+</html>

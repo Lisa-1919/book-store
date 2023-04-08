@@ -16,4 +16,6 @@ public interface BookService {
 
     List<Book> search(String quest);
 
+    List<Book> sort(String sort);
+
 }
