@@ -168,7 +168,7 @@ public class Book implements Serializable {
         this.bookCoverType = bookCoverType;
     }
 
-//    public List<BookImage> getImages() {
+    //    public List<BookImage> getImages() {
 //        return new ArrayList<>(images);
 //    }
 //

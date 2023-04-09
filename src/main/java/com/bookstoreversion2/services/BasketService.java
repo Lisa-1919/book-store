@@ -9,8 +9,8 @@ public interface BasketService {
 
     Basket getBasketById(Long id);
     Basket getBasketByUserId(Long userId);
-    void addProductToBasket(Long basketId, Book book, int quantity);
-    void deleteProductsFromBasket(Long basketId, List<Book> books);
+    void addProductToBasket(Long bookId);
+    void deleteProductsFromBasket(Book book);
     void clearBasket(Long id);
 
 }

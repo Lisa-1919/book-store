@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "baskets")
@@ -16,19 +18,24 @@ public class Basket implements Serializable {
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-//    @ManyToMany
+//    @OneToMany(mappedBy = "baskets", cascade = CascadeType.ALL)
 //    @JoinTable(name = "book_in_basket",  joinColumns = @JoinColumn(name = "basket_id"),
 //            inverseJoinColumns = @JoinColumn(name = "book_id"))
 //    private List<BookInBasket> productsInBasket;
-
+    @ManyToMany
+    @JoinTable(name = "books_baskets", joinColumns = @JoinColumn(name = "basket_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
+    private Set<Book> books;
+    @Column(name="total_price")
+    private double totalPrice;
     public Basket() {
-        //this.productsInBasket = new ArrayList<>();
+        this.books = new HashSet<>();
     }
 
-    public Basket(Long id, User user, List<BookInBasket> productsInBasket) {
+    public Basket(Long id, User user, HashSet<Book> productsInBasket) {
         this.id = id;
         this.user = user;
-    //    this.productsInBasket = productsInBasket;
+        this.books = productsInBasket;
     }
 
     public Long getId() {
@@ -47,11 +54,19 @@ public class Basket implements Serializable {
         this.user = user;
     }
 
-//    public List<BookInBasket> getProductsInBasket() {
-//        return productsInBasket;
-//    }
-//
-//    public void setProductsInBasket(List<BookInBasket> productsInBasket) {
-//        this.productsInBasket = productsInBasket;
-//    }
+    public Set<Book> getProductsInBasket() {
+        return books;
+    }
+
+    public void setProductsInBasket(HashSet<Book> productsInBasket) {
+        this.books = productsInBasket;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 }

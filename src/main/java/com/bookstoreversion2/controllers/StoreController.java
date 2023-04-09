@@ -1,18 +1,15 @@
 package com.bookstoreversion2.controllers;
 
 import com.bookstoreversion2.entities.Book;
-import com.bookstoreversion2.entities.User;
 import com.bookstoreversion2.services.BookServiceImp;
 import com.bookstoreversion2.services.UserServiceImp;
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.HttpRequestHandler;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 

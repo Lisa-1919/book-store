@@ -4,7 +4,10 @@ package com.bookstoreversion2.services;
 import com.bookstoreversion2.entities.Basket;
 import com.bookstoreversion2.entities.Book;
 import com.bookstoreversion2.entities.BookInBasket;
+import com.bookstoreversion2.entities.User;
 import com.bookstoreversion2.repo.BasketRepository;
+import com.bookstoreversion2.repo.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,11 +15,13 @@ import java.util.List;
 @Service
 public class BasketServiceImp implements BasketService {
 
-    private final BasketRepository basketRepository;
+    @Autowired
+    private BasketRepository basketRepository;
+    @Autowired
+    private UserServiceImp userServiceImp;
+    @Autowired
+    private BookRepository bookRepository;
 
-    public BasketServiceImp(BasketRepository basketRepository) {
-        this.basketRepository = basketRepository;
-    }
 
     @Override
     public Basket getBasketById(Long id) {
@@ -34,19 +39,23 @@ public class BasketServiceImp implements BasketService {
     }
 
     @Override
-    public void addProductToBasket(Long basketId, Book book, int quantity) {
-//        Basket basket = basketRepository.findById(basketId).get();
-//        for (BookInBasket bookInBasket : basket.getProductsInBasket()) {
-//            if (bookInBasket.getBook().equals(book.getId()))
-//                basket.getProductsInBasket().add(new BookInBasket(basket.getId(), book.getId(), quantity));
-//            else
-//                bookInBasket.setQuantity(bookInBasket.getQuantity() + quantity);
-//        }
+    public void addProductToBasket(Long bookId) {
+        Basket basket = userServiceImp.getAuthorizedUserBasket();
+        Book book = bookRepository.findById(bookId).get();
+        double totalPrice = basket.getTotalPrice();
+        if (basket.getProductsInBasket().add(book))
+            totalPrice += book.getPrice();
+        basket.setTotalPrice(totalPrice);
+        basketRepository.save(basket);
     }
 
     @Override
-    public void deleteProductsFromBasket(Long basketId, List<Book> books) {
-     //   basketRepository.findById(basketId).get().getProductsInBasket().removeAll(books);
+    public void deleteProductsFromBasket(Book book) {
+        Basket basket = userServiceImp.getAuthorizedUserBasket();
+        if(basket.getProductsInBasket().remove(book))
+            basket.setTotalPrice(basket.getTotalPrice() - book.getPrice());
+        basketRepository.save(basket);
+        //   basketRepository.findById(basketId).get().getProductsInBasket().removeAll(books);
     }
 
     @Override

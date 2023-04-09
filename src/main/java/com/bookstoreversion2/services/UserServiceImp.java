@@ -1,7 +1,6 @@
 package com.bookstoreversion2.services;
 
 import com.bookstoreversion2.entities.Basket;
-import com.bookstoreversion2.entities.Role;
 import com.bookstoreversion2.entities.User;
 import com.bookstoreversion2.repo.BasketRepository;
 import com.bookstoreversion2.repo.UserRepository;
@@ -15,10 +14,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.passay.DigestDictionaryRule.ERROR_CODE;
 
@@ -102,6 +97,22 @@ public class UserServiceImp implements UserService, UserDetailsService {
         String password = gen.generatePassword(10, splCharRule, lowerCaseRule,
                 upperCaseRule, digitRule);
         return password;
+    }
+
+    @Override
+    public void updatePassword(String oldPassword, String newPassword) {
+        User user = getAuthorizedUser();
+        if(user.getPassword().equals(oldPassword)){
+            user.setPassword(newPassword);
+            userRepository.save(user);
+        }
+    }
+
+    @Override
+    public Basket getAuthorizedUserBasket() {
+        User user = getAuthorizedUser();
+        Basket basket = user.getBasket();
+        return basket;
     }
 
 
