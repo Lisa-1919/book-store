@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<form th:action="'/book/' + ${book.id} + '/add'" method="get">
+  <div name="book">
+    <p th:text="${book.title}"/>
+    <p th:text="${book.author}"/>
+    <p th:text="${book.price}"/>
+  </div>
+  <input type="submit" value="add to basket">
+</form>
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

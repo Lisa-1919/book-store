@@ -1,7 +1,7 @@
 package com.bookstoreversion2.controllers;
 
-import com.bookstoreversion2.entities.Book;
-import com.bookstoreversion2.entities.Discount;
+import com.bookstoreversion2.data.entities.Book;
+import com.bookstoreversion2.data.entities.Discount;
 import com.bookstoreversion2.services.DiscountServiceImp;
 import com.bookstoreversion2.services.BookServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,17 +36,18 @@ public class ManagerController {
     }
 
     @GetMapping("/manager/book/add")
-    public String addBookPage(){
+    public String addBookPage(Model model){
+        model.addAttribute("book", new Book());
         return "add_book_form";
     }
 
     @PostMapping("/manager/book/add")
-    public String addBook(@RequestParam String title, @RequestParam String author, @RequestParam
-    String price , Model model){
-        Book book = new Book();
-        book.setTitle(title);
-        book.setAuthor(author);
-        book.setPrice(Double.parseDouble(price));
+    public String addBook(/*@RequestParam String title, @RequestParam String author, @RequestParam
+    String price*/ @ModelAttribute("book") Book book , Model model){
+//        Book book = new Book();
+//        book.setTitle(title);
+//        book.setAuthor(author);
+//        book.setPrice(Double.parseDouble(price));
         productServiceImp.addNewBook(book);
         return "redirect:/manager/book/catalog";
     }

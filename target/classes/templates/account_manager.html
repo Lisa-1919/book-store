@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<a href="/home">Главная страница</a><br>
+<header th:insert="blocks/header :: header"></header>
 <p>hi, manager</p>
 <a href="/manager/book/catalog">catalog</a><br>
-<a href="/manager/book/add">add book</a>
+<a href="/manager/book/add">add book</a><br>
+<a href="/account/password">update password</a>
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

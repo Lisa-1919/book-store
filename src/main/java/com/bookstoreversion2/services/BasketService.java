@@ -1,9 +1,7 @@
 package com.bookstoreversion2.services;
 
-import com.bookstoreversion2.entities.Basket;
-import com.bookstoreversion2.entities.Book;
-
-import java.util.List;
+import com.bookstoreversion2.data.entities.Basket;
+import com.bookstoreversion2.data.entities.Book;
 
 public interface BasketService {
 

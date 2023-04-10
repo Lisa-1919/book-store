@@ -1,6 +1,6 @@
 package com.bookstoreversion2.controllers;
 
-import com.bookstoreversion2.entities.Book;
+import com.bookstoreversion2.data.entities.Book;
 import com.bookstoreversion2.services.BookServiceImp;
 import com.bookstoreversion2.services.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.bookstoreversion2.entities;
+package com.bookstoreversion2.data.entities;
 
 import jakarta.persistence.*;
 

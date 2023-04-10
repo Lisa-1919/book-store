@@ -1,4 +1,4 @@
-package com.bookstoreversion2.entities;
+package com.bookstoreversion2.data.entities;
 
 import jakarta.persistence.*;
 
@@ -9,7 +9,7 @@ public class BookImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-  //  @Column(name = "image")
+    @Column(name = "image")
     private String imageURL;
 
     @ManyToOne

@@ -1,9 +1,9 @@
 package com.bookstoreversion2.services;
 
-import com.bookstoreversion2.entities.Basket;
-import com.bookstoreversion2.entities.User;
-import com.bookstoreversion2.repo.BasketRepository;
-import com.bookstoreversion2.repo.UserRepository;
+import com.bookstoreversion2.data.entities.Basket;
+import com.bookstoreversion2.data.entities.User;
+import com.bookstoreversion2.data.repo.BasketRepository;
+import com.bookstoreversion2.data.repo.UserRepository;
 import org.passay.CharacterData;
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
@@ -14,6 +14,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.passay.DigestDictionaryRule.ERROR_CODE;
 
@@ -113,6 +116,17 @@ public class UserServiceImp implements UserService, UserDetailsService {
         User user = getAuthorizedUser();
         Basket basket = user.getBasket();
         return basket;
+    }
+
+    @Override
+    public List<User> getManagerList() {
+        List<User> managers = new ArrayList<>();
+        for(User user : userRepository.findAll()){
+            if(user.getRoles().stream().toList().get(0).getRole().equals("MANAGER")){
+                managers.add(user);
+            }
+        }
+        return managers;
     }
 
 

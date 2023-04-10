@@ -7,8 +7,8 @@
 <body>
 <header th:insert="blocks/header :: header"></header>
     <div th:each="book : ${books}">
-        <form th:action="'/user/book/' + ${book.id} + '/delete'" method="post">
-            <a th:href="'/user/book/' + ${book.id}" th:text="${book.title}"></a>
+        <form th:action="'/book/' + ${book.id} + '/delete'" method="post">
+            <a th:href="'/book/' + ${book.id}" th:text="${book.title}"></a>
             <p th:text="${book.author}"></p>
             <p th:text="${book.price}"></p>
             <input type="checkbox" name="add" th:checked="${add}"><br>

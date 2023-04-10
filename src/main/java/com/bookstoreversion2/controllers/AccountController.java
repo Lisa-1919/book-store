@@ -1,7 +1,7 @@
 package com.bookstoreversion2.controllers;
 
-import com.bookstoreversion2.entities.Role;
-import com.bookstoreversion2.entities.User;
+import com.bookstoreversion2.data.entities.Role;
+import com.bookstoreversion2.data.entities.User;
 import com.bookstoreversion2.services.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -53,5 +53,11 @@ public class AccountController {
     @GetMapping("/account/password")
     public String passwordUpdatePage(Model model){
         return "password_page";
+    }
+
+    @PostMapping("/account/password")
+    public String updatePassword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, Model model){
+        userServiceImp.updatePassword(bCryptPasswordEncoder.encode(oldPassword), bCryptPasswordEncoder.encode(newPassword));
+        return "redirect:/account";
     }
 }

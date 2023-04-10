@@ -1,7 +1,7 @@
 package com.bookstoreversion2.services;
 
-import com.bookstoreversion2.entities.Discount;
-import com.bookstoreversion2.repo.DiscountRepository;
+import com.bookstoreversion2.data.entities.Discount;
+import com.bookstoreversion2.data.repo.DiscountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

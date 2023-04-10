@@ -1,8 +1,8 @@
 package com.bookstoreversion2.controllers;
 
-import com.bookstoreversion2.entities.Basket;
-import com.bookstoreversion2.entities.Book;
-import com.bookstoreversion2.entities.User;
+import com.bookstoreversion2.data.entities.Basket;
+import com.bookstoreversion2.data.entities.Book;
+import com.bookstoreversion2.data.entities.User;
 import com.bookstoreversion2.services.BasketServiceImp;
 import com.bookstoreversion2.services.BookServiceImp;
 import com.bookstoreversion2.services.OrderServiceImp;
@@ -28,7 +28,7 @@ public class UserController {
     @Autowired
     private OrderServiceImp orderServiceImp;
 
-    @GetMapping("/user/book/basket")
+    @GetMapping("/basket")
     public String basketPage(Model model){
         User user = userServiceImp.getAuthorizedUser();
         Basket basket = basketServiceImp.getBasketByUserId(user.getId());
@@ -41,20 +41,20 @@ public class UserController {
         return "basket";
     }
 
-    @GetMapping("/user/book/{id}")
+    @GetMapping("/book/{id}")
     public String bookPage(@PathVariable("id") Long id, Model model){
         Book book = bookServiceImp.getBookById(id);
         model.addAttribute("book", book);
         return "book_page";
     }
 
-    @GetMapping("/user/book/{id}/add")
+    @GetMapping("/book/{id}/add")
     public String addToBasket(@PathVariable("id") Long id, Model model){
         basketServiceImp.addProductToBasket(id);
         return "redirect:/catalog";
     }
 
-    @PostMapping("/user/book/{id}/delete")
+    @PostMapping("/book/{id}/delete")
     public String deleteFromBasket(@PathVariable("id") Long id, Model model){
         Book book = bookServiceImp.getBookById(id);
         basketServiceImp.deleteProductsFromBasket(book);

@@ -1,6 +1,6 @@
 package com.bookstoreversion2.services;
 
-import com.bookstoreversion2.entities.Discount;
+import com.bookstoreversion2.data.entities.Discount;
 
 import java.util.List;
 

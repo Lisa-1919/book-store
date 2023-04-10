@@ -1,13 +1,14 @@
 package com.bookstoreversion2.controllers;
 
-import com.bookstoreversion2.entities.Role;
-import com.bookstoreversion2.entities.User;
+import com.bookstoreversion2.data.entities.Role;
+import com.bookstoreversion2.data.entities.User;
 import com.bookstoreversion2.services.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -59,9 +60,15 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PostMapping("/admin/managers/{id}/delete")
-    public String deleteManager(@RequestParam User user, Model model) {
-        userServiceImp.deleteUserById(user.getId());
+    @PostMapping("/managers/{id}/delete")
+    public String deleteManager(@PathVariable("id") Long managerId, Model model) {
+        userServiceImp.deleteUserById(managerId);
         return "redirect:/admin";
+    }
+
+    @GetMapping("/managers")
+    public String managerList(Model model){
+        model.addAttribute("managers", userServiceImp.getManagerList());
+        return "manager_list_page";
     }
 }

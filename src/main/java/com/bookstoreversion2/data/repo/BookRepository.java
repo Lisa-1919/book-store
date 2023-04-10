@@ -1,8 +1,7 @@
-package com.bookstoreversion2.repo;
+package com.bookstoreversion2.data.repo;
 
 
-import com.bookstoreversion2.entities.Book;
-import org.springframework.data.domain.Sort;
+import com.bookstoreversion2.data.entities.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

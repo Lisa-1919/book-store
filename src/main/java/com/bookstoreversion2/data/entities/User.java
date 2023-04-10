@@ -1,6 +1,7 @@
-package com.bookstoreversion2.entities;
+package com.bookstoreversion2.data.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,7 +9,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
-
+@Builder
 @Entity
 @Table(name = "users")
 public class User implements UserDetails, Serializable {
@@ -33,8 +34,8 @@ public class User implements UserDetails, Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-//    @OneToOne(mappedBy = "id")
-//    private Basket basket;
+    @OneToOne(mappedBy = "user")
+    private Basket basket;
     public User() {
     }
 
@@ -139,11 +140,11 @@ public class User implements UserDetails, Serializable {
         this.roles = roles;
     }
 
-//    public Basket getBasket() {
-//        return basket;
-//    }
-//
-//    public void setBasket(Basket basket) {
-//        this.basket = basket;
-//    }
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public void setBasket(Basket basket) {
+        this.basket = basket;
+    }
 }

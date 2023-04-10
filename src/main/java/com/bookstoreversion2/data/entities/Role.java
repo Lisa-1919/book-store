@@ -1,9 +1,8 @@
-package com.bookstoreversion2.entities;
+package com.bookstoreversion2.data.entities;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
-import java.io.Serializable;
 import java.util.Set;
 
 @Entity
@@ -59,6 +58,7 @@ public class Role implements GrantedAuthority {
 
 //    @Override
 //    public boolean equals(Object obj) {
+//        if(this.id == )
 //
 //        return super.equals(obj);
 //    }

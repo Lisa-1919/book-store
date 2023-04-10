@@ -1,16 +1,12 @@
 package com.bookstoreversion2.services;
 
 
-import com.bookstoreversion2.entities.Basket;
-import com.bookstoreversion2.entities.Book;
-import com.bookstoreversion2.entities.BookInBasket;
-import com.bookstoreversion2.entities.User;
-import com.bookstoreversion2.repo.BasketRepository;
-import com.bookstoreversion2.repo.BookRepository;
+import com.bookstoreversion2.data.entities.Basket;
+import com.bookstoreversion2.data.entities.Book;
+import com.bookstoreversion2.data.repo.BasketRepository;
+import com.bookstoreversion2.data.repo.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class BasketServiceImp implements BasketService {
@@ -43,7 +39,7 @@ public class BasketServiceImp implements BasketService {
         Basket basket = userServiceImp.getAuthorizedUserBasket();
         Book book = bookRepository.findById(bookId).get();
         double totalPrice = basket.getTotalPrice();
-        if (basket.getProductsInBasket().add(book))
+        if (basket.getBooks().add(book))
             totalPrice += book.getPrice();
         basket.setTotalPrice(totalPrice);
         basketRepository.save(basket);
@@ -52,7 +48,7 @@ public class BasketServiceImp implements BasketService {
     @Override
     public void deleteProductsFromBasket(Book book) {
         Basket basket = userServiceImp.getAuthorizedUserBasket();
-        if(basket.getProductsInBasket().remove(book))
+        if(basket.getBooks().remove(book))
             basket.setTotalPrice(basket.getTotalPrice() - book.getPrice());
         basketRepository.save(basket);
         //   basketRepository.findById(basketId).get().getProductsInBasket().removeAll(books);

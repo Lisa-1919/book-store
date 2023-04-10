@@ -1,7 +1,7 @@
 package com.bookstoreversion2.services;
 
-import com.bookstoreversion2.entities.Book;
-import com.bookstoreversion2.repo.BookRepository;
+import com.bookstoreversion2.data.entities.Book;
+import com.bookstoreversion2.data.repo.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;

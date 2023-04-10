@@ -1,13 +1,17 @@
-package com.bookstoreversion2.entities;
+package com.bookstoreversion2.data.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = "baskets")
 public class Basket implements Serializable {
@@ -32,41 +36,4 @@ public class Basket implements Serializable {
         this.books = new HashSet<>();
     }
 
-    public Basket(Long id, User user, HashSet<Book> productsInBasket) {
-        this.id = id;
-        this.user = user;
-        this.books = productsInBasket;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Set<Book> getProductsInBasket() {
-        return books;
-    }
-
-    public void setProductsInBasket(HashSet<Book> productsInBasket) {
-        this.books = productsInBasket;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
 }

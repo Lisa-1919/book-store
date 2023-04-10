@@ -1,7 +1,9 @@
 package com.bookstoreversion2.services;
 
-import com.bookstoreversion2.entities.Order;
-import com.bookstoreversion2.repo.OrderRepository;
+import com.bookstoreversion2.data.entities.Book;
+import com.bookstoreversion2.data.entities.Order;
+import com.bookstoreversion2.data.repo.BasketRepository;
+import com.bookstoreversion2.data.repo.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +13,14 @@ import java.util.List;
 @Service
 public class OrderServiceImp implements OrderService{
 
-    private final OrderRepository orderRepository;
-
-    public OrderServiceImp(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
+    @Autowired
+    private OrderRepository orderRepository;
+    @Autowired
+    private BasketServiceImp basketServiceImp;
+    @Autowired
+    private UserServiceImp userServiceImp;
+    @Autowired
+    private BasketRepository basketRepository;
 
     @Override
     public Order getOrderById(Long id) {
@@ -33,7 +38,18 @@ public class OrderServiceImp implements OrderService{
     }
 
     @Override
-    public void createNewOrder(Order order) {
-        orderRepository.save(order);
+    public void createNewOrder(List<Book> books) {
+//        Order order = new Order();
+//        List<Book> toOrder = new ArrayList<>();
+//        for(Book book: books){
+//            if(book.isAdd())
+//                toOrder.add(book);
+//        }
+//        order.setBooksInOrder(toOrder);
+//        Basket basket = userServiceImp.getAuthorizedUserBasket();
+//        if(basket.getProductsInBasket().removeAll(toOrder)) {
+//            basketRepository.save(basket);
+//            orderRepository.save(order);
+//        }
     }
 }

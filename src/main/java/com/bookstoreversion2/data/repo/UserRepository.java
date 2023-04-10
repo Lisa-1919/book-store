@@ -1,6 +1,6 @@
-package com.bookstoreversion2.repo;
+package com.bookstoreversion2.data.repo;
 
-import com.bookstoreversion2.entities.User;
+import com.bookstoreversion2.data.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
