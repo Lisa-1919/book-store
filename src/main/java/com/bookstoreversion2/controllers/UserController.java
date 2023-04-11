@@ -32,7 +32,7 @@ public class UserController {
     public String basketPage(Model model){
         User user = userServiceImp.getAuthorizedUser();
         Basket basket = basketServiceImp.getBasketByUserId(user.getId());
-        model.addAttribute("books", basket.getProductsInBasket());
+        model.addAttribute("books", basket.getBooks());
         model.addAttribute("totalPrice", basket.getTotalPrice());
         List<Book> list = new ArrayList<>();
         model.addAttribute("list", list);

@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<form th:action="'/book/' + ${book.id} + '/add'" method="get">
-  <div name="book">
-    <p th:text="${book.title}"/>
-    <p th:text="${book.author}"/>
-    <p th:text="${book.price}"/>
-  </div>
-  <input type="submit" value="add to basket">
+<form th:action="'/book/' + ${book.id} + '/add'" method="get" th:object="${book}">
+    <p th:text="'title:'+ *{title}"/>
+    <p th:text="'author:' + *{author}"/>
+    <p th:text="'price:' + *{price} +' byn'"/>
+    <p th:text="'genre: ' + *{genre}"/>
+    <p th:text="'publisher: ' + *{publisher}"/>
+    <p th:text="'book type: ' + *{bookType}"/>
+    <p th:text="'cover type: ' + *{bookCoverType}"/>
+    <p th:text="'desctiption: ' + *{description}"/>
+<!--    <p>free book excerpt url<input th:field="*{freeBookExcerptURL}" type="text" th:value="*{freeBookExcerptURL}"></p>-->
+<!--    <p>ebook url<input th:field="*{EBookURL}" type="text" th:value="*{EBookURL}"></p>-->
+    <p th:text="'stock quantity: ' + *{stockQuantity}"/>
+    <input type="submit" value="add to basket">
 </form>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>

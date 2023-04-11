@@ -32,7 +32,7 @@ public class Book implements Serializable {
     private String EBookURL;
     @Column(name = "book_type")
     private String bookType;
-    @Column(name = "cover_type")
+    @Column(name = "book_cover_type")
     private String bookCoverType;
     @Column(name = "description")
     private String description;
@@ -44,12 +44,29 @@ public class Book implements Serializable {
     private int stockQuantity;
 
     //What is it?
-    @OneToMany
-    @JoinTable(name = "book_images", joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "image"))
-    private Set<BookImage> images;
+//    @OneToMany
+//    @JoinTable(name = "book_images", joinColumns = @JoinColumn(name = "book_id"),
+//            inverseJoinColumns = @JoinColumn(name = "image"))
+//    private Set<BookImage> images;
 
     public Book() {
-        images = new HashSet<>();
+        /*images = new HashSet<>();*/
+    }
+
+    public Book(Long id, String title, String author, String genre, String publisher, String freeBookExcerptURL, String EBookURL, String bookType, String bookCoverType, String description, double price, int salesNumber, int stockQuantity) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.publisher = publisher;
+        this.freeBookExcerptURL = freeBookExcerptURL;
+        this.EBookURL = EBookURL;
+        this.bookType = bookType;
+        this.bookCoverType = bookCoverType;
+        this.description = description;
+        this.price = price;
+        this.salesNumber = salesNumber;
+        this.stockQuantity = stockQuantity;
+        //this.images = images;
     }
 }

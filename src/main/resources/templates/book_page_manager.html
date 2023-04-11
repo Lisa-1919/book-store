@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<form th:action="'/manager/book/' + ${book.id} + '/edit'" method="post" th:object="${book}">
+    <p>title<input th:field="*{title}" type="text" th:value="*{title}"></p>
+    <p>author<input th:field="*{author}" type="text" th:value="*{author}"></p>
+    <p>price<input th:field="*{price}" type="text" th:value="*{price}"></p>
+    <select th:field="*{genre}" th:selected="*{genre}">
+        <option th:value="'roman'">roman</option>
+        <option th:value="'education'">education</option>
+        <option th:value="'fantastic'">fantastic</option>
+        <option th:value="'historical'">historical</option>
+    </select><br>
+    <select th:field="*{publisher}" th:selected="*{publisher}">
+        <option th:value="'АСТ'">АСТ</option>
+        <option th:value="'Азбука'">Азбука</option>
+    </select><br>
+    <select th:field="*{bookType}" th:selected="*{bookType}">
+        <option th:value="'Бумажная'">Бумажная</option>
+        <option th:value="'Электронная'">Электронная</option>
+    </select><br>
+    <select th:field="*{bookCoverType}" th:value="*{bookCoverType}">
+        <option th:value="'Твердая'">Твердая</option>
+        <option th:value="'Мягкая'">Мягкая</option>
+        <option th:value="'-'">Электронная книга</option>
+    </select><br>
+    <p>description<input th:field="*{description}" type="text" th:value="*{description}"></p>
+    <p>free book excerpt url<input th:field="*{freeBookExcerptURL}" type="text" th:value="*{freeBookExcerptURL}"></p>
+    <p>ebook url<input th:field="*{EBookURL}" type="text" th:value="*{EBookURL}"></p>
+    <p>stock quantity<input th:field="*{stockQuantity}" type="number" th:value="*{stockQuantity}"></p>
+  <input type="submit" value="update">
+</form>
+<form th:action="'/manager/book/' + ${book.id} + '/delete'" method="get">
+    <input type="submit" value="delete">
+</form>
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

@@ -58,6 +58,17 @@ public class User implements UserDetails, Serializable {
         this.roles = roles;
     }
 
+    public User(Long id, String username, String phone, String firstName, String lastName, String password, Set<Role> roles, Basket basket) {
+        this.id = id;
+        this.username = username;
+        this.phone = phone;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.roles = roles;
+        this.basket = basket;
+    }
+
     public Long getId() {
         return id;
     }

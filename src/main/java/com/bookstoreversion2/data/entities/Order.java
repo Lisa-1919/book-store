@@ -37,4 +37,16 @@ public class Order {
     public Order() {
     }
 
+    public Order(Long id, User user, String address, List<Book> booksInOrder, double cost, LocalDateTime orderDate, LocalDateTime receiptDate, Status status, PaymentMethod paymentMethod, ShippingMethod shippingMethod) {
+        this.id = id;
+        this.user = user;
+        this.address = address;
+        this.booksInOrder = booksInOrder;
+        this.cost = cost;
+        this.orderDate = orderDate;
+        this.receiptDate = receiptDate;
+        this.status = status;
+        this.paymentMethod = paymentMethod;
+        this.shippingMethod = shippingMethod;
+    }
 }

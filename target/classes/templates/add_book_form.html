@@ -10,17 +10,28 @@
     <div th:object="${book}" th:value="${book}">
         <input th:field="*{title}" type="text" placeholder="title"><br>
         <input th:field="*{author}" type="text" placeholder="author"><br>
-        <input th:field="*{price}" type="text" placeholder="price">
+        <input th:field="*{price}" type="text" placeholder="price"><br>
         <select th:field="*{genre}">
             <option th:value="'roman'">roman</option>
             <option th:value="'education'">education</option>
             <option th:value="'fantastic'">fantastic</option>
             <option th:value="'historical'">historical</option>
-        </select>
+        </select><br>
         <select th:field="*{publisher}">
-            <option th:value="'ast'">АСТ</option>
-            <option th:value="'ast'">Азбука</option>
+            <option th:value="'АСТ'">АСТ</option>
+            <option th:value="'Азбука'">Азбука</option>
+        </select><br>
+        <select th:field="*{bookType}">
+            <option th:value="'Бумажная'">Бумажная</option>
+            <option th:value="'Электронная'">Электронная</option>
         </select>
+        <select th:field="*{bookCoverType}">
+            <option th:value="'Твердая'">Твердая</option>
+            <option th:value="'Мягкая'">Мягкая</option>
+        </select><br>
+        <input th:field="*{description}" type="text" placeholder="description"><br>
+        <input th:field="*{freeBookExcerptURL}" type="text" placeholder="free book excerpt url"><br>
+        <input th:field="*{EBookURL}" type="text" placeholder="ebook url"><br>
     </div>
     <input type="submit" value="add">
 </form>

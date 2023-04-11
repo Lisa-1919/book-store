@@ -1,0 +1,21 @@
+{
+  "personalizations": [
+    {
+      "to": [
+        {
+          "email": "svetlana.burak415@gmail.com"
+        }
+      ],
+      "subject": "Hello, World!"
+    }
+  ],
+  "from": {
+    "email": "lizasimerova438@gmail.com"
+  },
+  "content": [
+    {
+      "type": "text/plain",
+      "value": "Hello, World!"
+    }
+  ]
+}

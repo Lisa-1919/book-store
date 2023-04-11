@@ -36,4 +36,10 @@ public class Basket implements Serializable {
         this.books = new HashSet<>();
     }
 
+    public Basket(Long id, User user, Set<Book> books, double totalPrice) {
+        this.id = id;
+        this.user = user;
+        this.books = books;
+        this.totalPrice = totalPrice;
+    }
 }

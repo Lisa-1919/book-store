@@ -38,19 +38,7 @@ public class BookServiceImp implements BookService {
 
     @Override
     public void updateBook(Book updateBook) {
-        Book book = bookRepository.findById(updateBook.getId()).get();
-        book.setBookType(updateBook.getBookType());
-        book.setTitle(updateBook.getTitle());
-        book.setAuthor(updateBook.getAuthor());
-        book.setEBookURL(updateBook.getEBookURL());
-        book.setDescription(updateBook.getDescription());
-        book.setGenre(updateBook.getGenre());
-     //   book.setImages(updateBook.getImages());
-        book.setFreeBookExcerptURL(updateBook.getFreeBookExcerptURL());
-        book.setPrice(updateBook.getId());
-        book.setPublisher(updateBook.getPublisher());
-        book.setStockQuantity(updateBook.getStockQuantity());
-        bookRepository.save(book);
+        bookRepository.save(updateBook);
     }
 
     @Override
