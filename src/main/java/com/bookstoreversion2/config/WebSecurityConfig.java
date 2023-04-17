@@ -29,7 +29,7 @@ public class WebSecurityConfig{
         http.csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/registration").permitAll()
-                        .requestMatchers("/catalog/*", "/book/*").permitAll()
+                        .requestMatchers("/catalog", "/book/*").permitAll()
                         .requestMatchers("/home", "/", "").permitAll()
                         .requestMatchers("/admin/*", "/managers/*").hasRole("ADMIN")
                         .requestMatchers("/manager/*").hasRole("MANAGER")
@@ -38,6 +38,7 @@ public class WebSecurityConfig{
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
+
                         .loginPage("/login")
                         .defaultSuccessUrl("/home")
                         .permitAll()

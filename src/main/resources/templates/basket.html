@@ -6,20 +6,26 @@
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<div th:each="book : ${books}">
-    <form th:action="'/book/' + ${book.id} + '/delete'" method="post">
-        <a th:href="'/book/' + ${book.id}" th:text="${book.title}"></a>
-        <p th:text="${book.author}"></p>
-        <p th:text="${book.price}"></p>
-        <input type="checkbox" name="add" th:checked="${add}"><br>
-        <input type="submit" value="delete">
-    </form>
-</div>
-<form action="/user/book/order/create" method="post" th:object="${books}">
+<p th:text="'Итого:' + ${basket.getTotalPrice()}"></p>
+<form action="/basket/order/create" method="post">
+    <div th:object="${basket}">
+        <div th:each="bookInBasket : ${basket.getBooks()}">
 
+            <div th:object="${bookInBasket}">
+                <form th:action="'/book/' + ${bookInBasket.book.id} + '/delete'" method="post">
+                    <a th:href="'/book/' + ${bookInBasket.book.id}" th:text="${bookInBasket.book.title}"></a>
+                    <p th:text="${bookInBasket.book.author}"></p>
+                    <p th:text="${bookInBasket.book.price}"></p>
+                    <input type="submit" value="delete">
+                </form>
+                <input type="checkbox" name="selectedBooks" th:value="${bookInBasket.id}"/>
+            </div>
+        </div>
+    </div>
     <input name="address" placeholder="address">
     <input type="submit" value="create order">
 </form>
+
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

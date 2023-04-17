@@ -32,7 +32,7 @@ public class ManagerController {
     public String catalogPage(Model model){
         List<Book> books = productServiceImp.getAllBooks();
         model.addAttribute("books", books);
-        return "manager_catalog";
+        return "catalog_manager";
     }
 
     @GetMapping("/manager/book/add")
@@ -56,17 +56,11 @@ public class ManagerController {
     public String bookPage(@PathVariable(name = "id") Long id, Model model){
         Book book = productServiceImp.getBookById(id);
         model.addAttribute("book", book);
-        return "manager_book_page";
+        return "book_page_manager";
     }
 
-    @PostMapping("/manager/book/{id}")
-    public String editBook(@PathVariable("id") Long id,@RequestParam("title") String title, @RequestParam("author") String author,
-                           @RequestParam("price") double price, Model model){
-        Book book = new Book();
-        book.setId(id);
-        book.setTitle(title);
-        book.setAuthor(author);
-        book.setPrice(price);
+    @PostMapping("/manager/book/{id}/edit")
+    public String editBook(@ModelAttribute("book") Book book, Model model){
         productServiceImp.updateBook(book);
         return "redirect:/manager/book/catalog";
     }

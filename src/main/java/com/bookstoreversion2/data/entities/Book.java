@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Builder
 @Getter
@@ -42,6 +40,7 @@ public class Book implements Serializable {
     private int salesNumber;
     @Column(name = "stock_quantity")
     private int stockQuantity;
+
 
     //What is it?
 //    @OneToMany

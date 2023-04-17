@@ -23,9 +23,9 @@ public class Order {
     private User user;
     private String address;
 
-    @ManyToMany
-    @JoinTable(name = "order_details",  joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "order_details",  joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
     private List<Book> booksInOrder;
     private double cost;
     private LocalDateTime orderDate;
