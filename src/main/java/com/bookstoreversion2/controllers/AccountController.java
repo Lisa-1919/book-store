@@ -57,7 +57,11 @@ public class AccountController {
 
     @PostMapping("/account/password")
     public String updatePassword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, Model model){
-        userServiceImp.updatePassword(bCryptPasswordEncoder.encode(oldPassword), bCryptPasswordEncoder.encode(newPassword));
-        return "redirect:/account";
+        if(bCryptPasswordEncoder.matches(oldPassword, userServiceImp.getAuthorizedUser().getPassword())) {
+            userServiceImp.updatePassword(bCryptPasswordEncoder.encode(newPassword));
+            return "redirect:/account";
+        }else {
+            return "redirect:/account/password";
+        }
     }
 }

@@ -1,7 +1,11 @@
 package com.bookstoreversion2.data.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "book_images")
 public class BookImage {
@@ -9,11 +13,11 @@ public class BookImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "image")
+    @Column(name = "image_url")
     private String imageURL;
 
     @ManyToOne
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "book_id", referencedColumnName = "id")
     private Book book;
 
     public BookImage() {
@@ -25,27 +29,7 @@ public class BookImage {
         this.book = book;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
+    public BookImage(String imageURL) {
         this.imageURL = imageURL;
-    }
-
-    public Book getProduct() {
-        return book;
-    }
-
-    public void setProduct(Book book) {
-        this.book = book;
     }
 }

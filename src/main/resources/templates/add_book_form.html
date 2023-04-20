@@ -6,18 +6,18 @@
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<form action="/manager/book/add" method="post" th:object="${book}">
+<form action="/manager/book/add" method="post" th:object="${book}" enctype="application/x-www-form-urlencoded | multipart/form-data | text/plain">
     <div th:object="${book}" th:value="${book}">
-        <input th:field="*{title}" type="text" placeholder="title"><br>
-        <input th:field="*{author}" type="text" placeholder="author"><br>
-        <input th:field="*{price}" type="text" placeholder="price"><br>
-        <select th:field="*{genre}">
+        <input th:field="*{title}" type="text" placeholder="title" required><br>
+        <input th:field="*{author}" type="text" placeholder="author" required><br>
+        <input th:field="*{price}" type="text" placeholder="price" required><br>
+        <select th:field="*{genre}" required>
             <option th:value="'roman'">roman</option>
             <option th:value="'education'">education</option>
             <option th:value="'fantastic'">fantastic</option>
             <option th:value="'historical'">historical</option>
         </select><br>
-        <select th:field="*{publisher}">
+        <select th:field="*{publisher}" required>
             <option th:value="'АСТ'">АСТ</option>
             <option th:value="'Азбука'">Азбука</option>
         </select><br>
@@ -30,8 +30,10 @@
             <option th:value="'Мягкая'">Мягкая</option>
         </select><br>
         <input th:field="*{description}" type="text" placeholder="description"><br>
-        <input th:field="*{freeBookExcerptURL}" type="text" placeholder="free book excerpt url"><br>
-        <input th:field="*{EBookURL}" type="text" placeholder="ebook url"><br>
+        <input name="freeBookExcerptURL" type="file" placeholder="free book excerpt url"><br>
+        <input name="eBookURL" type="file" placeholder="ebook url"><br>
+        <input name="images" type="file"  accept=".jpg, .jpeg, .png" multiple="multiple"  placeholder="add images">
+        <input th:field="*{stockQuantity}" type="number" placeholder="stock quantity" required>
     </div>
     <input type="submit" value="add">
 </form>

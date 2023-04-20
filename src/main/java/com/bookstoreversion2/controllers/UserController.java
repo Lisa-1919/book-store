@@ -1,9 +1,6 @@
 package com.bookstoreversion2.controllers;
 
-import com.bookstoreversion2.data.entities.Basket;
-import com.bookstoreversion2.data.entities.Book;
-import com.bookstoreversion2.data.entities.BookInBasket;
-import com.bookstoreversion2.data.entities.User;
+import com.bookstoreversion2.data.entities.*;
 import com.bookstoreversion2.services.BasketServiceImp;
 import com.bookstoreversion2.services.BookServiceImp;
 import com.bookstoreversion2.services.OrderServiceImp;
@@ -14,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -33,16 +31,26 @@ public class UserController {
     private OrderServiceImp orderServiceImp;
 
     @ModelAttribute("basket")
-    public Basket getBasket(){
+    public Basket getBasket() {
         return this.userServiceImp.getAuthorizedUserBasket();
+    }
+    @ModelAttribute("order")
+    public Order getOrder() {
+        return new Order();
+    }
+    @ModelAttribute("orders")
+    public List<Order> detAllOrders(){
+        return this.orderServiceImp.getAllOrdersByUserId(userServiceImp.getAuthorizedUser().getId());
     }
 
     @GetMapping("/basket")
     public String basketPage(Model model) {
-        User user = userServiceImp.getAuthorizedUser();
-   //     Basket basket = basketServiceImp.getBasketByUserId(user.getId());
- //       model.addAttribute("basket", basket);
         return "basket";
+    }
+
+    @GetMapping("/orders")
+    public String viewAllOrders(Model model){
+        return "order_list_page";
     }
 
     @GetMapping("/book/{id}")
@@ -58,25 +66,26 @@ public class UserController {
         return "redirect:/catalog";
     }
 
-    @PostMapping("/book/{id}/delete")
-    public String deleteFromBasket(@PathVariable("id") Long id, Model model) {
-        Book book = bookServiceImp.getBookById(id);
-        basketServiceImp.deleteProductsFromBasket(book);
+    @PostMapping("/book/delete")
+    public String deleteFromBasket(@RequestParam("selectedBooks") List<Long> selectedBooks, Model model) {
+//        Book book = bookServiceImp.getBookById(id);
+
+        //      basketServiceImp.deleteProductsFromBasket(book);
         return "redirect:/catalog";
     }
 
     @PostMapping("/basket/order/create")
-    public String createOrder(@RequestParam("selectedBooks") List<Long> selectedBooks, Model model) {
+    public String createOrder(@ModelAttribute("order") Order order, @RequestParam("selectedBooks") List<Long> selectedBooks, Model model) {
         List<BookInBasket> toOrder = new ArrayList<>();
         Basket basket = userServiceImp.getAuthorizedUserBasket();
         for (Long selectedBookId : selectedBooks) {
-            for(BookInBasket bookInBasket : basket.getBooks()){
-                if(selectedBookId == bookInBasket.getId()){
+            for (BookInBasket bookInBasket : basket.getBooks()) {
+                if (selectedBookId == bookInBasket.getId()) {
                     toOrder.add(bookInBasket);
                 }
             }
         }
-        orderServiceImp.createNewOrder(toOrder);
+        orderServiceImp.createNewOrder(order, toOrder);
         return "redirect:/catalog";
     }
 }

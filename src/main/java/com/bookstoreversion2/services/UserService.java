@@ -14,7 +14,7 @@ public interface UserService {
     void deleteUserById(Long id);
     User getAuthorizedUser();
     String generatePassword();
-    void updatePassword(String oldPassword, String newPassword);
+    void updatePassword(String newPassword);
     Basket getAuthorizedUserBasket();
     List<User> getManagerList();
 

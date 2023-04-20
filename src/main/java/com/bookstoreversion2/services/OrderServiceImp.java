@@ -6,6 +6,7 @@ import com.bookstoreversion2.data.entities.BookInBasket;
 import com.bookstoreversion2.data.entities.Order;
 import com.bookstoreversion2.data.repo.BasketRepository;
 import com.bookstoreversion2.data.repo.BookInBasketRepository;
+import com.bookstoreversion2.data.repo.BookRepository;
 import com.bookstoreversion2.data.repo.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class OrderServiceImp implements OrderService{
+public class OrderServiceImp implements OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
+
     @Autowired
-    private BasketServiceImp basketServiceImp;
+    private BookRepository bookRepository;
     @Autowired
     private UserServiceImp userServiceImp;
     @Autowired
@@ -34,8 +36,8 @@ public class OrderServiceImp implements OrderService{
     @Override
     public List<Order> getAllOrdersByUserId(Long userId) {
         List<Order> userOrderList = new ArrayList<>();
-        for(Order order: orderRepository.findAll()){
-            if(order.getUser().getId().equals(userId))
+        for (Order order : orderRepository.findAll()) {
+            if (order.getUser().getId().equals(userId))
                 userOrderList.add(order);
         }
         return userOrderList;
@@ -43,23 +45,23 @@ public class OrderServiceImp implements OrderService{
 
 
     @Override
-    public void createNewOrder(List<BookInBasket> books) {
+    public void createNewOrder(Order order, List<BookInBasket> books) {
         double totalCost = 0;
-        for(BookInBasket bookInBasket: books){
+        for (BookInBasket bookInBasket : books) {
             totalCost += bookInBasket.getQuantity() * bookInBasket.getBook().getPrice();
+            bookInBasket.getBook().setSalesNumber(bookInBasket.getBook().getSalesNumber() + bookInBasket.getQuantity());
+            bookRepository.save(bookInBasket.getBook());
         }
+        order.setCost(totalCost);
         Basket basket = userServiceImp.getAuthorizedUserBasket();
-        Order order = Order.builder()
-                .orderDate(LocalDateTime.now())
-                .cost(totalCost)
-                .user(basket.getUser())
-                .build()
-                ;
+        order.setOrderDate(LocalDateTime.now());
+        order.setUser(userServiceImp.getAuthorizedUser());
+        order.setStatus("В ожидании доставки");
         List<Book> list = new ArrayList<>();
-        books.forEach(bookInBasket -> {list.add(bookInBasket.getBook());});
+        books.forEach(bookInBasket -> list.add(bookInBasket.getBook()));
         order.setBooksInOrder(list);
         orderRepository.save(order);
-        if(basket.getBooks().removeAll(books)) {
+        if (basket.getBooks().removeAll(books)) {
             basket.setTotalPrice(basket.getTotalPrice() - totalCost);
             basketRepository.save(basket);
         }

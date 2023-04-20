@@ -1,6 +1,7 @@
 package com.bookstoreversion2.controllers;
 
 import com.bookstoreversion2.data.entities.Book;
+import com.bookstoreversion2.data.entities.BookImage;
 import com.bookstoreversion2.data.entities.Discount;
 import com.bookstoreversion2.services.DiscountServiceImp;
 import com.bookstoreversion2.services.BookServiceImp;
@@ -8,11 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
 public class ManagerController {
+
 
     @Autowired
     private BookServiceImp productServiceImp;
@@ -42,12 +49,12 @@ public class ManagerController {
     }
 
     @PostMapping("/manager/book/add")
-    public String addBook(/*@RequestParam String title, @RequestParam String author, @RequestParam
-    String price*/ @ModelAttribute("book") Book book , Model model){
-//        Book book = new Book();
-//        book.setTitle(title);
-//        book.setAuthor(author);
-//        book.setPrice(Double.parseDouble(price));
+    public String addBook(@ModelAttribute("book") Book book, @RequestParam(value = "freeBookExcerptURL") File file, @RequestParam(value = "eBookURL") File eBook,
+                          @RequestParam(value = "images") ArrayList<File> images,Model model) throws IOException {
+        book.setFreeBookExcerptURL(file.getAbsolutePath());
+        book.setEBookURL(eBook.getAbsolutePath());
+        book.setImages(new ArrayList<>());
+        images.forEach(image->{book.getImages().add(new BookImage(image.getAbsolutePath()));});
         productServiceImp.addNewBook(book);
         return "redirect:/manager/book/catalog";
     }

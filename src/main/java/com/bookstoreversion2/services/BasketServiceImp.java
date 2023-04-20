@@ -56,10 +56,10 @@ public class BasketServiceImp implements BasketService {
     }
 
     @Override
-    public void deleteProductsFromBasket(Book book) {
+    public void deleteProductsFromBasket(BookInBasket bookInBasket) {
         Basket basket = userServiceImp.getAuthorizedUserBasket();
-        if(basket.getBooks().remove(book)) {
-            basket.setTotalPrice(basket.getTotalPrice() - book.getPrice());
+        if(basket.getBooks().remove(bookInBasket)) {
+            basket.setTotalPrice(basket.getTotalPrice() - bookInBasket.getBook().getPrice()*bookInBasket.getQuantity());
         }
         basketRepository.save(basket);
     }

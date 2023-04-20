@@ -36,8 +36,8 @@ public class UserServiceImp implements UserService, UserDetailsService {
     @Override
     public User getUserByEmail(String email) {
         User userFindByEmail = new User();
-        for(User user : userRepository.findAll()){
-            if(user.getUsername().equals(email))
+        for (User user : userRepository.findAll()) {
+            if (user.getUsername().equals(email))
                 userFindByEmail = user;
         }
         return userFindByEmail;
@@ -46,9 +46,9 @@ public class UserServiceImp implements UserService, UserDetailsService {
     @Override
     public void createNewAccount(User user) {
         userRepository.save(user);
-        if(user.getRoles().stream().toList().get(0).getRole().equals("USER")){
+        if (user.getRoles().stream().toList().get(0).getRole().equals("USER")) {
             Basket basket = new Basket();
-          //  user.setBasket(basket);
+            //  user.setBasket(basket);
             basket.setUser(user);
             basketRepository.save(basket);
         }
@@ -62,9 +62,9 @@ public class UserServiceImp implements UserService, UserDetailsService {
     @Override
     public User getAuthorizedUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username ="";
+        String username = "";
         if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
+            username = ((UserDetails) principal).getUsername();
         } else {
             username = principal.toString();
         }
@@ -90,6 +90,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
             public String getErrorCode() {
                 return ERROR_CODE;
             }
+
             public String getCharacters() {
                 return "!@#$%^&*()_+";
             }
@@ -103,12 +104,10 @@ public class UserServiceImp implements UserService, UserDetailsService {
     }
 
     @Override
-    public void updatePassword(String oldPassword, String newPassword) {
+    public void updatePassword(String newPassword) {
         User user = getAuthorizedUser();
-        if(user.getPassword().equals(oldPassword)){
-            user.setPassword(newPassword);
-            userRepository.save(user);
-        }
+        user.setPassword(newPassword);
+        userRepository.save(user);
     }
 
     @Override
@@ -121,14 +120,13 @@ public class UserServiceImp implements UserService, UserDetailsService {
     @Override
     public List<User> getManagerList() {
         List<User> managers = new ArrayList<>();
-        for(User user : userRepository.findAll()){
-            if(user.getRoles().stream().toList().get(0).getRole().equals("MANAGER")){
+        for (User user : userRepository.findAll()) {
+            if (user.getRoles().stream().toList().get(0).getRole().equals("MANAGER")) {
                 managers.add(user);
             }
         }
         return managers;
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -143,4 +141,5 @@ public class UserServiceImp implements UserService, UserDetailsService {
     public String getRoleName() {
         return getAuthorizedUser().getRoles().stream().toList().get(0).getRole();
     }
+
 }

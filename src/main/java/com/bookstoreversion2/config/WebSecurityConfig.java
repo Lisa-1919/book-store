@@ -33,7 +33,7 @@ public class WebSecurityConfig{
                         .requestMatchers("/home", "/", "").permitAll()
                         .requestMatchers("/admin/*", "/managers/*").hasRole("ADMIN")
                         .requestMatchers("/manager/*").hasRole("MANAGER")
-                        .requestMatchers("/user/*", "/basket/*").hasRole("USER")
+                        .requestMatchers("/user/*", "/basket/*", "/orders/*").hasRole("USER")
                         .requestMatchers("/account").fullyAuthenticated()
                         .anyRequest().authenticated()
                 )

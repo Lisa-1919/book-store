@@ -33,9 +33,9 @@ public class User implements UserDetails, Serializable {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
-
     @OneToOne(mappedBy = "user")
     private Basket basket;
+
     public User() {
     }
 

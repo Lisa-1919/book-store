@@ -6,6 +6,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Builder
 @Getter
@@ -42,17 +46,13 @@ public class Book implements Serializable {
     private int stockQuantity;
 
 
-    //What is it?
-//    @OneToMany
-//    @JoinTable(name = "book_images", joinColumns = @JoinColumn(name = "book_id"),
-//            inverseJoinColumns = @JoinColumn(name = "image"))
-//    private Set<BookImage> images;
-
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BookImage> images;
     public Book() {
-        /*images = new HashSet<>();*/
+        images = new ArrayList<BookImage>();
     }
 
-    public Book(Long id, String title, String author, String genre, String publisher, String freeBookExcerptURL, String EBookURL, String bookType, String bookCoverType, String description, double price, int salesNumber, int stockQuantity) {
+    public Book(Long id, String title, String author, String genre, String publisher, String freeBookExcerptURL, String EBookURL, String bookType, String bookCoverType, String description, double price, int salesNumber, int stockQuantity, List<BookImage> images) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -66,6 +66,6 @@ public class Book implements Serializable {
         this.price = price;
         this.salesNumber = salesNumber;
         this.stockQuantity = stockQuantity;
-        //this.images = images;
+        this.images = images;
     }
 }

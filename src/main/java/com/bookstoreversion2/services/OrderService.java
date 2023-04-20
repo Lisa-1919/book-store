@@ -9,6 +9,6 @@ import java.util.List;
 public interface OrderService {
     Order getOrderById(Long id);
     List<Order> getAllOrdersByUserId(Long userId);
-    void createNewOrder(List<BookInBasket> books);
+    void createNewOrder(Order order, List<BookInBasket> book);
 
 }

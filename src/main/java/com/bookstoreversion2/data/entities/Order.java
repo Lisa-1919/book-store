@@ -21,23 +21,29 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    @Column(name = "address")
     private String address;
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "order_details",  joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
     private List<Book> booksInOrder;
+    @Column(name = "cost")
     private double cost;
+    @Column(name = "date_of_order")
     private LocalDateTime orderDate;
+    @Column(name = "date_of_receipt")
     private LocalDateTime receiptDate;
-    private Status status;
+    @Column(name = "status")
+    private String status;
+    @Column(name = "payment_method")
     private PaymentMethod paymentMethod;
+    @Column(name = "shipping_method")
     private ShippingMethod shippingMethod;
 
     public Order() {
     }
 
-    public Order(Long id, User user, String address, List<Book> booksInOrder, double cost, LocalDateTime orderDate, LocalDateTime receiptDate, Status status, PaymentMethod paymentMethod, ShippingMethod shippingMethod) {
+    public Order(Long id, User user, String address, List<Book> booksInOrder, double cost, LocalDateTime orderDate, LocalDateTime receiptDate, String status, PaymentMethod paymentMethod, ShippingMethod shippingMethod) {
         this.id = id;
         this.user = user;
         this.address = address;
