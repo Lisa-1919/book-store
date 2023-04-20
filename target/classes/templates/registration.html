@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
@@ -9,7 +9,7 @@
 <form action="/registration" method="post">
     <input name="firstName" placeholder="first name"><br>
     <input name="lastName" placeholder="last name"><br>
-    <input name = "email" placeholder="email"><br>
+    <input type="email" name = "email" placeholder="email" required><br>
     <input name="phone" placeholder="phone"><br>
     <input name = "password" type="password" placeholder="password"><br>
     <input name="confirmPassword" type="password" placeholder="confirm password"><br>

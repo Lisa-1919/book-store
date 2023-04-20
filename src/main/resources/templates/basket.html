@@ -7,25 +7,28 @@
 <body>
 <header th:insert="blocks/header :: header"></header>
 <p th:text="'Итого:' + ${basket.getTotalPrice()}"></p>
-<form action="/basket/order/create" method="post">
+<form action="/basket/order/create" method="post" th:object="${order}">
     <div th:object="${basket}">
         <div th:each="bookInBasket : ${basket.getBooks()}">
-
             <div th:object="${bookInBasket}">
-                <form th:action="'/book/' + ${bookInBasket.book.id} + '/delete'" method="post">
-                    <a th:href="'/book/' + ${bookInBasket.book.id}" th:text="${bookInBasket.book.title}"></a>
-                    <p th:text="${bookInBasket.book.author}"></p>
-                    <p th:text="${bookInBasket.book.price}"></p>
-                    <input type="submit" value="delete">
-                </form>
-                <input type="checkbox" name="selectedBooks" th:value="${bookInBasket.id}"/>
+                <a th:href="'/book/' + ${bookInBasket.book.id}" th:text="${bookInBasket.book.title}"></a>
+                <p th:text="${bookInBasket.book.author}"></p>
+                <p th:text="${bookInBasket.book.price}"></p>
             </div>
+            <input type="checkbox" name="selectedBooks" th:disabled="${bookInBasket.book.stockQuantity==0}" th:value="${bookInBasket.id}"/>
         </div>
     </div>
-    <input name="address" placeholder="address">
+<!--    <input name="address" placeholder="address">-->
+    <select th:field="*{address}" required>
+        <option th:value="'Минск, ул. Восточная 30'">Минск, ул. Восточная 30</option>
+        <option th:value="'Борисов, ул. Чапаева 50'">Борисов, ул. Чапаева 50</option>
+    </select><br>
+    <select th:field="*{paymentMethod}" required>
+        <option th:value="'card'">card</option>
+        <option th:value="'cash'">cash</option>
+    </select><br>
     <input type="submit" value="create order">
 </form>
-
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>
