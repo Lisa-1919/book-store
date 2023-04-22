@@ -2,6 +2,7 @@ package com.bookstoreversion2.controllers;
 
 import com.bookstoreversion2.data.entities.Book;
 import com.bookstoreversion2.services.BookServiceImp;
+import com.bookstoreversion2.services.RatingService;
 import com.bookstoreversion2.services.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
@@ -21,8 +22,13 @@ public class StoreController implements ErrorController {
     @Autowired
     private BookServiceImp bookServiceImp;
 
+    @Autowired
+    private RatingService ratingService;
+
     @GetMapping({"/home", "/", ""})
     public String homePage(Model model) {
+        List<Book> books = ratingService.getRecommendation();
+        model.addAttribute("books", books);
         return "home";
     }
 
