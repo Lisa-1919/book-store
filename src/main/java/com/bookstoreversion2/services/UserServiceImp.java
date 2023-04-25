@@ -72,16 +72,6 @@ public class UserServiceImp implements UserService, UserDetailsService {
         return user;
     }
 
-    public List<User> getUsers(){
-        List<User> users = new ArrayList<>();
-        for (User user : userRepository.findAll()) {
-            if (user.getRoles().stream().toList().get(0).getRole().equals("USER")) {
-                users.add(user);
-            }
-        }
-        return users;
-    }
-
     @Override
     public String generatePassword() {
         PasswordGenerator gen = new PasswordGenerator();

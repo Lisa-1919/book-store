@@ -6,20 +6,28 @@
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<form th:action="'/book/' + ${book.id} + '/add'" method="get" th:object="${book}">
-    <p th:text="'title:'+ *{title}"/>
-    <p th:text="'author:' + *{author}"/>
-    <p th:text="'price:' + *{price} +' byn'"/>
-    <p th:text="'genre: ' + *{genre}"/>
-    <p th:text="'publisher: ' + *{publisher}"/>
-    <p th:text="'book type: ' + *{bookType}"/>
-    <p th:text="'cover type: ' + *{bookCoverType}"/>
-    <p th:text="'desctiption: ' + *{description}"/>
-<!--    <p>free book excerpt url<input th:field="*{freeBookExcerptURL}" type="text" th:value="*{freeBookExcerptURL}"></p>-->
-<!--    <p>ebook url<input th:field="*{EBookURL}" type="text" th:value="*{EBookURL}"></p>-->
-    <p th:text="'stock quantity: ' + *{stockQuantity}"/>
-    <input type="submit" value="add to basket">
-</form>
+<div th:object="${book}">
+    <form th:action="'/book/' + ${book.id} + '/add'" method="get" th:object="${book}">
+        <p th:text="'title:'+ *{title}"/>
+        <p th:text="'author:' + *{author}"/>
+        <p th:text="'price:' + *{price} +' byn'"/>
+        <p th:text="'genre: ' + *{genre}"/>
+        <p th:text="'publisher: ' + *{publisher}"/>
+        <p th:text="'book type: ' + *{bookType}"/>
+        <p th:text="'cover type: ' + *{bookCoverType}"/>
+        <p th:text="'desctiption: ' + *{description}"/>
+        <p>free book excerpt url</p>
+<!--        <a href="/1._100_ways_to_motivate_yourself.pdf" download="1._100_ways_to_motivate_yourself.pdf" target="_blank">open</a>-->
+<!--        <a href="#0" onclick="window.open('http://localhost:8080/1._100_ways_to_motivate_yourself.pdf');" type="application/pdf">open pdf</a>-->
+        <!--    <p>ebook url<input th:field="*{EBookURL}" type="text" th:value="*{EBookURL}"></p>-->
+        <p th:text="'stock quantity: ' + *{stockQuantity}"/>
+        <input type="submit" value="add to basket">
+    </form>
+    <form th:action="'/book/' + ${book.id}" method="post">
+        <input name="rating" type="number" step="0.1" placeholder="rating">
+        <input type="submit" value="rate">
+    </form>
+</div>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

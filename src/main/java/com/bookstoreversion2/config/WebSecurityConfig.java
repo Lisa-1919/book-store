@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -29,7 +30,7 @@ public class WebSecurityConfig{
         http.csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/registration").permitAll()
-                        .requestMatchers("/catalog", "/book/*").permitAll()
+                        .requestMatchers("/catalog", "/book/*", "/*").permitAll()
                         .requestMatchers("/home", "/", "").permitAll()
                         .requestMatchers("/admin/*", "/managers/*").hasRole("ADMIN")
                         .requestMatchers("/manager/*").hasRole("MANAGER")
@@ -50,5 +51,10 @@ public class WebSecurityConfig{
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userServiceImp).passwordEncoder(bCryptPasswordEncoder);
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/css/**", "/js/**", "/img/**");
     }
 }

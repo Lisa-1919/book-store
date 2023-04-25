@@ -1,5 +1,6 @@
 package com.bookstoreversion2.services;
 
+import com.bookstoreversion2.data.entities.Book;
 import com.bookstoreversion2.data.entities.Discount;
 import com.bookstoreversion2.data.repo.DiscountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,4 +40,5 @@ public class DiscountServiceImp implements DiscountService {
         List<Discount> discounts = discountRepository.findAll();
         return discounts;
     }
+
 }

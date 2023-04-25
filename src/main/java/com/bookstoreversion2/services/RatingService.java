@@ -1,17 +1,15 @@
 package com.bookstoreversion2.services;
 
 import com.bookstoreversion2.data.entities.Book;
-import com.bookstoreversion2.data.rating.Rating;
 import com.bookstoreversion2.data.entities.User;
+import com.bookstoreversion2.data.rating.Rating;
 import com.bookstoreversion2.data.rating.RatingItemPK;
 import com.bookstoreversion2.data.repo.BookRepository;
 import com.bookstoreversion2.data.repo.RatingRepository;
-
 import org.apache.mahout.cf.taste.common.TasteException;
-import org.apache.mahout.cf.taste.impl.common.FastByIDMap;
-import org.apache.mahout.cf.taste.impl.model.GenericDataModel;
-import org.apache.mahout.cf.taste.impl.model.GenericPreference;
 import org.apache.mahout.cf.taste.impl.model.GenericUserPreferenceArray;
+import org.apache.mahout.cf.taste.impl.model.PlusAnonymousConcurrentUserDataModel;
+import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
 import org.apache.mahout.cf.taste.impl.neighborhood.ThresholdUserNeighborhood;
 import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
@@ -19,7 +17,7 @@ import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.model.PreferenceArray;
 import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
-import org.apache.mahout.cf.taste.recommender.UserBasedRecommender;
+import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +26,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RatingService {
@@ -39,8 +38,7 @@ public class RatingService {
     @Autowired
     private BookRepository bookRepository;
 
-    @Autowired
-    private UserServiceImp userServiceImp;
+
 
     public void add(User user, Book book, double rating) {
         ratingRepository.save(new Rating(new RatingItemPK(user, book), rating));
@@ -48,44 +46,25 @@ public class RatingService {
 
     public List<Book> getRecommendation() {
         List<Book> recommendedBooks = new ArrayList<>();
-        List<User> users = userServiceImp.getUsers();
         try {
+            DataModel realModel = getUserData();
+            PlusAnonymousConcurrentUserDataModel plusModel = new PlusAnonymousConcurrentUserDataModel(realModel, 4);
+            Long anonymousUserId = plusModel.takeAvailableUser();
+            PreferenceArray tempPrefs = new GenericUserPreferenceArray(2);
+            tempPrefs.setUserID(0, anonymousUserId);
+            tempPrefs.setItemID(0, 11);
+            tempPrefs.setValue(0, (float) 2.3);
+            tempPrefs.setUserID(1, anonymousUserId);
+            tempPrefs.setItemID(1, 16);
+            tempPrefs.setValue(1, 5);
+            plusModel.setTempPrefs(tempPrefs, anonymousUserId);
 
-            List<Rating> ratings = ratingRepository.findAll();
-
-            HashMap<Long, PreferenceArray> hashMap = new HashMap<>();
-            List<GenericPreference> genericPreferenceList = new ArrayList<>();
-            for (Rating rating : ratings) {
-                genericPreferenceList.add(new GenericPreference(rating.getRatingItemPK().getUser().getId(),
-                        rating.getRatingItemPK().getBook().getId(), (float) rating.getRating()));
-            }
-            for (User value : users) {
-                List<GenericPreference> userPreference = new ArrayList<>();
-                for (GenericPreference preference : genericPreferenceList) {
-                    if (value.getId() == preference.getUserID()) {
-                        userPreference.add(preference);
-                    }
-                }
-                if (userPreference.size() > 0) {
-                    PreferenceArray preferenceArray = new GenericUserPreferenceArray(userPreference);
-                    hashMap.put(value.getId(), preferenceArray);
-                }
-            }
-            FastByIDMap<PreferenceArray> userData = new FastByIDMap<>(3);
-            Set<Long> keys = hashMap.keySet();
-            for (Long key : keys) {
-                userData.put(key, hashMap.get(key));
-            }
-            DataModel realModel = new GenericDataModel(userData);
-
-            UserSimilarity similarity = new PearsonCorrelationSimilarity(realModel);
-
-            UserNeighborhood neighborhood = new ThresholdUserNeighborhood(0.1, similarity, realModel);
-            UserBasedRecommender recommender = new GenericUserBasedRecommender(realModel, neighborhood, similarity);
+            UserSimilarity similarity = new PearsonCorrelationSimilarity(plusModel);
+            UserNeighborhood neighborhood = new ThresholdUserNeighborhood(0.1, similarity, plusModel);
+            Recommender recommender = new GenericUserBasedRecommender(plusModel, neighborhood, similarity);
             List<RecommendedItem> recommendedItems;
-            recommendedItems = recommender.recommend(30, 2);
-
-
+            recommendedItems = recommender.recommend(anonymousUserId, 1);
+            plusModel.releaseUser(anonymousUserId);
             for (RecommendedItem item : recommendedItems) {
                 Book book = bookRepository.findById(item.getItemID()).get();
                 recommendedBooks.add(book);
@@ -94,5 +73,35 @@ public class RatingService {
             throw new RuntimeException(e);
         }
         return recommendedBooks;
+    }
+
+    public DataModel getUserData() {
+        DataModel dataModel;
+        try {
+            dataModel = new FileDataModel(writeRatingDataFromDBToFile());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return dataModel;
+    }
+
+    private File writeRatingDataFromDBToFile(){
+        File file = new File("D:/book-store-version-2/src/main/java/com/bookstoreversion2/data/rating/rating.txt");
+        List<Rating> ratings = ratingRepository.findAll();
+        try {
+            Writer writer = new FileWriter(file, false);
+            ratings.forEach(rating -> {
+                try {
+                    writer.write(rating.getRatingItemPK().getUser().getId() + "," + rating.getRatingItemPK().getBook().getId() + "," + rating.getRating() + "\n");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            writer.flush();
+            writer.close();
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
+        return file;
     }
 }

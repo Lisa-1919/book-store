@@ -2,6 +2,7 @@ package com.bookstoreversion2.controllers;
 
 import com.bookstoreversion2.data.entities.Book;
 import com.bookstoreversion2.services.BookServiceImp;
+import com.bookstoreversion2.services.DiscountServiceImp;
 import com.bookstoreversion2.services.RatingService;
 import com.bookstoreversion2.services.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,10 @@ public class StoreController implements ErrorController {
     @Autowired
     private RatingService ratingService;
 
-    @GetMapping({"/home", "/", ""})
+    @Autowired
+    private DiscountServiceImp discountServiceImp;
+
+    @GetMapping({"/home"})
     public String homePage(Model model) {
         List<Book> books = ratingService.getRecommendation();
         model.addAttribute("books", books);
@@ -44,6 +48,7 @@ public class StoreController implements ErrorController {
         } else {
             books = bookServiceImp.getAllBooks();
         }
+        books.forEach(book->bookServiceImp.is(book));
         model.addAttribute("books", books);
         return "catalog";
     }

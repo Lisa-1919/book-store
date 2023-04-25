@@ -1,11 +1,8 @@
 package com.bookstoreversion2.controllers;
 
 import com.bookstoreversion2.data.entities.*;
-import com.bookstoreversion2.services.BasketServiceImp;
-import com.bookstoreversion2.services.BookServiceImp;
-import com.bookstoreversion2.services.OrderServiceImp;
-import com.bookstoreversion2.services.UserServiceImp;
-import net.minidev.json.JSONObject;
+import com.bookstoreversion2.services.*;
+import org.apache.hadoop.yarn.webapp.hamlet.Hamlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +27,9 @@ public class UserController {
     @Autowired
     private OrderServiceImp orderServiceImp;
 
+    @Autowired
+    private RatingService ratingService;
+
     @ModelAttribute("basket")
     public Basket getBasket() {
         return this.userServiceImp.getAuthorizedUserBasket();
@@ -38,8 +38,12 @@ public class UserController {
     public Order getOrder() {
         return new Order();
     }
+    @ModelAttribute("book")
+    public Book getBook(@PathVariable("id") Long id) {
+        return bookServiceImp.getBookById(id);
+    }
     @ModelAttribute("orders")
-    public List<Order> detAllOrders(){
+    public List<Order> getAllOrders(){
         return this.orderServiceImp.getAllOrdersByUserId(userServiceImp.getAuthorizedUser().getId());
     }
 
@@ -59,6 +63,14 @@ public class UserController {
         model.addAttribute("book", book);
         return "book_page";
     }
+
+    @PostMapping("/book/{id}")
+    public String rating(@RequestParam("rating") double rating, Model model) {
+        ratingService.add(userServiceImp.getAuthorizedUser(), (Book) model.getAttribute("book"), rating);
+        return "book_page";
+    }
+
+
 
     @GetMapping("/book/{id}/add")
     public String addToBasket(@PathVariable("id") Long id, Model model) {

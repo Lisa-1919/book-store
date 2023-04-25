@@ -1,6 +1,7 @@
 package com.bookstoreversion2.services;
 
 import com.bookstoreversion2.data.entities.Book;
+import com.bookstoreversion2.data.entities.Discount;
 import com.bookstoreversion2.data.repo.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -14,6 +15,9 @@ public class BookServiceImp implements BookService {
 
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private DiscountServiceImp discountServiceImp;
 
     @Override
     public Book getBookById(Long id) {
@@ -66,4 +70,17 @@ public class BookServiceImp implements BookService {
         return books;
     }
 
+    public boolean is(Book book){
+        List<Discount> discounts = discountServiceImp.getAllDiscounts();
+        for(Discount discount: discounts){
+            // String parameter = discount.getParameter();
+            String value = discount.getValue();
+            if(book.getAuthor().equals(value) || book.getPublisher().equals(value) || book.getGenre().equals(value)) {
+                book.setPrice(book.getPrice()*(1-discount.getDiscountAmount()));
+                return true;
+            }
+            else return false;
+        }
+        return true;
+    }
 }

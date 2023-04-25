@@ -11,8 +11,8 @@
     <p th:text="'payment: ' + ${order.paymentMethod}"></p>
     <p th:text="'shipping: ' + ${order.shippingMethod}"></p>
     <p th:text="'address: ' + ${order.address}"></p>
-    <div th:each="book : ${order.booksInOrder}">
-        <p th:text="${book.title}"></p>
+    <div th:each="bookInOrder : ${order.booksInOrder}">
+        <p th:text="${bookInOrder.title}"></p>
     </div>
 </div>
 </body>
