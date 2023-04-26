@@ -7,10 +7,12 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class MvcConfig  implements WebMvcConfigurer {
+public class MvcConfig implements WebMvcConfigurer {
 
-
-    private String uploadPath;
+    @Value("${upload.img.path}")
+    private String uploadImgPath;
+    @Value("${upload.pdf.path}")
+    private String uploadPDFPath;
 
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
@@ -18,7 +20,8 @@ public class MvcConfig  implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
+        registry.addResourceHandler("/readPart/**")
+                .addResourceLocations("file://" + uploadPDFPath + "/");
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath://static/");
     }

@@ -2,11 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <title>Title</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<form action="/manager/book/add" method="post" th:object="${book}" enctype="application/x-www-form-urlencoded | multipart/form-data | text/plain">
+<form action="/manager/book/add" method="post" th:object="${book}" enctype="multipart/form-data">
     <div th:object="${book}" th:value="${book}">
         <input th:field="*{title}" type="text" placeholder="title" required><br>
         <input th:field="*{author}" type="text" placeholder="author" required><br>
@@ -21,18 +23,18 @@
             <option th:value="'АСТ'">АСТ</option>
             <option th:value="'Азбука'">Азбука</option>
         </select><br>
-        <select th:field="*{bookType}">
+        <select th:field="*{bookType}" required>
             <option th:value="'Бумажная'">Бумажная</option>
             <option th:value="'Электронная'">Электронная</option>
         </select>
-        <select th:field="*{bookCoverType}">
+        <select th:field="*{bookCoverType}" required>
             <option th:value="'Твердая'">Твердая</option>
             <option th:value="'Мягкая'">Мягкая</option>
         </select><br>
         <input th:field="*{description}" type="text" placeholder="description"><br>
-        <input name="freeBookExcerptURL" type="file" placeholder="free book excerpt url"><br>
-        <input name="eBookURL" type="file" placeholder="ebook url"><br>
-        <input name="images" type="file"  accept=".jpg, .jpeg, .png" multiple="multiple"  placeholder="add images">
+        <p>free book excerpt url <input name="_freeBookExcerptURL" type="file" accept=".pdf"></p>
+        <p>ebook url <input name="_eBookURL" type="file" accept=".pdf"></p>
+        <p>add images <input name="_images" type="file"  accept=".jpg, .jpeg, .png" multiple="multiple"></p>
         <input th:field="*{stockQuantity}" type="number" placeholder="stock quantity" required>
     </div>
     <input type="submit" value="add">

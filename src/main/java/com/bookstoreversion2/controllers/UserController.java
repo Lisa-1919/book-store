@@ -30,7 +30,9 @@ public class UserController {
     @Autowired
     private RatingService ratingService;
 
-    @ModelAttribute("basket")
+    @ModelAttribute("u")
+    public User getUser(){return this.userServiceImp.getAuthorizedUser();}
+    @ModelAttribute("authorizedUserBasket")
     public Basket getBasket() {
         return this.userServiceImp.getAuthorizedUserBasket();
     }
@@ -38,10 +40,10 @@ public class UserController {
     public Order getOrder() {
         return new Order();
     }
-    @ModelAttribute("book")
-    public Book getBook(@PathVariable("id") Long id) {
-        return bookServiceImp.getBookById(id);
-    }
+//    @ModelAttribute("book")
+//    public Book getBook(@PathVariable("id") Long id) {
+//        return bookServiceImp.getBookById(id);
+//    }
     @ModelAttribute("orders")
     public List<Order> getAllOrders(){
         return this.orderServiceImp.getAllOrdersByUserId(userServiceImp.getAuthorizedUser().getId());
@@ -49,6 +51,7 @@ public class UserController {
 
     @GetMapping("/basket")
     public String basketPage(Model model) {
+        model.addAttribute("authorizedUserBasket", getUser().getBasket());
         return "basket";
     }
 
@@ -70,8 +73,10 @@ public class UserController {
         return "book_page";
     }
 
-
-
+    @GetMapping("/book/{id}/part")
+    public String readPart(Model model){
+        return "read_part";
+    }
     @GetMapping("/book/{id}/add")
     public String addToBasket(@PathVariable("id") Long id, Model model) {
         basketServiceImp.addProductToBasket(id);
@@ -100,4 +105,5 @@ public class UserController {
         orderServiceImp.createNewOrder(order, toOrder);
         return "redirect:/catalog";
     }
+
 }

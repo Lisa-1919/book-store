@@ -31,6 +31,7 @@ public class BookServiceImp implements BookService {
 
     @Override
     public void addNewBook(Book book) {
+        book.getImages().forEach(bookImage -> {bookImage.setBook(book);});
         bookRepository.save(book);
     }
 

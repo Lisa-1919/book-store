@@ -36,14 +36,14 @@ public class Order {
     @Column(name = "status")
     private String status;
     @Column(name = "payment_method")
-    private PaymentMethod paymentMethod;
+    private String paymentMethod;
     @Column(name = "shipping_method")
-    private ShippingMethod shippingMethod;
+    private String shippingMethod;
 
     public Order() {
     }
 
-    public Order(Long id, User user, String address, List<Book> booksInOrder, double cost, LocalDateTime orderDate, LocalDateTime receiptDate, String status, PaymentMethod paymentMethod, ShippingMethod shippingMethod) {
+    public Order(Long id, User user, String address, List<Book> booksInOrder, double cost, LocalDateTime orderDate, LocalDateTime receiptDate, String status, String paymentMethod, String shippingMethod) {
         this.id = id;
         this.user = user;
         this.address = address;

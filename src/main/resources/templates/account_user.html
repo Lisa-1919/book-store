@@ -2,14 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
     <title>Title</title>
 </head>
 <body>
-<a href="/home">home</a><br>
-<p>hi, user</p>
-<a href="/account/password">update password</a><br>
-<a href="/basket">my basket</a>
-<a href="/orders">my orders</a>
+<footer th:insert="blocks/header :: header"></footer>
+<div th:object="${u}">
+    <a href="/home">home</a><br>
+    <p th:text="'hi, ' + ${u.firstName}"></p>
+    <a href="/account/password">update password</a><br>
+    <a href="/basket">my basket</a><br>
+    <a href="/orders">my orders</a><br>
+</div>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

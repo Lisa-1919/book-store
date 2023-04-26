@@ -2,6 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <title>Title</title>
 </head>
 <body>
@@ -9,7 +11,9 @@
 <p>hi, manager</p>
 <a href="/manager/book/catalog">catalog</a><br>
 <a href="/manager/book/add">add book</a><br>
-<a href="/account/password">update password</a>
+<a href="/manager/discounts/view">discounts</a><br>
+<a href="/manager/discounts/add">add discount</a><br>
+<a href="/account/password">update password</a><br>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

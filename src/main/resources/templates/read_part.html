@@ -8,10 +8,8 @@
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<p>catalog</p>
-<div th:each="book : ${books}">
-    <a th:href="'/manager/book/' + ${book.id}" th:text="${book.title}"></a>
-</div>
-<footer th:insert="blocks/footer :: footer"></footer>
+<object>
+    <embed src="/readPart/1._100_ways_to_motivate_yourself.pdf" width="400px" height="400px" />
+</object>
 </body>
 </html>

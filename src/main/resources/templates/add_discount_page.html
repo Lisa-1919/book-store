@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+  <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+  <title>Title</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<form action="/manager/discounts/add" method="post" th:object="${discount}">
+  <input th:field="*{title}" type="text" placeholder="title" required><br>
+  <input th:field="*{description}" type="text" placeholder="description" required>
+  <input th:field="*{startDate}" type="date" required><br>
+  <input th:field="*{endDate}" type="date" required><br>
+  <select th:field="*{parameter}" required>
+    <option th:value="'author'">author</option>
+    <option th:value="'genre'">genre</option>
+    <option th:value="'publisher'">publisher</option>
+    <option th:value="'all'">all</option>
+  </select><br>
+  <input th:field="*{value}" type="text" placeholder="value" required><br>
+  <input th:field="*{discountAmount}" type="number" min="1" max="99" placeholder="discount amount" required><br>
+  <input type="submit" value="add">
+</form>
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

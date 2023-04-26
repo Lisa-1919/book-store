@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,6 +23,11 @@ public class AccountController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public AccountController() {
+    }
+
+    @ModelAttribute("u")
+    public User getAccount(){
+        return this.userServiceImp.getAuthorizedUser();
     }
 
     @GetMapping("/registration")
@@ -42,6 +48,7 @@ public class AccountController {
     @GetMapping("/account")
     public String authenticationSuccess(Model model) {
         String roleName = userServiceImp.getRoleName();
+        model.addAttribute("u", userServiceImp.getAuthorizedUser());
         return switch (roleName) {
             case "ADMIN" -> "account_admin";
             case "MANAGER" -> "account_manager";
@@ -64,4 +71,6 @@ public class AccountController {
             return "redirect:/account/password";
         }
     }
+
+
 }

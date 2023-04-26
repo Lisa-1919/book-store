@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <title>Title</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
 <div th:each="order : ${orders}">
     <p th:text="${order.orderDate}"></p>
     <p th:text="'status: ' + ${order.status}"></p>

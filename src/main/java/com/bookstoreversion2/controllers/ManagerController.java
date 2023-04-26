@@ -6,6 +6,7 @@ import com.bookstoreversion2.data.entities.Discount;
 import com.bookstoreversion2.services.DiscountServiceImp;
 import com.bookstoreversion2.services.BookServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class ManagerController {
@@ -27,8 +29,15 @@ public class ManagerController {
     @Autowired
     private DiscountServiceImp discountServiceImp;
 
+    @Value("D:/book-store/book-images")
+    private String uploadImgPath;
+
+    @Value("D:/book-store/book-pdf")
+    private String uploadPDFPath;
+
     public ManagerController() {
     }
+
 
     @GetMapping("/manager")
     public String managerPage(Model model){
@@ -49,12 +58,53 @@ public class ManagerController {
     }
 
     @PostMapping("/manager/book/add")
-    public String addBook(@ModelAttribute("book") Book book, @RequestParam(value = "freeBookExcerptURL") File file, @RequestParam(value = "eBookURL") File eBook,
-                          @RequestParam(value = "images") ArrayList<File> images,Model model) throws IOException {
-        book.setFreeBookExcerptURL(file.getAbsolutePath());
-        book.setEBookURL(eBook.getAbsolutePath());
+    public String addBook(@ModelAttribute("book") Book book, @RequestParam(value = "_freeBookExcerptURL") MultipartFile file, @RequestParam(value = "_eBookURL") MultipartFile eBook,
+                          @RequestParam(value = "_images") ArrayList<MultipartFile> images, Model model) throws IOException {
+        if(file != null){
+            File uploadFolder = new File(uploadPDFPath);
+
+            if (!uploadFolder.exists()) {
+                uploadFolder.mkdir();
+            }
+            String resultPartFileName = UUID.randomUUID() + "." +file.getOriginalFilename();
+            try {
+                file.transferTo(new File(uploadPDFPath + "/" + resultPartFileName));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            book.setFreeBookExcerptURL(resultPartFileName);
+        }
+        if(eBook != null){
+            File uploadFolder = new File(uploadPDFPath);
+
+            if (!uploadFolder.exists()) {
+                uploadFolder.mkdir();
+            }
+            String resultEBookFileName = UUID.randomUUID() + "." +eBook.getOriginalFilename();
+            try {
+                eBook.transferTo(new File(uploadPDFPath + "/" + resultEBookFileName));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            book.setEBookURL(resultEBookFileName);
+        }
         book.setImages(new ArrayList<>());
-        images.forEach(image->{book.getImages().add(new BookImage(image.getAbsolutePath()));});
+        File uploadFolder = new File(uploadImgPath);
+
+        if (!uploadFolder.exists()) {
+            uploadFolder.mkdir();
+        }
+        images.forEach(image->{
+            if(image != null){
+                String resultImgName = UUID.randomUUID() + "." +image.getOriginalFilename();
+                try {
+                    image.transferTo(new File(uploadImgPath + "/" + resultImgName));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                book.getImages().add(new BookImage(resultImgName));
+            }
+        });
         productServiceImp.addNewBook(book);
         return "redirect:/manager/book/catalog";
     }
@@ -79,34 +129,41 @@ public class ManagerController {
     }
 
 
-    @GetMapping("/manager/discounts")
+    @GetMapping("/manager/discounts/view")
     public String discountsPage(Model model){
-        return "discounts_page";
+        model.addAttribute("discounts", discountServiceImp.getAllDiscounts());
+        return "discounts_manager";
     }
 
     @GetMapping("/manager/discounts/add")
     public String addDiscountPage(Model model){
+        model.addAttribute("discount", new Discount());
         return "add_discount_page";
     }
 
     @PostMapping("/manager/discounts/add")
-    public String addDiscount(@RequestAttribute Discount discount, Model model){
+    public String addDiscount(@ModelAttribute("discount") Discount discount, Model model){
         discountServiceImp.save(discount);
-        return "redirect:/manager/discounts";
+        return "redirect:/manager/discounts/view";
     }
 
     @GetMapping("/manager/discounts/{id}")
-    public String discountPage(@RequestParam Long id, Model model){
+    public String discountPage(@PathVariable(name = "id") Long id, Model model){
         Discount discount = discountServiceImp.findById(id);
         model.addAttribute("discount", discount);
-        return "discount_page";
+        return "discount_page_manager";
     }
 
     @PostMapping("/manager/discounts/{id}/edit")
-    public String editDiscount(@RequestAttribute Discount discount, Model model){
+    public String editDiscount(@ModelAttribute Discount discount, Model model){
         discountServiceImp.update(discount);
-        return "redirect:/manager/discounts";
+        return "redirect:/manager/discounts/view";
     }
 
+    @GetMapping("/manager/discounts/{id}/delete")
+    public String deleteDiscount(@ModelAttribute Discount discount, Model model){
+        discountServiceImp.delete(discount);
+        return "redirect:/manager/discounts/view";
+    }
 
 }

@@ -2,6 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <title>Title</title>
 </head>
 <body>
@@ -20,6 +22,7 @@
 <!--        <a href="/1._100_ways_to_motivate_yourself.pdf" download="1._100_ways_to_motivate_yourself.pdf" target="_blank">open</a>-->
 <!--        <a href="#0" onclick="window.open('http://localhost:8080/1._100_ways_to_motivate_yourself.pdf');" type="application/pdf">open pdf</a>-->
         <!--    <p>ebook url<input th:field="*{EBookURL}" type="text" th:value="*{EBookURL}"></p>-->
+        <a th:href="'/book/' + ${book.id} + '/part'">read part</a>
         <p th:text="'stock quantity: ' + *{stockQuantity}"/>
         <input type="submit" value="add to basket">
     </form>

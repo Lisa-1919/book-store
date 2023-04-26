@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+  <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+  <script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
+  <title>Title</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<form th:action="'/manager/discounts/' + ${discount.id} + '/edit'" method="post" th:object="${discount}">
+  <input th:field="*{title}" th:value="*{title}"><br>
+  <input th:field="*{description}" th:value="*{description}"><br>
+  <input type="date" th:field="*{startDate}" th:value="*{startDate}"><br>
+  <input type="date" th:field="*{endDate}" th:value="*{endDate}"><br>
+  <input th:field="*{parameter}" th:value="*{parameter}"><br>
+  <input th:field="*{value}" th:value="*{value}"><br>
+  <input th:field="*{discountAmount}" th:value="*{discountAmount}" type="number" min="1" max="99"><br>
+  <input type="submit" value="edit">
+</form>
+</body>
+</html>

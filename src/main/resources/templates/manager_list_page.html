@@ -2,10 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <title>Title</title>
+    <script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
 </head>
 <body>
-<header th:insert="blocks/header :: header_admin"></header>
+<header th:insert="blocks/header :: header"></header>
 <p>Hi, admin</p>
 <a href="/admin/managers/add">add new manager</a><br>
 <table>
@@ -25,7 +28,7 @@
                 <th th:text="${manager.lastName}"></th>
                 <th th:text="${manager.username}"></th>
                 <th th:text="${manager.phone}"></th>
-                <th><input type="submit" value="delete"></th>
+                <th><input type="submit" value="delete" onclick="return deleletconfig()"></th>
             </form>
         </tr>
     </div>

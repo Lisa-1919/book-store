@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
+    <title>Title</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<table border="2px solid black">
+    <tr>
+        <th>id</th>
+        <th>title</th>
+        <th>start date</th>
+        <th>end date</th>
+        <th>parameter</th>
+        <th>value</th>
+        <th>discount amount</th>
+        <th>description</th>
+    </tr>
+    <div th:each="discount : ${discounts}">
+        <tr>
+            <form th:action="'/manager/discounts/' + ${discount.id} + '/delete'" method="get" th:object="${discount}">
+                <td th:text="${discount.id}"></td>
+                <td>
+                <a th:href="'/manager/discounts/' + ${discount.id}" th:text="${discount.title}">
+                </a>
+                </td>
+                <td th:text="${discount.startDate}"></td>
+                <td th:text="${discount.endDate}"></td>
+                <td th:text="${discount.parameter}"></td>
+                <td th:text="${discount.value}"></td>
+                <td th:text="${discount.discountAmount}"></td>
+                <td th:text="${discount.description}"></td>
+                <td><input type="submit" value="delete" onclick="return deleletconfig()"></td>
+            </form>
+        </tr>
+    </div>
+</table>
+</body>
+</html>

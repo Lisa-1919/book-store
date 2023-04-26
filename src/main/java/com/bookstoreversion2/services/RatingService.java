@@ -63,7 +63,7 @@ public class RatingService {
             UserNeighborhood neighborhood = new ThresholdUserNeighborhood(0.1, similarity, plusModel);
             Recommender recommender = new GenericUserBasedRecommender(plusModel, neighborhood, similarity);
             List<RecommendedItem> recommendedItems;
-            recommendedItems = recommender.recommend(anonymousUserId, 1);
+            recommendedItems = recommender.recommend(anonymousUserId, 2);
             plusModel.releaseUser(anonymousUserId);
             for (RecommendedItem item : recommendedItems) {
                 Book book = bookRepository.findById(item.getItemID()).get();

@@ -32,7 +32,15 @@ public class DiscountServiceImp implements DiscountService {
 
     @Override
     public void update(Discount discount) {
-
+        Discount discountInDb = discountRepository.findById(discount.getId()).get();
+        discountInDb.setTitle(discount.getTitle());
+        discountInDb.setDescription(discount.getDescription());
+        discountInDb.setStartDate(discount.getStartDate());
+        discountInDb.setEndDate(discount.getEndDate());
+        discountInDb.setParameter(discount.getParameter());
+        discountInDb.setValue(discount.getValue());
+        discountInDb.setDiscountAmount(discountInDb.getDiscountAmount());
+        discountRepository.save(discountInDb);
     }
 
     @Override
