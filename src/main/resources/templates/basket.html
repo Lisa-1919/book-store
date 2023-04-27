@@ -2,14 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <title>Title</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<p th:text="'Итого:' + ${basket.getTotalPrice()}"></p>
+<p th:text="'Итого:' + ${authorizedUserBasket.getTotalPrice()}"></p>
 <form action="/basket/order/create" method="post" th:object="${order}">
-    <div th:object="${basket}">
-        <div th:each="bookInBasket : ${basket.getBooks()}">
+    <div th:object="${authorizedUserBasket}">
+        <div th:each="bookInBasket : ${authorizedUserBasket.getBooks()}">
             <div th:object="${bookInBasket}">
                 <a th:href="'/book/' + ${bookInBasket.book.id}" th:text="${bookInBasket.book.title}"></a>
                 <p th:text="${bookInBasket.book.author}"></p>

@@ -47,8 +47,10 @@ public class AccountController {
 
     @GetMapping("/account")
     public String authenticationSuccess(Model model) {
-        String roleName = userServiceImp.getRoleName();
-        model.addAttribute("u", userServiceImp.getAuthorizedUser());
+        User user = userServiceImp.getAuthorizedUser();
+       // String roleName = userServiceImp.getRoleName();
+        String roleName = user.getRoles().stream().toList().get(0).getRole();
+        model.addAttribute("u", user);
         return switch (roleName) {
             case "ADMIN" -> "account_admin";
             case "MANAGER" -> "account_manager";

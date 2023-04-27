@@ -40,19 +40,33 @@ public class BasketServiceImp implements BasketService {
     }
 
     @Override
-    public void addProductToBasket(Long bookId) {
+    public boolean addProductToBasket(Long bookId) {
         Basket basket = userServiceImp.getAuthorizedUserBasket();
         Book book = bookRepository.findById(bookId).get();
-        double totalPrice = basket.getTotalPrice();
-        BookInBasket bookInBasket = BookInBasket.builder()
-                .book(book)
-                .basket(basket)
-                .quantity(1)
-                .build();
-        basket.getBooks().add(bookInBasket);
-        totalPrice += book.getPrice();
-        basket.setTotalPrice(totalPrice);
-        basketRepository.save(basket);
+        if (isBookInBasket(basket, book)) {
+            return false;
+        } else {
+            double totalPrice = basket.getTotalPrice();
+            BookInBasket bookInBasket = BookInBasket.builder()
+                    .book(book)
+                    .basket(basket)
+                    .quantity(1)
+                    .build();
+            basket.getBooks().add(bookInBasket);
+            totalPrice += book.getPrice();
+            basket.setTotalPrice(totalPrice);
+            basketRepository.save(basket);
+            return true;
+        }
+    }
+
+    public boolean isBookInBasket(Basket basket, Book book){
+        for(BookInBasket bookInBasket : basket.getBooks()){
+            if(bookInBasket.getBook().getId() == book.getId()){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
