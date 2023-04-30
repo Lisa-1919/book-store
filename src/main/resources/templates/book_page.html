@@ -26,7 +26,7 @@
         <p th:text="'stock quantity: ' + *{stockQuantity}"/>
         <input type="submit" value="add to basket">
     </form>
-    <form th:action="'/book/' + ${book.id}" method="post">
+    <form th:action="'/book/' + ${book.id} +'/rating'" method="post">
         <input name="rating" type="number" step="0.1" placeholder="rating">
         <input type="submit" value="rate">
     </form>

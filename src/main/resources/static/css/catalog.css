@@ -1,0 +1,144 @@
+.grid-container {
+    position: absolute;
+    margin-top: 0;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    gap: 10px;
+}
+
+.menu {
+    grid-row-start: 1;
+    grid-row-end:4;
+    margin-top: 0;
+    width: 417px;
+}
+
+.genres{
+    width: 415px;
+    height: 499px;
+    left: 0;
+    border: 1px solid #F67DF9;
+}
+.genres h3{
+    width: 215px;
+    height: 21.95px;
+    margin-left: 50px;
+    margin-top: 39.92px;
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 22px;
+    color: #F67DF9;
+}
+
+.catalog{
+    width: 417px;
+    height: 945px;
+    margin-left:0px;
+    margin-top: 43px;
+    margin-right:0;
+}
+
+.choice_genre{
+    width: 300px;
+    height: 376.12px;
+    margin-left: 50px;
+    margin-top:28.13px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-start;
+}
+
+.choice_genre a{
+    width: 290px;
+    text-decoration: none;
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 22px;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.choice_genre a:last-child{
+    margin-bottom:32.88px;
+}
+
+.choice_genre a:hover{
+    border-bottom: 3px solid #F67DF9;
+}
+
+.grid-header {
+    margin-top: 51px;
+    width: 417px;
+    height: 68px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sort{
+    margin-left: 440px;
+}
+
+select {
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 29px;
+    text-align: center;
+    color: #000000;
+    border: none;
+    position: relative;
+    outline: none;
+}
+
+option {
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 29px;
+    text-align: center;
+    color: #000000;
+}
+
+.product_list {
+    position: absolute;
+    width: 969px;
+    left: 465px;
+    margin-top: 113px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+.product_more {
+    position: absolute;
+    text-decoration: none;
+}
+
+.product_more:hover {
+    width: 306px;
+    height: 415px;
+    border: 2px solid #F67DF9;
+}
+
+.button_sort {
+    margin-left: 7px;
+    background: #F67DF9;
+    border-radius: 66px;
+    border: none;
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 29px;
+    text-align: center;
+    color: #000000;
+}
+

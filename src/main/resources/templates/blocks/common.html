@@ -7,8 +7,8 @@
 <body>
 <div th:fragment="search">
     <form action="/catalog" method="get">
-        <input name="query" placeholder="search">
-        <input type="submit" value="find">
+        <input class="search__form" type="search" name="query" placeholder="Что вы ищите?">
+        <input type="submit" value="ПОИСК" class="search_button">
     </form>
 </div>
 <div th:fragment="sort">

@@ -1,0 +1,51 @@
+.search{
+    position: absolute;
+    width: 1440px;
+    height: 440.5px;
+    background: url("../img/background_home.svg") no-repeat center;
+
+}
+
+.search__form, .search_button{
+    text-align: center;
+
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 58px;
+    /* or 230% */
+
+    letter-spacing: 0.02em;
+
+    border: 1px solid #F67DF9;
+    border-radius: 66px;
+
+}
+
+.search__form{
+    position: absolute;
+    width: 365px;
+    height: 58px;
+    left: 245px;
+    top: 310px;
+
+}
+
+.search_button{
+    position: absolute;
+    width: 180px;
+    height: 58px;
+    left: 635px;
+    top: 310px;
+    background: #F67DF9;
+}
+
+.recommendation_list{
+    position: absolute;
+    margin-top: 500px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    gap: 10px;
+
+}

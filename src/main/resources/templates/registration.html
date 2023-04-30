@@ -2,20 +2,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/registration.css"
+          th:href="@{/css/registration.css}"/>
     <title>Registration</title>
 </head>
 <body>
-<a href="/home">Главная страница</a><br>
-<form action="/registration" method="post">
-    <input name="firstName" placeholder="first name"><br>
-    <input name="lastName" placeholder="last name"><br>
-    <input type="email" name = "email" placeholder="email" required><br>
-    <input name="phone" placeholder="phone"><br>
-    <input name = "password" type="password" placeholder="password"><br>
-    <input name="confirmPassword" type="password" placeholder="confirm password"><br>
-    <button type="submit">ГОТОВО!</button>
-</form>
+<div class="wrapper">
+    <a href="/home">Главная страница</a><br>
+    <main class="main">
+        <div class="registration_block">
+            <h1>Регистрация</h1>
+            <form action="/registration" method="post">
+                <input name="firstName" placeholder="first name">
+                <hr>
+                <br>
+                <input name="lastName" placeholder="last name">
+                <hr>
+                <br>
+                <input type="email" name="email" placeholder="email" required>
+                <hr>
+                <br>
+                <input name="phone" placeholder="phone">
+                <hr>
+                <br>
+                <input name="password" type="password" placeholder="password">
+                <hr>
+                <br>
+                <input name="confirmPassword" type="password" placeholder="confirm password">
+                <hr>
+                <br>
+                <a class="login_class" href="/login">Уже есть аккаунт? Войти</a>
+                <button type="submit">ГОТОВО!</button>
+            </form>
+        </div>
+    </main>
+</div>
 </body>
 </html>

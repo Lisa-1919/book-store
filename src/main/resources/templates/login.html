@@ -3,16 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/login.css"
+          th:href="@{/css/login.css}"/>
 </head>
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
-</div>
-<a href="/home">Home</a><br><br>
-<form action="/login" method="post">
-  <input name="username" placeholder="email"><br>
-  <input name="password" type="password" placeholder="password"><br>
-  <input type="submit" value="Log in">
-</form>
+<div th:if="${param.error}">Неверный логин или пароль.</div>
+<div th:if="${param.logout}">You have been logged out.</div>
+<main class="main">
+    <div class="wrapper">
+        <div class="login_block">
+            <h1>Авторизация</h1>
+            <form action="/login" method="post">
+                <input th:type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="username" placeholder="Эл. почта" required>
+                <hr>
+                <br>
+                <input name="password" type="password" placeholder="Пароль" required>
+                <hr>
+                <br>
+                <a class="registration" href="/registration">Ещё нет аккаунта? Зарегистрироваться</a>
+                <button type="submit">ВОЙТИ</button>
+            </form>
+        </div>
+    </div>
+</main>
 </body>
 </html>

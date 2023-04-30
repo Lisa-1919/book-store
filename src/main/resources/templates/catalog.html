@@ -4,16 +4,43 @@
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/book_in_catalog.css"
+          th:href="@{/css/book_in_catalog.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/catalog.css" th:href="@{/css/catalog.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/search.css" th:href="@{/css/search.css}"/>
     <title>Title</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<div th:insert="blocks/common.html :: search"></div>
-<div th:insert="blocks/common.html :: sort"></div>
-<div th:each="book : ${books}">
-  <a th:href="'/book/' + ${book.id}" th:text="${book.title}"></a>
-    <p th:text="${book.author}"></p>
-    <p th:text="${book.price}"></p><br>
+<div class="grid-header">
+    <div class="search" th:insert="blocks/common.html :: search"></div>
+    <div class="sort" th:insert="blocks/common.html :: sort"></div>
+</div>
+<div class="grid-container">
+    <div class="menu">
+        <div class="genres">
+            <h3>Категории</h3>
+            <div class="choice_genre">
+                <a href="/store/genres/foreign">Зарубежная классика</a><br>
+                <a href="/store/genres/detective">Детективы</a><br>
+                <a href="/store/genres/psychology">Психология</a><br>
+                <a href="/store/genres/fantasy">Фэнтези</a><br>
+                <a href="/store/genres/fantastic">Фантастика</a><br>
+                <a href="/store/genres/roman">Любовные романы</a><br>
+                <a href="/store/genres/history">История</a><br>
+                <a href="/store/genres/science">Наука</a><br>
+                <a href="/store/genres/kids">Детские</a><br>
+            </div>
+        </div>
+    </div>
+    <div class="book" th:each="book : ${books}">
+        <a class="book_more" th:href="'/book/' + ${book.id}">
+            <p class="title" th:text="${book.title}"></p>
+            <p class="author" th:text="${book.author}"></p>
+            <p class="publisher" th:text="${book.publisher}"></p>
+            <p class="price" th:text="${book.price}"></p><br>
+        </a>
+    </div>
 </div>
 <footer th:insert="blocks/footer.html :: footer"></footer>
 </body>

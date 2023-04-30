@@ -1,0 +1,35 @@
+.search {
+    display: flex;
+    position: absolute;
+    width: 415px;
+    height: 68px;
+    left: 0;
+    top: 165px;
+    border: 1px solid #F67DF9;
+}
+
+.search__form {
+    position: absolute;
+    width: 263px;
+    height: 60px;
+    margin-left: 49px;
+    outline: none;
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 22px;
+    letter-spacing: -0.04em;
+    color: #000000;
+
+}
+
+.search_button {
+    margin-left: 332px;
+    width: 83px;
+    height: 68px;
+    border: none;
+    border-left: 1px solid #F67DF9;
+    filter: none;
+    background: url("../img/search.svg") no-repeat center;
+}

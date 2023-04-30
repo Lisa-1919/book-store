@@ -31,21 +31,26 @@ public class UserController {
     private RatingService ratingService;
 
     @ModelAttribute("u")
-    public User getUser(){return this.userServiceImp.getAuthorizedUser();}
+    public User getUser() {
+        return this.userServiceImp.getAuthorizedUser();
+    }
+
     @ModelAttribute("authorizedUserBasket")
     public Basket getBasket() {
         return this.userServiceImp.getAuthorizedUserBasket();
     }
+
     @ModelAttribute("order")
     public Order getOrder() {
         return new Order();
     }
-//    @ModelAttribute("book")
+
+    //    @ModelAttribute("book")
 //    public Book getBook(@PathVariable("id") Long id) {
 //        return bookServiceImp.getBookById(id);
 //    }
     @ModelAttribute("orders")
-    public List<Order> getAllOrders(){
+    public List<Order> getAllOrders() {
         return this.orderServiceImp.getAllOrdersByUserId(userServiceImp.getAuthorizedUser().getId());
     }
 
@@ -56,7 +61,7 @@ public class UserController {
     }
 
     @GetMapping("/orders")
-    public String viewAllOrders(Model model){
+    public String viewAllOrders(Model model) {
         return "order_list_page";
     }
 
@@ -67,16 +72,17 @@ public class UserController {
         return "book_page";
     }
 
-    @PostMapping("/book/{id}")
-    public String rating(@RequestParam("rating") double rating, Model model) {
-        ratingService.add(userServiceImp.getAuthorizedUser(), (Book) model.getAttribute("book"), rating);
-        return "book_page";
+    @PostMapping("/book/{id}/rating")
+    public String rating(@PathVariable("id") Long bookId, @RequestParam("rating") double rating, Model model) {
+        ratingService.add(userServiceImp.getAuthorizedUser(), bookServiceImp.getBookById(bookId), rating);
+        return "redirect:/book/" + bookId;
     }
 
     @GetMapping("/book/{id}/part")
-    public String readPart(Model model){
+    public String readPart(Model model) {
         return "read_part";
     }
+
     @GetMapping("/book/{id}/add")
     public String addToBasket(@PathVariable("id") Long id, Model model) {
         basketServiceImp.addProductToBasket(id);

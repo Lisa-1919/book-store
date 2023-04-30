@@ -48,7 +48,6 @@ public class UserServiceImp implements UserService, UserDetailsService {
         userRepository.save(user);
         if (user.getRoles().stream().toList().get(0).getRole().equals("USER")) {
             Basket basket = new Basket();
-            //  user.setBasket(basket);
             basket.setUser(user);
             basketRepository.save(basket);
         }

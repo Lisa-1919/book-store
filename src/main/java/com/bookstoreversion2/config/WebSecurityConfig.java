@@ -35,11 +35,10 @@ public class WebSecurityConfig{
                         .requestMatchers("/admin/*", "/managers/*").hasRole("ADMIN")
                         .requestMatchers("/manager/*").hasRole("MANAGER")
                         .requestMatchers("/user/*", "/basket/*", "/orders/*").hasRole("USER")
-                        .requestMatchers("/account").fullyAuthenticated()
+                        .requestMatchers("/account").authenticated()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
-
                         .loginPage("/login")
                         .defaultSuccessUrl("/home")
                         .permitAll()
