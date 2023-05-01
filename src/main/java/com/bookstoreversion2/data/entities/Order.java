@@ -35,15 +35,11 @@ public class Order {
     private LocalDateTime receiptDate;
     @Column(name = "status")
     private String status;
-    @Column(name = "payment_method")
-    private String paymentMethod;
-    @Column(name = "shipping_method")
-    private String shippingMethod;
 
     public Order() {
     }
 
-    public Order(Long id, User user, String address, List<Book> booksInOrder, double cost, LocalDateTime orderDate, LocalDateTime receiptDate, String status, String paymentMethod, String shippingMethod) {
+    public Order(Long id, User user, String address, List<Book> booksInOrder, double cost, LocalDateTime orderDate, LocalDateTime receiptDate, String status) {
         this.id = id;
         this.user = user;
         this.address = address;
@@ -52,7 +48,5 @@ public class Order {
         this.orderDate = orderDate;
         this.receiptDate = receiptDate;
         this.status = status;
-        this.paymentMethod = paymentMethod;
-        this.shippingMethod = shippingMethod;
     }
 }

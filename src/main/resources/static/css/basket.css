@@ -1,0 +1,142 @@
+.book_in_basket_list {
+    width: 1203px;
+    left: 102px;
+    top: 285px;
+}
+
+.book_in_basket {
+    position: absolute;
+    width: 1203px;
+    height: 246px;
+    left: 102px;
+    border: 3px solid #FCFEB2;
+}
+
+.book_in_basket img {
+    margin-top: 20px;
+    margin-left: 17px;
+    width: 204px;
+    height: 206px;
+}
+
+.title {
+    position: absolute;
+    height: 50px;
+    margin-left: 276px;
+    top: 0px;
+
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 45px;
+    line-height: 50px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #000000;
+}
+
+.author {
+    position: absolute;
+    height: 50px;
+    margin-left: 276px;
+    top: 50px;
+
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 45px;
+    line-height: 50px;
+    /* identical to box height */
+
+    text-align: start;
+
+    color: #000000;
+}
+
+.publisher {
+    position: absolute;
+    height: 22px;
+    margin-left: 276px;
+    top: 142px;
+
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 22px;
+    /* identical to box height */
+
+    text-align: start;
+
+    color: #000000;
+}
+
+.price {
+    position: absolute;
+    width: 162px;
+    height: 66px;
+    left: 830px;
+    top: 38px;
+
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 66px;
+    text-align: start;
+
+    color: #000000;
+}
+
+.select_book {
+    position: absolute;
+    top: 106px;
+    margin-left: 936px;
+    width: 36.25px;
+    height: 33.1px;
+    border: 3.5px solid #848484;
+}
+
+.address{
+    margin-left: 245px;
+}
+
+h1{
+    height: 66px;
+    margin-left: 245px;
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 66px;
+    text-align: start;
+
+    color: #000000;
+}
+
+.create_order{
+    position: absolute;
+    width: 507px;
+    height: 84px;
+    margin-left: 719px;
+    top:165px;
+    background: #F67DF9;
+    border: 1px solid #F67DF9;
+    border-radius: 66px;
+
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 47.2988px;
+    line-height: 46px;
+    /* identical to box height, or 97% */
+
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #000000;
+
+}
+

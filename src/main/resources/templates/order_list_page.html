@@ -11,8 +11,6 @@
 <div th:each="order : ${orders}">
     <p th:text="${order.orderDate}"></p>
     <p th:text="'status: ' + ${order.status}"></p>
-    <p th:text="'payment: ' + ${order.paymentMethod}"></p>
-    <p th:text="'shipping: ' + ${order.shippingMethod}"></p>
     <p th:text="'address: ' + ${order.address}"></p>
     <div th:each="bookInOrder : ${order.booksInOrder}">
         <p th:text="${bookInOrder.title}"></p>

@@ -4,10 +4,19 @@ import com.bookstoreversion2.data.entities.*;
 import com.bookstoreversion2.services.*;
 import org.apache.hadoop.yarn.webapp.hamlet.Hamlet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -29,6 +38,11 @@ public class UserController {
 
     @Autowired
     private RatingService ratingService;
+
+    @Value("D:/book-store/book-pdf")
+    private String uploadPDFPath;
+    @Autowired
+    ResourceLoader resourceLoader;
 
     @ModelAttribute("u")
     public User getUser() {
@@ -110,6 +124,25 @@ public class UserController {
         }
         orderServiceImp.createNewOrder(order, toOrder);
         return "redirect:/catalog";
+    }
+
+    @GetMapping("/books/{filename}")
+    @ResponseBody
+    public ResponseEntity<Resource> serveFile(@PathVariable String filename) throws FileNotFoundException {
+        //Resource file = resourceLoader.getResource("file:d:/book-store-version-2/book-store/book-pdf/" + filename);
+        //download
+//        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+//                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+        File file = new File(uploadPDFPath+ "/" + filename);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=" +filename);
+
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(file.length())
+                .contentType(MediaType.parseMediaType("application/pdf"))
+                .body(resource);
     }
 
 }

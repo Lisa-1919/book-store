@@ -4,26 +4,38 @@
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/book_page.css" th:href="@{/css/book_page.css}"/>
     <title>Title</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<div th:object="${book}">
+
+<div th:object="${book}" class="book">
     <form th:action="'/book/' + ${book.id} + '/add'" method="get" th:object="${book}">
-        <p th:text="'title:'+ *{title}"/>
-        <p th:text="'author:' + *{author}"/>
-        <p th:text="'price:' + *{price} +' byn'"/>
-        <p th:text="'genre: ' + *{genre}"/>
-        <p th:text="'publisher: ' + *{publisher}"/>
-        <p th:text="'book type: ' + *{bookType}"/>
-        <p th:text="'cover type: ' + *{bookCoverType}"/>
-        <p th:text="'desctiption: ' + *{description}"/>
-        <p>free book excerpt url</p>
-<!--        <a href="/1._100_ways_to_motivate_yourself.pdf" download="1._100_ways_to_motivate_yourself.pdf" target="_blank">open</a>-->
-<!--        <a href="#0" onclick="window.open('http://localhost:8080/1._100_ways_to_motivate_yourself.pdf');" type="application/pdf">open pdf</a>-->
-        <!--    <p>ebook url<input th:field="*{EBookURL}" type="text" th:value="*{EBookURL}"></p>-->
-        <a th:href="'/book/' + ${book.id} + '/part'">read part</a>
-        <p th:text="'stock quantity: ' + *{stockQuantity}"/>
+        <img src="">
+        <p class="title" th:text="*{title}"/>
+        <p class="author" th:text="*{author}"/>
+        <div class="tabs">
+            <input type="radio" name="tab-btn" id="tab-btn-1" value="" checked>
+            <label for="tab-btn-1">Описание</label>
+            <input type="radio" name="tab-btn" id="tab-btn-2" value="">
+            <label for="tab-btn-2">Характеристики</label>
+            <div id="content-1">
+                <p class="description" th:text="*{description}"/>
+            </div>
+            <div id="content-2">
+                <p class="price" th:text="*{price}"> руб</p>
+                <p class="genre" th:text="*{genre}"/>
+                <p class="publisher" th:text=" *{publisher}"/>
+                <p class="book_type" th:text="*{bookType}"/>
+                <p class="book_cover_type" th:text="*{bookCoverType}"/>
+                <p th:text="'stock quantity: ' + *{stockQuantity}"/>
+                <a th:href="'/book/' + ${book.id} + '/part'">read part</a>
+                <p>free book excerpt url</p>
+                <a th:href="'/books/' + ${book.freeBookExcerptURL}"  type="application/pdf">open pdf</a>
+            </div>
+        </div>
+
         <input type="submit" value="add to basket">
     </form>
     <form th:action="'/book/' + ${book.id} +'/rating'" method="post">

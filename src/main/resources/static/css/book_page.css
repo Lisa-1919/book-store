@@ -1,0 +1,95 @@
+.tabs {
+    position: absolute;
+    left: 573px;
+    top: 285px;
+    font-size: 0;
+}
+
+#content-1, #content-2{
+    width: 818px;
+    height: 370px;
+}
+
+.tabs>input[type="radio"] {
+    display: none;
+}
+
+.tabs>div {
+    /* скрыть контент по умолчанию */
+    display: none;
+    border: 1px solid #e0e0e0;
+    padding: 10px 15px;
+    font-size: 16px;
+}
+
+/* отобразить контент, связанный с вабранной радиокнопкой (input type="radio") */
+#tab-btn-1:checked~#content-1,
+#tab-btn-2:checked~#content-2 {
+    display: block;
+}
+
+.tabs>label {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    padding: 2px 8px;
+    font-size: 16px;
+    line-height: 1.5;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+    cursor: pointer;
+    position: relative;
+    top: 1px;
+}
+
+.tabs>label:not(:first-of-type) {
+    border-left: none;
+}
+
+.tabs>input[type="radio"]:checked+label {
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+
+.book img {
+    position: absolute;
+    width: 447px;
+    height: 490px;
+    left: 53px;
+    top: 164px;
+}
+
+.title {
+    position: absolute;
+    width: 816px;
+    height: 90px;
+    left: 572px;
+
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 45px;
+    line-height: 47px;
+    text-align: start;
+    color: #000000;
+}
+
+.author{
+    position: absolute;
+    width: 273px;
+    height: 47px;
+    left: 572px;
+    top: 170px;
+
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 47px;
+    /* identical to box height, or 134% */
+    text-align: start;
+    color: #D4D4D4;
+}
