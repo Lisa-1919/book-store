@@ -68,4 +68,15 @@ public class Book implements Serializable {
         this.stockQuantity = stockQuantity;
         this.images = images;
     }
+
+    public String mainImgUrl(){
+        String mainImgUrl = "";
+        if(images.size() == 0){
+            mainImgUrl = "not_found.svg";
+        }
+        else {
+            mainImgUrl = images.get(0).getImageURL();
+        }
+        return mainImgUrl;
+    }
 }

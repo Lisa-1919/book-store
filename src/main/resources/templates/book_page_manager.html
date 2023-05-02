@@ -2,14 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <title>Title</title>
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
-    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/slider.css" th:href="@{/css/slider.css}">
+    <script src="../static/js/slider.js" th:src="@{/js/slider.js}"></script>
     <script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
+
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
 <form th:action="'/manager/book/' + ${book.id} + '/edit'" method="post" th:object="${book}">
+    <div class="slider" th:each="image : ${book.getImages()}">
+        <div class="item">
+            <img th:src="'/book_img/' + ${image.imageURL}">
+        </div>
+        <!-- Кнопки-стрелочки -->
+        <a class="previous" onclick="previousSlide()">&#10094;</a>
+        <a class="next" onclick="nextSlide()">&#10095;</a>
+    </div>
     <p>title<input th:field="*{title}" type="text" th:value="*{title}"></p>
     <p>author<input th:field="*{author}" type="text" th:value="*{author}"></p>
     <p>price<input th:field="*{price}" type="text" th:value="*{price}"></p>

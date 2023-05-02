@@ -5,6 +5,8 @@
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/book_page.css" th:href="@{/css/book_page.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/slider.css" th:href="@{/css/slider.css}">
+    <script src="../static/js/slider.js" th:src="@{/js/slider.js}"></script>
     <title>Title</title>
 </head>
 <body>
@@ -12,7 +14,15 @@
 
 <div th:object="${book}" class="book">
     <form th:action="'/book/' + ${book.id} + '/add'" method="get" th:object="${book}">
-        <img src="">
+        <div class="slider" th:each="image : ${book.getImages()}">
+            <div class="item">
+                <img th:src="'/book_img/' + ${image.imageURL}">
+            </div>
+            <!-- Кнопки-стрелочки -->
+            <a class="previous" onclick="previousSlide()">&#10094;</a>
+            <a class="next" onclick="nextSlide()">&#10095;</a>
+        </div>
+
         <p class="title" th:text="*{title}"/>
         <p class="author" th:text="*{author}"/>
         <div class="tabs">

@@ -35,6 +35,7 @@
     </div>
     <div class="book" th:each="book : ${books}">
         <a class="book_more" th:href="'/book/' + ${book.id}">
+            <img th:src="'/book_img/' + ${book.mainImgUrl()}">
             <p class="title" th:text="${book.title}"></p>
             <p class="author" th:text="${book.author}"></p>
             <p class="publisher" th:text="${book.publisher}"></p>

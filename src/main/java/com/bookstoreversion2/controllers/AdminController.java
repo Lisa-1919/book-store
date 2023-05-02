@@ -67,7 +67,7 @@ public class AdminController {
                 .url("https://rapidprod-sendgrid-v1.p.rapidapi.com/mail/send")
                 .post(body)
                 .addHeader("content-type", "application/json")
-                .addHeader("X-RapidAPI-Key", "")
+                .addHeader("X-RapidAPI-Key", "459c909060msh259d284d0105b54p151393jsnbb0570bf2901")
                 .addHeader("X-RapidAPI-Host", "rapidprod-sendgrid-v1.p.rapidapi.com")
                 .build();
 

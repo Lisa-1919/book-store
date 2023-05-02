@@ -32,4 +32,5 @@ public class BookImage {
     public BookImage(String imageURL) {
         this.imageURL = imageURL;
     }
+
 }

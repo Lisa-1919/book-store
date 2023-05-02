@@ -11,9 +11,8 @@
 <header th:insert="blocks/header :: header"></header>
 <h1 th:text="'Итого:' + ${authorizedUserBasket.getTotalPrice()}"></h1>
 <form action="/basket/order/create" method="post" th:object="${order}">
-    <select th:field="*{address}" required class="address">
-        <option th:value="'Минск, ул. Восточная 30'">Минск, ул. Восточная 30</option>
-        <option th:value="'Борисов, ул. Чапаева 50'">Борисов, ул. Чапаева 50</option>
+    <select th:field="*{address}" required class="address" th:each="pickUpPoint : ${pickUpPoints}">
+        <option th:value="${pickUpPoint.address}" th:text="${pickUpPoint.address}"></option>
     </select><br>
     <input class="create_order" type="submit" value="Оформить заказ">
     <div th:object="${authorizedUserBasket}">
