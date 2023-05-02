@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/account_admin.css" th:href="@{/css/account_admin.css}"/>
     <title>Title</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<a href="/admin/managers/add">Добавить менеджера</a><br>
-<a href="/managers">Менеджеры</a><br>
-<a href="/account/password">Изменить пароль</a>
+<div class="wrapper">
+    <a href="/admin/managers/add">Добавить менеджера</a><br>
+    <a href="/managers">Менеджеры</a><br>
+    <a href="/account/password">Изменить пароль</a>
+</div>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

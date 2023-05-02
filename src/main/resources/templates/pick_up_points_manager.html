@@ -8,13 +8,10 @@
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<p>hi, manager</p>
-<a href="/manager/book/catalog">Книги</a><br>
-<a href="/manager/book/add">add book</a><br>
-<a href="/manager/discounts/view">Акции</a><br>
-<a href="/manager/pick-up-points/view">Пункты самовывоза</a><br>
-<a href="/manager/discounts/add">add discount</a><br>
-<a href="/account/password">Изменить пароль</a><br>
-<footer th:insert="blocks/footer :: footer"></footer>
+<a href="/manager/pick-up-points/add">Добавить адрес самовывоза</a>
+<p>Адреса самовывоза</p>
+<div th:each="pickUpPoint : ${pickUpPoints}">
+    <a th:href="'/manager/pick-up-points/' + ${pickUpPoint.id}" th:text="${pickUpPoint.address}"></a>
+</div>
 </body>
 </html>

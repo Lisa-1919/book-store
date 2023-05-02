@@ -3,8 +3,11 @@ package com.bookstoreversion2.controllers;
 import com.bookstoreversion2.data.entities.Book;
 import com.bookstoreversion2.data.entities.BookImage;
 import com.bookstoreversion2.data.entities.Discount;
+import com.bookstoreversion2.data.entities.PickUpPoint;
 import com.bookstoreversion2.services.DiscountServiceImp;
 import com.bookstoreversion2.services.BookServiceImp;
+import com.bookstoreversion2.services.PickUpPointService;
+import com.bookstoreversion2.services.PickUpPointServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -21,36 +24,26 @@ import java.util.UUID;
 
 @Controller
 public class ManagerController {
-
-
     @Autowired
     private BookServiceImp productServiceImp;
-
     @Autowired
     private DiscountServiceImp discountServiceImp;
-
+    @Autowired
+    private PickUpPointServiceImp pickUpPointServiceImp;
     @Value("D:/book-store/book-images")
     private String uploadImgPath;
-
     @Value("D:/book-store/book-pdf")
     private String uploadPDFPath;
-
-    public ManagerController() {
-    }
-
-
     @GetMapping("/manager")
     public String managerPage(Model model){
         return "account_manager";
     }
-
     @GetMapping("/manager/book/catalog")
     public String catalogPage(Model model){
         List<Book> books = productServiceImp.getAllBooks();
         model.addAttribute("books", books);
         return "catalog_manager";
     }
-
     @GetMapping("/manager/book/add")
     public String addBookPage(Model model){
         model.addAttribute("book", new Book());
@@ -164,6 +157,42 @@ public class ManagerController {
     public String deleteDiscount(@ModelAttribute Discount discount, Model model){
         discountServiceImp.delete(discount);
         return "redirect:/manager/discounts/view";
+    }
+
+    @GetMapping("/manager/pick-up-points/add")
+    public String addPickUpPointPage(Model model){
+        model.addAttribute("pickUpPoint", new PickUpPoint());
+        return "add_pick_up_point_page";
+    }
+
+    @PostMapping("/manager/pick-up-points/add")
+    public String addPickUpPoint(@ModelAttribute PickUpPoint pickUpPoint, Model model){
+        pickUpPointServiceImp.save(pickUpPoint);
+        return "redirect:/manager/pick-up-points/view";
+    }
+
+    @GetMapping("/manager/pick-up-points/view")
+    public String pickUpPointsPage(Model model){
+        model.addAttribute("pickUpPoints", pickUpPointServiceImp.findAll());
+        return "pick_up_points_manager";
+    }
+    @GetMapping("/manager/pick-up-points/{id}")
+    public String pickUpPointPage(@PathVariable(name = "id") Long id, Model model){
+        PickUpPoint pickUpPoint = pickUpPointServiceImp.findById(id);
+        model.addAttribute("pickUpPoint", pickUpPoint);
+        return "pick_up_point_page_manager";
+    }
+
+    @PostMapping("/manager/pick-up-points/{id}/edit")
+    public String editPickUpPoint(@ModelAttribute PickUpPoint pickUpPoint, Model model){
+        pickUpPointServiceImp.update(pickUpPoint);
+        return "redirect:/manager/pick-up-points/view";
+    }
+
+    @GetMapping("/manager/pick-up-points/{id}/delete")
+    public String deletePickUpPoint(@ModelAttribute PickUpPoint pickUpPoint, Model model){
+        pickUpPointServiceImp.delete(pickUpPoint);
+        return "redirect:/manager/pick-up-points/view";
     }
 
 }

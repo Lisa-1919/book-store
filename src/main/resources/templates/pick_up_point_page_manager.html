@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
+    <title>Title</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<form th:action="'/manager/pick-up-points/' + ${pickUpPoint.id} + '/edit'" method="post" th:object="${pickUpPoint}">
+    <input th:field="*{address}" th:value="*{address}"><br>
+    <input th:field="*{workSchedule}" th:value="*{workSchedule}"><br>
+    <input type="time" th:field="*{startOfBusiness}" th:value="*{startOfBusiness}"><br>
+    <input type="time" th:field="*{closeOfBusiness}" th:value="*{closeOfBusiness}"><br>
+    <input type="submit" value="edit">
+</form>
+<form th:action="'/manager/pick-up-points/' + ${pickUpPoint.id} + '/delete'" method="get">
+    <input type="submit" onclick="return deleletconfig()" value="delete">
+</form>
+</body>
+</html>

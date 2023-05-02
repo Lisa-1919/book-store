@@ -2,10 +2,11 @@ package com.bookstoreversion2.controllers;
 
 import com.bookstoreversion2.data.entities.*;
 import com.bookstoreversion2.services.*;
-import org.apache.hadoop.yarn.webapp.hamlet.Hamlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.*;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class UserController {
@@ -32,6 +29,8 @@ public class UserController {
     private BookServiceImp bookServiceImp;
     @Autowired
     private BasketServiceImp basketServiceImp;
+    @Autowired
+    private PickUpPointServiceImp pickUpPointServiceImp;
 
     @Autowired
     private OrderServiceImp orderServiceImp;
@@ -63,6 +62,8 @@ public class UserController {
 //    public Book getBook(@PathVariable("id") Long id) {
 //        return bookServiceImp.getBookById(id);
 //    }
+
+
     @ModelAttribute("orders")
     public List<Order> getAllOrders() {
         return this.orderServiceImp.getAllOrdersByUserId(userServiceImp.getAuthorizedUser().getId());
@@ -143,6 +144,12 @@ public class UserController {
                 .contentLength(file.length())
                 .contentType(MediaType.parseMediaType("application/pdf"))
                 .body(resource);
+    }
+
+    @PostMapping("/pick-up-points/{id}/r")
+    public String pickUpPointRating(@PathVariable Long id, @RequestParam("rating") double rating, Model model){
+        pickUpPointServiceImp.ratePickUpPoint(id, rating);
+        return "redirect:/pick-up-points";
     }
 
 }

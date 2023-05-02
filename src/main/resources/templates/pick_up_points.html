@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <title>Title</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<p>Адреса самовывоза</p>
+<div th:each="pickUpPoint : ${pickUpPoints}">
+    <form th:action="'/pick-up-points/' + ${pickUpPoint.id} +'/r'" method="post">
+        <p th:text="${pickUpPoint.address}"></p>
+        <p th:text="${pickUpPoint.workSchedule}"></p>
+        <p th:text="${pickUpPoint.startOfBusiness}"></p>
+        <p th:text="${pickUpPoint.closeOfBusiness}"></p>
+        <p th:text="${pickUpPoint.rating}"></p>
+        <input name="rating" type="number" min="1.0" max="5.0" step="0.1" placeholder="rating">
+        <input type="submit" value="rate">
+    </form>
+</div>
+</body>
+</html>

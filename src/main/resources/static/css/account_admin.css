@@ -1,0 +1,13 @@
+.wrapper a{
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 43.5533px;
+    line-height: 42px;
+    /* identical to box height, or 97% */
+
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #000000;
+}

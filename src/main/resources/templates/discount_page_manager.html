@@ -19,5 +19,8 @@
   <input th:field="*{discountAmount}" th:value="*{discountAmount}" type="number" min="1" max="99"><br>
   <input type="submit" value="edit">
 </form>
+<form th:action="'/manager/discounts/' + ${discount.id} + '/delete'" method="get">
+  <input type="submit" onclick="return deleletconfig()" value="delete">
+</form>
 </body>
 </html>
