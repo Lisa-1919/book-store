@@ -7,13 +7,14 @@
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/slider.css" th:href="@{/css/slider.css}">
+    <link type="text/css" rel="stylesheet" href="../static/css/add_book.css" th:href="@{/css/add_book.css}"/>
     <script src="../static/js/slider.js" th:src="@{/js/slider.js}"></script>
     <script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
 
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<form th:action="'/manager/book/' + ${book.id} + '/edit'" method="post" th:object="${book}">
+<form th:action="'/manager/book/' + ${book.id} + '/edit'" method="post" th:object="${book}" class="form">
     <div class="slider" th:each="image : ${book.getImages()}">
         <div class="item">
             <img th:src="'/book_img/' + ${image.imageURL}">
@@ -22,36 +23,39 @@
         <a class="previous" onclick="previousSlide()">&#10094;</a>
         <a class="next" onclick="nextSlide()">&#10095;</a>
     </div>
-    <p>title<input th:field="*{title}" type="text" th:value="*{title}"></p>
-    <p>author<input th:field="*{author}" type="text" th:value="*{author}"></p>
-    <p>price<input th:field="*{price}" type="text" th:value="*{price}"></p>
-    <select th:field="*{genre}" th:selected="*{genre}">
-        <option th:value="'roman'">roman</option>
-        <option th:value="'education'">education</option>
-        <option th:value="'fantastic'">fantastic</option>
-        <option th:value="'historical'">historical</option>
-    </select><br>
+    <p>Название</p><input th:field="*{title}" type="text" th:value="*{title}">
+    <p>Автор</p><input th:field="*{author}" type="text" th:value="*{author}">
+    <p>Цена</p><input th:field="*{price}" type="text" th:value="*{price}">
+    <select th:field="*{genre}" required>
+        <option th:value="'Романы'">Романы</option>
+        <option th:value="'Зарубежные'">Зарубежные</option>
+        <option th:value="'Фантастика'">Фантастика</option>
+        <option th:value="'Фэнтези'">Фэнтези</option>
+        <option th:value="'Детективы'">Детектив</option>
+        <option th:value="'Психология'">Психология</option>
+        <option th:value="'Наука'">Наука</option>
+        <option th:value="'История'">История</option>
+        <option th:value="'Детские'">Детские</option>
+    </select>
     <select th:field="*{publisher}" th:selected="*{publisher}">
         <option th:value="'АСТ'">АСТ</option>
         <option th:value="'Азбука'">Азбука</option>
-    </select><br>
+    </select>
     <select th:field="*{bookType}" th:selected="*{bookType}">
         <option th:value="'Бумажная'">Бумажная</option>
         <option th:value="'Электронная'">Электронная</option>
-    </select><br>
+    </select>
     <select th:field="*{bookCoverType}" th:value="*{bookCoverType}">
         <option th:value="'Твердая'">Твердая</option>
         <option th:value="'Мягкая'">Мягкая</option>
         <option th:value="'-'">Электронная книга</option>
-    </select><br>
-    <p>description<textarea th:field="*{description}" th:value="*{description}"/></p>
-    <p>free book excerpt url<input th:field="*{freeBookExcerptURL}" type="text" th:value="*{freeBookExcerptURL}"></p>
-    <p>ebook url<input th:field="*{EBookURL}" type="text" th:value="*{EBookURL}"></p>
-    <p>stock quantity<input th:field="*{stockQuantity}" type="number" th:value="*{stockQuantity}"></p>
-  <input type="submit" value="update">
+    </select>
+    <p>Описание<textarea th:field="*{description}" th:value="*{description}"/></p>
+    <p>КОличество на складе<input th:field="*{stockQuantity}" type="number" th:value="*{stockQuantity}"></p>
+  <input type="submit" value="Сохранить">
 </form>
 <form th:action="'/manager/book/' + ${book.id} + '/delete'" method="get">
-    <input type="submit" onclick="return deleletconfig()" value="delete">
+    <input type="submit" onclick="return deleletconfig()" value="Удалить">
 </form>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>

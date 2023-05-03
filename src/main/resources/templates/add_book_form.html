@@ -4,44 +4,45 @@
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/add_book.css" th:href="@{/css/add_book.css}"/>
     <link rel="shortcut icon" href="/img/logo.svg" type="image/png">
     <title>Personal Freedom</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<form action="/manager/book/add" method="post" th:object="${book}" enctype="multipart/form-data">
-    <div th:object="${book}" th:value="${book}">
-        <input th:field="*{title}" type="text" placeholder="title" required><br>
-        <input th:field="*{author}" type="text" placeholder="author" required><br>
-        <input th:field="*{price}" type="text" placeholder="price" required><br>
+<form action="/manager/book/add" method="post" th:object="${book}" enctype="multipart/form-data" >
+    <div th:object="${book}" th:value="${book}" class="form">
+        <input th:field="*{title}" type="text" placeholder="Название" required>
+        <input th:field="*{author}" type="text" placeholder="Автор" required>
+        <input th:field="*{price}" type="text" placeholder="Цена" required>
         <select th:field="*{genre}" required>
-            <option th:value="'roman'">Любовный роман</option>
-            <option th:value="'foreign'">Зарубежная классика</option>
-            <option th:value="'fantastic'">Фантастика</option>
-            <option th:value="'fantasy'">Фэнтези</option>
-            <option th:value="'detective'">Детективы</option>
-            <option th:value="'psychology'">Психология</option>
-            <option th:value="'science'">Наука</option>
-            <option th:value="'history'">История/option>
-            <option th:value="'kids'">Детские</option>
-        </select><br>
+            <option th:value="'Романы'">Романы</option>
+            <option th:value="'Зарубежные'">Зарубежные</option>
+            <option th:value="'Фантастика'">Фантастика</option>
+            <option th:value="'Фэнтези'">Фэнтези</option>
+            <option th:value="'Детективы'">Детектив</option>
+            <option th:value="'Психология'">Психология</option>
+            <option th:value="'Наука'">Наука</option>
+            <option th:value="'История'">История</option>
+            <option th:value="'Детские'">Детские</option>
+        </select>
         <select th:field="*{publisher}" required>
             <option th:value="'АСТ'">АСТ</option>
             <option th:value="'Азбука'">Азбука</option>
-        </select><br>
+        </select>
         <select th:field="*{bookType}" required>
             <option th:value="'Бумажная'">Бумажная</option>
             <option th:value="'Электронная'">Электронная</option>
         </select>
-        <select th:field="*{bookCoverType}" required>
+        <select th:field="*{bookCoverType}">
             <option th:value="'Твердая'">Твердая</option>
             <option th:value="'Мягкая'">Мягкая</option>
-        </select><br>
-        <textarea th:field="*{description}" type="text" placeholder="description"/><br>
-        <p>free book excerpt url <input name="_freeBookExcerptURL" type="file" accept=".pdf"></p>
-        <p>ebook url <input name="_eBookURL" type="file" accept=".pdf"></p>
-        <p>add images <input name="_images" type="file"  accept=".jpg, .jpeg, .png" multiple="multiple"></p>
-        <input th:field="*{stockQuantity}" type="number" placeholder="stock quantity" required>
+        </select>
+        <textarea th:field="*{description}" placeholder="Описание"></textarea>
+        <p>Бусплатный фрагмент <input name="_freeBookExcerptURL" type="file" accept=".pdf"></p>
+        <p>Электронная книга <input name="_eBookURL" type="file" accept=".pdf"></p>
+        <p>Изображения <input name="_images" type="file"  accept=".jpg, .jpeg, .png" multiple="multiple"></p>
+        <input th:field="*{stockQuantity}" type="number" placeholder="Количество на складе" required>
     </div>
     <input type="submit" value="Добавить">
 </form>

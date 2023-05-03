@@ -1,0 +1,43 @@
+.form{
+    position: absolute;
+    top:180px;
+    width: 400px;
+    left: 50px;
+    display: flex;
+    flex-direction: column;
+
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 30px;
+    letter-spacing: -0.04em;
+    color: #000000;
+}
+
+input[type=text]{
+    border-radius: 39px;
+    border: 1px solid #F67DF9;
+}
+
+input[type=submit]{
+    position: fixed;
+    left: 1200px;
+    width: 180px;
+    height: 50px;
+    margin-top:450px;
+    background: #F67DF9;
+    border-radius: 39px;
+    border: none;
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 30px;
+    /* or 58% */
+
+    text-align: center;
+    letter-spacing: 0.02em;
+
+    color: #000000;
+}

@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/add_book.css" th:href="@{/css/add_book.css}"/>
     <link rel="shortcut icon" href="/img/logo.svg" type="image/png">
     <title>Personal Freedom</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<form action="/manager/pick-up-points/add" method="post" th:object="${pickUpPoint}">
-    <input th:field="*{address}" type="text" placeholder="address" required><br>
-    <input th:field="*{startOfBusiness}" type="time" required><br>
-    <input th:field="*{closeOfBusiness}" type="time" required><br>
-    <select th:field="*{workSchedule}" required>
+<form action="/manager/pick-up-points/add" method="post" th:object="${pickUpPoint}" class="form">
+    <input th:field="*{address}" type="text" placeholder="Адрес" required>
+    <p>Начало работы </p><input th:field="*{startOfBusiness}" type="time" required>
+    <p>Конец работы </p><input th:field="*{closeOfBusiness}" type="time" required>
+    <p>Дни недели </p><select th:field="*{workSchedule}" required>
         <option th:value="'пн-вс'">пн-вс</option>
         <option th:value="'пн-пт'">пн-пт</option>
-    </select><br>
-    <input type="submit" value="add">
+    </select>
+    <input type="submit" value="Добавить">
 </form>
 </body>
 </html>

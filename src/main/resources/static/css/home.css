@@ -6,7 +6,7 @@
 
 }
 
-.search__form, .search_button{
+.search__form{
     text-align: center;
 
     font-family: 'Forum';
@@ -34,12 +34,16 @@
 
 .search_button{
     position: absolute;
-    width: 180px;
-    height: 58px;
-    left: 635px;
-    top: 310px;
-    background: #F67DF9;
+    left: 620px;
+    top: 303px;
+    width: 83px;
+    height: 68px;
+    border: none;
+    filter: none;
+    background: url("../img/search.svg") no-repeat center;
 }
+
+
 
 .recommendation_list{
     position: absolute;

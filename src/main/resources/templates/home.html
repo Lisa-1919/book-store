@@ -15,9 +15,7 @@
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<div class="search">
-    <div th:insert="blocks/common :: search"></div>
-</div>
+<div th:insert="blocks/common :: search" class="search"></div>
 <div class="recommendation_list" id="recommendation-list">
     <div class="book" th:each="book : ${books}">
         <a class="book_more" th:href="'/book/' + ${book.id}">

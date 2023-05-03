@@ -1,4 +1,11 @@
-.wrapper a{
+.menu{
+    position: absolute;
+    left:50px;
+    top:200px;
+    display: flex;
+    flex-direction: column;
+}
+.menu a{
     margin-top: 50px;
     font-family: 'Forum';
     font-style: normal;
