@@ -7,50 +7,50 @@
     <link type="text/css" rel="stylesheet" href="../static/css/book_page.css" th:href="@{/css/book_page.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/slider.css" th:href="@{/css/slider.css}">
     <script src="../static/js/slider.js" th:src="@{/js/slider.js}"></script>
-    <title>Title</title>
+    <link rel="shortcut icon" href="/img/logo.svg" type="image/png">
+    <title>Personal Freedom</title>
 </head>
 <body>
-<header th:insert="blocks/header :: header"></header>
+<header th:insert="blocks/header :: header" class="wrapper"></header>
 
 <div th:object="${book}" class="book">
-    <form th:action="'/book/' + ${book.id} + '/add'" method="get" th:object="${book}">
-        <div class="slider" th:each="image : ${book.getImages()}">
-            <div class="item">
-                <img th:src="'/book_img/' + ${image.imageURL}">
-            </div>
-            <!-- Кнопки-стрелочки -->
-            <a class="previous" onclick="previousSlide()">&#10094;</a>
-            <a class="next" onclick="nextSlide()">&#10095;</a>
+    <div class="slider" th:each="image : ${book.getImages()}">
+        <div class="item">
+            <img th:src="'/book_img/' + ${image.imageURL}">
         </div>
+        <!-- Кнопки-стрелочки -->
+        <a class="previous" onclick="previousSlide()">&#10094;</a>
+        <a class="next" onclick="nextSlide()">&#10095;</a>
+    </div>
 
-        <p class="title" th:text="*{title}"/>
-        <p class="author" th:text="*{author}"/>
-        <div class="tabs">
-            <input type="radio" name="tab-btn" id="tab-btn-1" value="" checked>
-            <label for="tab-btn-1">Описание</label>
-            <input type="radio" name="tab-btn" id="tab-btn-2" value="">
-            <label for="tab-btn-2">Характеристики</label>
-            <div id="content-1">
-                <p class="description" th:text="*{description}"/>
-            </div>
-            <div id="content-2">
-                <p class="price" th:text="*{price}"> руб</p>
-                <p class="genre" th:text="*{genre}"/>
-                <p class="publisher" th:text=" *{publisher}"/>
-                <p class="book_type" th:text="*{bookType}"/>
-                <p class="book_cover_type" th:text="*{bookCoverType}"/>
-                <p th:text="'stock quantity: ' + *{stockQuantity}"/>
-                <a th:href="'/book/' + ${book.id} + '/part'">read part</a>
-                <p>free book excerpt url</p>
-                <a th:href="'/books/' + ${book.freeBookExcerptURL}"  type="application/pdf">open pdf</a>
-            </div>
+    <p class="title" th:text="*{title}"/>
+    <p class="author" th:text="*{author}"/>
+    <div class="tabs">
+        <input type="radio" name="tab-btn" id="tab-btn-1" value="" checked>
+        <label for="tab-btn-1">Описание</label>
+        <input type="radio" name="tab-btn" id="tab-btn-2" value="">
+        <label for="tab-btn-2">Характеристики</label>
+        <div id="content-1">
+            <p class="description" th:text="*{description}"/>
         </div>
-
-        <input type="submit" value="add to basket">
-    </form>
-    <form th:action="'/book/' + ${book.id} +'/rating'" method="post">
+        <div id="content-2">
+            <p class="price" th:text="*{price}"> руб</p>
+            <p class="genre" th:text="*{genre}"/>
+            <p class="publisher" th:text=" *{publisher}"/>
+            <p class="book_type" th:text="*{bookType}"/>
+            <p class="book_cover_type" th:text="*{bookCoverType}"/>
+            <p th:text="'stock quantity: ' + *{stockQuantity}"/>
+            <a th:href="'/book/' + ${book.id} + '/part'">read part</a>
+            <p>free book excerpt url</p>
+            <a th:href="'/books/' + ${book.freeBookExcerptURL}" type="application/pdf">open pdf</a>
+        </div>
+    </div>
+    <form th:action="'/book/' + ${book.id} +'/rating'" method="post" class="rating">
         <input name="rating" type="number" step="0.1" placeholder="rating">
-        <input type="submit" value="rate">
+        <input type="submit" class="rating_btn" value="rate">
+    </form>
+    <form th:action="'/book/' + ${book.id} + '/add'" method="get" th:object="${book}">
+        <input type="submit" class="add_to_basket" value="add to basket">
     </form>
 </div>
 <footer th:insert="blocks/footer :: footer"></footer>

@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 <div th:fragment="search">
     <form action="/catalog" method="get">
         <input class="search__form" type="search" name="query" placeholder="Что вы ищите?">
-        <input type="submit" value="ПОИСК" class="search_button">
+        <input type="submit" value="" class="search_button">
     </form>
 </div>
-<div th:fragment="sort">
+
+<div th:fragment="sort" class="dropdown">
     <form action="/catalog" method="get">
         <select name="sort">
             <option>sort</option>
@@ -27,7 +21,3 @@
 
     </form>
 </div>
-
-
-</body>
-</html>

@@ -16,7 +16,7 @@
     border-radius: 26px;
 }
 h1{
-    margin-left: 147px;
+    width: 518.4px;
     margin-bottom:30px;
     top: 226px;
     font-family: 'Forum';
@@ -24,6 +24,7 @@ h1{
     font-weight: 400;
     font-size: 45px;
     line-height: 29px;
+    text-align: center;
     color: #000000;
 }
 

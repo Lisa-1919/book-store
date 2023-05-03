@@ -1,0 +1,22 @@
+
+.pick_up_point{
+    box-sizing: border-box;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 413px;
+    height: 350px;
+    border: 1px solid #F67DF9;
+}
+
+.pick_up_point p{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: 'Forum';
+    font-style: normal;
+    font-size: 30px;
+    line-height: 30px;
+    font-weight: 400;
+    text-align: center;
+    color: #000000;
+}

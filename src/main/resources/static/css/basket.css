@@ -1,16 +1,15 @@
 .book_in_basket_list {
     width: 1203px;
-    left: 102px;
-    top: 285px;
+    margin-left: 102px;
 }
 
 .book_in_basket {
-    position: absolute;
+    display: flex;
     width: 1203px;
     height: 246px;
-    left: 102px;
     border: 3px solid #FCFEB2;
 }
+
 
 .book_in_basket img {
     margin-top: 20px;
@@ -21,28 +20,25 @@
 
 .title {
     position: absolute;
+    width: 300px;
     height: 50px;
     margin-left: 276px;
-    top: 0px;
-
+    margin-top: 45px;
     font-family: 'Forum';
     font-style: normal;
     font-weight: 400;
-    font-size: 45px;
+    font-size: 40px;
     line-height: 50px;
-    /* identical to box height */
-
-    text-align: center;
-
+    text-align: start;
     color: #000000;
+    text-decoration: none;
 }
 
 .author {
     position: absolute;
     height: 50px;
     margin-left: 276px;
-    top: 50px;
-
+    margin-top: 100px;
     font-family: 'Forum';
     font-style: normal;
     font-weight: 400;
@@ -56,10 +52,9 @@
 }
 
 .publisher {
-    position: absolute;
     height: 22px;
-    margin-left: 276px;
-    top: 142px;
+    margin-left: 55px;
+    margin-top: 150px;
 
     font-family: 'Forum';
     font-style: normal;
@@ -74,11 +69,10 @@
 }
 
 .price {
-    position: absolute;
     width: 162px;
     height: 66px;
-    left: 830px;
-    top: 38px;
+    margin-left: 430px;
+    margin-top: 87px;
 
     font-family: 'Forum';
     font-style: normal;
@@ -91,25 +85,39 @@
 }
 
 .select_book {
-    position: absolute;
-    top: 106px;
-    margin-left: 936px;
+    margin-top: 8px;
+    margin-left: 60px;
     width: 36.25px;
-    height: 33.1px;
     border: 3.5px solid #848484;
 }
 
 .address{
-    margin-left: 245px;
-}
+    position: absolute;
+    margin-left: 400px;
+    top: 165px;
+    height: 41px;
+    border: 1px solid #F67DF9;
+    border-radius: 66px;
 
-h1{
-    height: 66px;
-    margin-left: 245px;
     font-family: 'Forum';
     font-style: normal;
     font-weight: 400;
-    font-size: 60px;
+    font-size: 20px;
+    line-height: 30px;
+    /* identical to box height, or 97% */
+
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #000000;
+}
+
+h1{
+    margin-left: 100px;
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
     line-height: 66px;
     text-align: start;
 
@@ -118,19 +126,17 @@ h1{
 
 .create_order{
     position: absolute;
-    width: 507px;
-    height: 84px;
-    margin-left: 719px;
+    left: 760px;
     top:165px;
     background: #F67DF9;
-    border: 1px solid #F67DF9;
+    border: 5px solid #F67DF9;
     border-radius: 66px;
 
     font-family: 'Forum';
     font-style: normal;
     font-weight: 400;
-    font-size: 47.2988px;
-    line-height: 46px;
+    font-size: 20px;
+    line-height: 30px;
     /* identical to box height, or 97% */
 
     text-align: center;

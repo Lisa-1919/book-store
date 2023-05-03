@@ -5,8 +5,7 @@
     justify-content: start;
     width: 1340px;
     height: 113px;
-    left: 50px;
-    top: 9px;
+    margin-left: 50px;
 }
 
 .store__nav{
@@ -32,9 +31,8 @@
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    width: 215px;
+    width: 265px;
     height: 49px;
-    top: 27px;
 }
 
 .header__item{

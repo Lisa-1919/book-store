@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="shortcut icon" href="/img/logo.svg" type="image/png">
+    <title>Personal Freedom</title>
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/slider.css" th:href="@{/css/slider.css}">
@@ -43,7 +44,7 @@
         <option th:value="'Мягкая'">Мягкая</option>
         <option th:value="'-'">Электронная книга</option>
     </select><br>
-    <p>description<input th:field="*{description}" type="text" th:value="*{description}"></p>
+    <p>description<textarea th:field="*{description}" th:value="*{description}"/></p>
     <p>free book excerpt url<input th:field="*{freeBookExcerptURL}" type="text" th:value="*{freeBookExcerptURL}"></p>
     <p>ebook url<input th:field="*{EBookURL}" type="text" th:value="*{EBookURL}"></p>
     <p>stock quantity<input th:field="*{stockQuantity}" type="number" th:value="*{stockQuantity}"></p>

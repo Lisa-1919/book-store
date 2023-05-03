@@ -3,36 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
-    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/basket.css" th:href="@{/css/basket.css}"/>
-    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link rel="shortcut icon" href="/img/logo.svg" type="image/png">
+    <title>Personal Freedom</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<h1 th:text="'Итого:' + ${authorizedUserBasket.getTotalPrice()}"></h1>
+<h1 th:text="'Итого: ' + ${authorizedUserBasket.getTotalPrice()} + 'руб'"></h1>
 <form action="/basket/order/create" method="post" th:object="${order}">
     <select th:field="*{address}" required class="address" th:each="pickUpPoint : ${pickUpPoints}">
         <option th:value="${pickUpPoint.address}" th:text="${pickUpPoint.address}"></option>
     </select><br>
-    <input class="create_order" type="submit" value="Оформить заказ">
     <div th:object="${authorizedUserBasket}">
         <div class="book_in_basket_list">
-            <div  th:each="bookInBasket : ${authorizedUserBasket.getBooks()}">
+            <div th:each="bookInBasket, flag : ${authorizedUserBasket.getBooks()}">
                 <div th:object="${bookInBasket}" class="book_in_basket">
-                    <a th:href="'/book/' + ${bookInBasket.book.id}">
-                        <img src=""/>
-                        <p class="title" th:text="'&#34' + ${bookInBasket.book.title} + '&#34'"></p>
-                        <p class="author" th:text="${bookInBasket.book.author}"></p>
-                        <p class="publisher" th:text="'Издательство ' + ${bookInBasket.book.publisher}"></p>
-                    </a>
+                    <img th:src="'/book_img/' + ${bookInBasket.book.mainImgUrl()}"/>
+                    <a th:href="'/book/' + ${bookInBasket.book.id}" class="title" th:text="'&#34' + ${bookInBasket.book.title} + '&#34'"></a>
+                    <p class="author" th:text="${bookInBasket.book.author}"></p>
+                    <p class="publisher" th:text="'Издательство ' + ${bookInBasket.book.publisher}"></p>
                     <p class="price" th:text="${bookInBasket.book.price} + 'руб'"></p>
-
-                <input class="select_book" type="checkbox" name="selectedBooks" th:disabled="${bookInBasket.book.stockQuantity==0}"
-                       th:value="${bookInBasket.id}"/>
+                    <input th:object="${flag}" class="select_book" type="checkbox" name="selectedBooks"
+                           th:disabled="${bookInBasket.book.stockQuantity==0}"
+                           th:value="${bookInBasket.id}"/>
                 </div>
             </div>
         </div>
     </div>
+    <input class="create_order" type="submit" value="Оформить заказ">
 </form>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>

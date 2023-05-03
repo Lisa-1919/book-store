@@ -1,57 +1,55 @@
 <div th:fragment="header">
-  <div class="wrapper">
     <div class="header__wrapper">
-      <div class="logo">
-        <a href="/home" class="logo-link">
-          <img src="/img/logo.svg" alt="OnlineBookstore" class="logo-pic"/>
-        </a>
-      </div>
-      <nav class="store__nav">
-        <ul class="store__list">
-          <li class="header__item">
-            <a href="/catalog" class="header__link">КАТАЛОГ</a>
-          </li>
-          <li class="header__item">
-            <a href="/" class="header__link">АКЦИИ</a>
-          </li>
-          <li class="header__item">
-            <a href="/pick-up-points" class="header__link">ДОСТАВКА</a>
-          </li>
-        </ul>
-      </nav>
-      <nav class="account__nav">
-        <ul class="account__list">
-          <li class="header__item-button">
-            <a href="/basket" class="header__link">
-              <img src="/img/Basket.svg" alt="КОРЗИНА" class="header__bap-pic"/>
+        <div class="logo">
+            <a href="/home" class="logo-link">
+                <img src="/img/logo.svg" alt="OnlineBookstore" class="logo-pic"/>
             </a>
-          </li>
-          <li class="header__item-button">
-            <a href="/account" class="header__link">
-              <img src="/img/account.png" alt="МОЯ СТРАНИЦА" class="header__bap-pic"/>
-            </a>
-          </li>
-          <li class="header__item-button">
-            <div class="dropdown">
-              <button><img src="/img/menu.png" alt="МЕНЮ" class="header__bap-pic"/></button>
-              <div class="dropdown-content">
-                <a href="/login">Вход</a>
-                <a href="/registration">Регистрация</a>
-                <a href="/logout">Выход</a>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </nav>
+        </div>
+        <nav class="store__nav">
+            <ul class="store__list">
+                <li class="header__item">
+                    <a href="/catalog" class="header__link">КАТАЛОГ</a>
+                </li>
+                <li class="header__item">
+                    <a href="/discounts" class="header__link">АКЦИИ</a>
+                </li>
+                <li class="header__item">
+                    <a href="/pick-up-points" class="header__link">ДОСТАВКА</a>
+                </li>
+            </ul>
+        </nav>
+        <nav class="account__nav">
+            <ul class="account__list">
+                <li class="header__item-button">
+                    <a href="/basket" class="header__link">
+                        <img src="/img/Basket.svg" alt="КОРЗИНА" class="header__bap-pic"/>
+                    </a>
+                </li>
+                <li class="header__item-button">
+                    <a href="/account" class="header__link">
+                        <img src="/img/account.png" alt="МОЯ СТРАНИЦА" class="header__bap-pic"/>
+                    </a>
+                </li>
+                <li class="header__item-button">
+                    <div class="dropdown">
+                        <button><img src="/img/menu.png" alt="МЕНЮ" class="header__bap-pic"/></button>
+                        <div class="dropdown-content">
+                            <a href="/login">Вход</a>
+                            <a href="/registration">Регистрация</a>
+                            <a href="/logout">Выход</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
     </div>
-  </div>
 </div>
 
 <div th:fragment="header_admin">
-  <a href="/home" class="header__logo-link">home</a>
-  <a href="/catalog" class="header__link">catalog</a>
-  <a href="/account" class="header__link">account</a>
-  <a href="/login">login</a>
-  <a href="/admin/managers">managers</a>
-  <a href="/logout">logout</a>
+    <a href="/home" class="header__logo-link">home</a>
+    <a href="/catalog" class="header__link">catalog</a>
+    <a href="/account" class="header__link">account</a>
+    <a href="/login">login</a>
+    <a href="/admin/managers">managers</a>
+    <a href="/logout">logout</a>
 </div>

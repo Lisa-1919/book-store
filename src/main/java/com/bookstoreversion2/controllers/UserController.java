@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,12 +72,15 @@ public class UserController {
 
     @GetMapping("/basket")
     public String basketPage(Model model) {
+        getUser().getBasket().getBooks().forEach(bookInBasket -> bookServiceImp.is(bookInBasket.getBook()));
+        model.addAttribute("pickUpPoints", pickUpPointServiceImp.findAll());
         model.addAttribute("authorizedUserBasket", getUser().getBasket());
         return "basket";
     }
 
     @GetMapping("/orders")
     public String viewAllOrders(Model model) {
+        model.addAttribute("format", DateTimeFormatter.ofPattern("d.MM.yyyy"));
         return "order_list_page";
     }
 
@@ -114,17 +118,23 @@ public class UserController {
 
     @PostMapping("/basket/order/create")
     public String createOrder(@ModelAttribute("order") Order order, @RequestParam("selectedBooks") List<Long> selectedBooks, Model model) {
-        List<BookInBasket> toOrder = new ArrayList<>();
-        Basket basket = userServiceImp.getAuthorizedUserBasket();
-        for (Long selectedBookId : selectedBooks) {
-            for (BookInBasket bookInBasket : basket.getBooks()) {
-                if (selectedBookId == bookInBasket.getId()) {
-                    toOrder.add(bookInBasket);
+        if(selectedBooks==null){
+            model.addAttribute("error", "error");
+            return "redirect:/basket";
+        }
+        else {
+            List<BookInBasket> toOrder = new ArrayList<>();
+            Basket basket = userServiceImp.getAuthorizedUserBasket();
+            for (Long selectedBookId : selectedBooks) {
+                for (BookInBasket bookInBasket : basket.getBooks()) {
+                    if (selectedBookId == bookInBasket.getId()) {
+                        toOrder.add(bookInBasket);
+                    }
                 }
             }
+            orderServiceImp.createNewOrder(order, toOrder);
+            return "redirect:/catalog";
         }
-        orderServiceImp.createNewOrder(order, toOrder);
-        return "redirect:/catalog";
     }
 
     @GetMapping("/books/{filename}")

@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
-    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/pick_up_point.css" th:href="@{/css/pick_up_point.css}"/>
+    <link rel="shortcut icon" href="/img/logo.svg" type="image/png">
+    <title>Personal Freedom</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
 <p>Адреса самовывоза</p>
-<div th:each="pickUpPoint : ${pickUpPoints}">
-    <form th:action="'/pick-up-points/' + ${pickUpPoint.id} +'/r'" method="post">
-        <p th:text="${pickUpPoint.address}"></p>
-        <p th:text="${pickUpPoint.workSchedule}"></p>
-        <p th:text="${pickUpPoint.startOfBusiness}"></p>
-        <p th:text="${pickUpPoint.closeOfBusiness}"></p>
-        <p th:text="${pickUpPoint.rating}"></p>
-        <input name="rating" type="number" min="1.0" max="5.0" step="0.1" placeholder="rating">
-        <input type="submit" value="rate">
-    </form>
+<div class="grid">
+    <div th:each="pickUpPoint : ${pickUpPoints}" class="pick_up_point">
+        <p class="address" th:text="${pickUpPoint.address}"/>
+        <p class="work_schedule" th:text="${pickUpPoint.workSchedule}"/>
+        <p class="time" th:text="${pickUpPoint.startOfBusiness} + ' - ' + ${pickUpPoint.closeOfBusiness}"/>
+        <p class="rating" th:text="${pickUpPoint.rating}"/>
+        <form th:action="'/pick-up-points/' + ${pickUpPoint.id} +'/r'" method="post" class="rating_form">
+            <input name="rating" type="number" min="1.0" max="5.0" step="0.1" placeholder="rating">
+            <input type="submit" value="rate">
+        </form>
+    </div>
 </div>
 </body>
 </html>

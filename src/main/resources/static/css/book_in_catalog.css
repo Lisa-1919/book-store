@@ -57,26 +57,19 @@
     color: #000000;
 }
 
-.add{
-    width:263px;
-    height: 53px;
+.add_to_basket{
     margin-left: 8px;
     margin-top: 4px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-
-.add button{
-    width: 178px;
-    height: 53px;
     border: 1px solid #F67DF9;
     background: #F67DF9;
     border-radius: 66px;
     font-family: 'Forum';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 15px;
     line-height: 29px;
     text-align: center;
     text-transform: uppercase;
@@ -125,4 +118,9 @@
     display: flex;
     align-content: center;
     justify-content: space-between;
+}
+
+
+.grid{
+    column-count: 5;
 }

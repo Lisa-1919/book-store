@@ -8,30 +8,50 @@
           th:href="@{/css/book_in_catalog.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/catalog.css" th:href="@{/css/catalog.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/search.css" th:href="@{/css/search.css}"/>
-    <title>Title</title>
+    <link rel="shortcut icon" href="/img/logo.svg" type="image/png">
+    <title>Personal Freedom</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
 <div class="grid-header">
     <div class="search" th:insert="blocks/common.html :: search"></div>
-    <div class="sort" th:insert="blocks/common.html :: sort"></div>
+    <!--    <div class="sort" th:insert="blocks/common.html :: sort"></div>-->
+    <div class="sort">
+        <button value=""><p class="s">Сортировать &#9660</p></button>
+        <div class="sort-content">
+            <a href="/catalog?sort=popular">popular</a>
+            <a href="/catalog?sort=priceUp">price (min)</a>
+            <a href="/catalog?sort=priceDown">price (max)</a>
+        </div>
+    </div>
 </div>
 <div class="grid-container">
     <div class="menu">
         <div class="genres">
             <h3>Категории</h3>
             <div class="choice_genre">
-                <a href="/store/genres/foreign">Зарубежная классика</a><br>
-                <a href="/store/genres/detective">Детективы</a><br>
-                <a href="/store/genres/psychology">Психология</a><br>
-                <a href="/store/genres/fantasy">Фэнтези</a><br>
-                <a href="/store/genres/fantastic">Фантастика</a><br>
-                <a href="/store/genres/roman">Любовные романы</a><br>
-                <a href="/store/genres/history">История</a><br>
-                <a href="/store/genres/science">Наука</a><br>
-                <a href="/store/genres/kids">Детские</a><br>
+                <a href="/catalog?genre=foreign">Зарубежная классика</a><br>
+                <a href="/catalog?genre=detective">Детективы</a><br>
+                <a href="/catalog?genre=psychology">Психология</a><br>
+                <a href="/catalog?genre=fantasy">Фэнтези</a><br>
+                <a href="/catalog?genre=fantastic">Фантастика</a><br>
+                <a href="/catalog?genre=roman">Любовные романы</a><br>
+                <a href="/catalog?genre=history">История</a><br>
+                <a href="/catalog?genre=science">Наука</a><br>
+                <a href="/catalog?genre=kids">Детские</a><br>
             </div>
         </div>
+        <form action="/catalog" method="post" class="filter">
+            <div class="filter">
+                <h3>Цена</h3>
+                <div class="input_values">
+                    <input type="number" name="min">
+                    <hr noshade>
+                    <input type="number" name="max">
+                </div>
+            </div>
+            <button type="submit" class="filter_button">Применить фильтр</button>
+        </form>
     </div>
     <div class="book" th:each="book : ${books}">
         <a class="book_more" th:href="'/book/' + ${book.id}">
@@ -39,7 +59,7 @@
             <p class="title" th:text="${book.title}"></p>
             <p class="author" th:text="${book.author}"></p>
             <p class="publisher" th:text="${book.publisher}"></p>
-            <p class="price" th:text="${book.price}"></p><br>
+            <p class="price" th:text="${book.price} + 'руб.'" ></p><br>
         </a>
     </div>
 </div>

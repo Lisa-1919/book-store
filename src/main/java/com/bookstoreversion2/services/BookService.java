@@ -17,5 +17,7 @@ public interface BookService {
     List<Book> search(String quest);
 
     List<Book> sort(String sort);
+    List<Book> genreFilter(String genre);
+    List<Book> priceFilter(double min, double max);
 
 }

@@ -1,7 +1,7 @@
 .tabs {
     position: absolute;
     left: 573px;
-    top: 285px;
+    top: 310px;
     font-size: 0;
 }
 
@@ -67,7 +67,7 @@
     width: 816px;
     height: 90px;
     left: 572px;
-
+    top:150px;
     font-family: 'Forum';
     font-style: normal;
     font-weight: 400;
@@ -82,7 +82,7 @@
     width: 273px;
     height: 47px;
     left: 572px;
-    top: 170px;
+    top: 205px;
 
     font-family: 'Forum';
     font-style: normal;
@@ -92,4 +92,14 @@
     /* identical to box height, or 134% */
     text-align: start;
     color: #D4D4D4;
+}
+
+.add_to_basket{
+    margin-left: 53px;
+    margin-top: 60px;
+}
+
+.rating{
+    margin-left: 53px;
+    margin-top: 400px;
 }

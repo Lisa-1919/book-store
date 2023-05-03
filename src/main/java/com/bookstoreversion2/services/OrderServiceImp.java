@@ -1,9 +1,6 @@
 package com.bookstoreversion2.services;
 
-import com.bookstoreversion2.data.entities.Basket;
-import com.bookstoreversion2.data.entities.Book;
-import com.bookstoreversion2.data.entities.BookInBasket;
-import com.bookstoreversion2.data.entities.Order;
+import com.bookstoreversion2.data.entities.*;
 import com.bookstoreversion2.data.repo.BasketRepository;
 import com.bookstoreversion2.data.repo.BookInBasketRepository;
 import com.bookstoreversion2.data.repo.BookRepository;
@@ -17,16 +14,17 @@ import java.util.List;
 
 @Service
 public class OrderServiceImp implements OrderService {
-
     @Autowired
     private OrderRepository orderRepository;
-
     @Autowired
     private BookRepository bookRepository;
     @Autowired
     private UserServiceImp userServiceImp;
     @Autowired
     private BasketRepository basketRepository;
+    @Autowired
+    private BookServiceImp bookServiceImp;
+
 
     @Override
     public Order getOrderById(Long id) {
@@ -56,7 +54,7 @@ public class OrderServiceImp implements OrderService {
         Basket basket = userServiceImp.getAuthorizedUserBasket();
         order.setOrderDate(LocalDateTime.now());
         order.setUser(userServiceImp.getAuthorizedUser());
-        order.setStatus("В ожидании доставки");
+        order.setStatus(Status.PROCESSING.getStatusName());
         List<Book> list = new ArrayList<>();
         books.forEach(bookInBasket -> list.add(bookInBasket.getBook()));
         order.setBooksInOrder(list);

@@ -38,10 +38,14 @@ public class RatingService {
     @Autowired
     private BookRepository bookRepository;
 
-
-
     public void add(User user, Book book, double rating) {
-        ratingRepository.save(new Rating(new RatingItemPK(user, book), rating));
+        Rating ratingDB = ratingRepository.findRatingByRatingItemPK(new RatingItemPK(user, book));
+        if (ratingDB == null) {
+            ratingRepository.save(new Rating(new RatingItemPK(user, book), rating));
+        } else {
+            ratingDB.setRating((ratingDB.getRating() + rating) / 2);
+            ratingRepository.save(ratingDB);
+        }
     }
 
     public List<Book> getRecommendation() {
@@ -85,7 +89,7 @@ public class RatingService {
         return dataModel;
     }
 
-    private File writeRatingDataFromDBToFile(){
+    private File writeRatingDataFromDBToFile() {
         File file = new File("D:/book-store-version-2/src/main/java/com/bookstoreversion2/data/rating/rating.txt");
         List<Rating> ratings = ratingRepository.findAll();
         try {
@@ -99,7 +103,7 @@ public class RatingService {
             });
             writer.flush();
             writer.close();
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return file;

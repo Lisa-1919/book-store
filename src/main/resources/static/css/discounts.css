@@ -1,0 +1,20 @@
+.list{
+    display: grid;
+    column-count: 1;
+    gap: 10px;
+}
+
+.discount{
+    border: 3px solid #FCFEB2;
+}
+
+.discount p{
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 47px;
+    /* identical to box height, or 134% */
+    text-align: start;
+    color: #000000;
+}

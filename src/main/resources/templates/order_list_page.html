@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
-    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/order_list.css" th:href="@{/css/order_list.css}"/>
+    <link rel="shortcut icon" href="/img/logo.svg" type="image/png">
+    <title>Personal Freedom</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<div th:each="order : ${orders}">
-    <p th:text="${order.orderDate}"></p>
-    <p th:text="'status: ' + ${order.status}"></p>
-    <p th:text="'address: ' + ${order.address}"></p>
+<div th:each="order : ${orders}" class="order">
+    <p th:text="'Дата заказа: ' + ${order.orderDate.format(format)}"></p>
+    <p th:text="'Статус: ' + ${order.status}"></p>
+    <p th:text="'Адрес: ' + ${order.address}"></p>
+    <p>Книги: </p>
     <div th:each="bookInOrder : ${order.booksInOrder}">
-        <p th:text="${bookInOrder.title}"></p>
+        <a th:href="'/book/' + ${bookInOrder.id}" th:text="${bookInOrder.title}"></a>
     </div>
 </div>
 </body>

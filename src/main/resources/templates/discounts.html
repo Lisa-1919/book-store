@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/discounts.css" th:href="@{/css/discounts.css}"/>
     <link rel="shortcut icon" href="/img/logo.svg" type="image/png">
     <title>Personal Freedom</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<a href="/manager/pick-up-points/add">Добавить адрес самовывоза</a>
-<p>Адреса самовывоза</p>
-<div th:each="pickUpPoint : ${pickUpPoints}">
-    <a th:href="'/manager/pick-up-points/' + ${pickUpPoint.id}" th:text="${pickUpPoint.address}"></a>
+<div class="list">
+    <div class="discount" th:each="discount : ${discounts}">
+        <p class="title" th:text="${discount.title}"></p>
+        <p class="description" th:text="${discount.description}"></p>
+        <p class="period" th:text="'Прововодится с ' + ${discount.startDate} + ' по ' + ${discount.endDate}"></p>
+    </div>
 </div>
 </body>
 </html>

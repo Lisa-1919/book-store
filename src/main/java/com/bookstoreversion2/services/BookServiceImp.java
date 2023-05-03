@@ -71,10 +71,30 @@ public class BookServiceImp implements BookService {
         return books;
     }
 
+    @Override
+    public List<Book> genreFilter(String genre) {
+        return bookRepository.findByGenre(genre);
+    }
+
+    @Override
+    public List<Book> priceFilter(double min, double max) {
+        if(min > max){
+            double temp = min;
+            min = max;
+            max = temp;
+        }
+        List<Book> books = new ArrayList<>();
+        for(Book book : bookRepository.findAll()){
+            if(book.getPrice() > min && book.getPrice() < max){
+                books.add(book);
+            }
+        }
+        return books;
+    }
+
     public boolean is(Book book){
         List<Discount> discounts = discountServiceImp.getAllDiscounts();
         for(Discount discount: discounts){
-            // String parameter = discount.getParameter();
             String value = discount.getValue();
             if(book.getAuthor().equals(value) || book.getPublisher().equals(value) || book.getGenre().equals(value)) {
                 book.setPrice(book.getPrice()*(1-discount.getDiscountAmount()));

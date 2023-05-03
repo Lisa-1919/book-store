@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
-    <title>Title</title>
+    <link rel="shortcut icon" href="/img/logo.svg" type="image/png">
+    <title>Personal Freedom</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
@@ -14,10 +15,15 @@
         <input th:field="*{author}" type="text" placeholder="author" required><br>
         <input th:field="*{price}" type="text" placeholder="price" required><br>
         <select th:field="*{genre}" required>
-            <option th:value="'roman'">roman</option>
-            <option th:value="'education'">education</option>
-            <option th:value="'fantastic'">fantastic</option>
-            <option th:value="'historical'">historical</option>
+            <option th:value="'roman'">Любовный роман</option>
+            <option th:value="'foreign'">Зарубежная классика</option>
+            <option th:value="'fantastic'">Фантастика</option>
+            <option th:value="'fantasy'">Фэнтези</option>
+            <option th:value="'detective'">Детективы</option>
+            <option th:value="'psychology'">Психология</option>
+            <option th:value="'science'">Наука</option>
+            <option th:value="'history'">История/option>
+            <option th:value="'kids'">Детские</option>
         </select><br>
         <select th:field="*{publisher}" required>
             <option th:value="'АСТ'">АСТ</option>
@@ -31,13 +37,13 @@
             <option th:value="'Твердая'">Твердая</option>
             <option th:value="'Мягкая'">Мягкая</option>
         </select><br>
-        <input th:field="*{description}" type="text" placeholder="description"><br>
+        <textarea th:field="*{description}" type="text" placeholder="description"/><br>
         <p>free book excerpt url <input name="_freeBookExcerptURL" type="file" accept=".pdf"></p>
         <p>ebook url <input name="_eBookURL" type="file" accept=".pdf"></p>
         <p>add images <input name="_images" type="file"  accept=".jpg, .jpeg, .png" multiple="multiple"></p>
         <input th:field="*{stockQuantity}" type="number" placeholder="stock quantity" required>
     </div>
-    <input type="submit" value="add">
+    <input type="submit" value="Добавить">
 </form>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>

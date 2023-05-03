@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
-    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/book_in_catalog.css"
+          th:href="@{/css/book_in_catalog.css}">
+    <link rel="shortcut icon" href="/img/logo.svg" type="image/png">
+    <title>Personal Freedom</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<p>catalog</p>
-<div th:each="book : ${books}">
-    <a th:href="'/manager/book/' + ${book.id}" th:text="${book.title}"></a>
+<a href="/manager/book/add">Добавить</a><br>
+<div class="grid">
+    <div class="book" th:each="book : ${books}">
+        <a class="book_more" th:href="'/manager/book/' + ${book.id}">
+            <img th:src="'/book_img/' + ${book.mainImgUrl()}">
+            <p class="title" th:text="${book.title}"></p>
+            <p class="author" th:text="${book.author}"></p>
+            <p class="publisher" th:text="${book.publisher}"></p>
+            <p class="price" th:text="${book.price} + 'руб.'"></p><br>
+        </a>
+    </div>
 </div>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>

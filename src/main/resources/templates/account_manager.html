@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
-    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/account_admin_manager.css" th:href="@{/css/account_admin_manager.css}"/>
+    <link rel="shortcut icon" href="/img/logo.svg" type="image/png">
+    <title>Personal Freedom</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<p>hi, manager</p>
-<a href="/manager/book/catalog">Книги</a><br>
-<a href="/manager/book/add">add book</a><br>
-<a href="/manager/discounts/view">Акции</a><br>
-<a href="/manager/pick-up-points/view">Пункты самовывоза</a><br>
-<a href="/manager/discounts/add">add discount</a><br>
-<a href="/account/password">Изменить пароль</a><br>
+<div class="wrapper">
+    <a href="/manager/book/catalog">Книги</a><br>
+    <a href="/manager/discounts/view">Акции</a><br>
+    <a href="/manager/pick-up-points/view">Пункты самовывоза</a><br>
+    <a href="/account/password">Изменить пароль</a><br>
+</div>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

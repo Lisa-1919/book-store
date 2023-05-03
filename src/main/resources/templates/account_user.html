@@ -4,18 +4,32 @@
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
-    <script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
-    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/account_user.css" th:href="@{/css/account_user.css}"/>
+    <link rel="shortcut icon" href="/img/logo.svg" type="image/png">
+    <title>Personal Freedom</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<div th:object="${u}">
-    <a href="/home">home</a><br>
-    <p th:text="'hi, ' + ${u.firstName}"></p>
-    <a href="/account/password">update password</a><br>
-    <a href="/basket">my basket</a><br>
-    <a href="/orders">my orders</a><br>
-</div>
+<main class="main" th:object="${u}">
+    <div class="wrapper">
+        <div class="information">
+            <h2>Личная информация</h2>
+            <div class="data">
+                <p th:text="${u.firstName}"/>
+                <p th:text="${u.lastName}"/>
+                <p th:text="${u.username}"/>
+            </div>
+        </div>
+        <div class="actions">
+            <h2>История</h2>
+            <div class="history">
+                <a href="/basket">Корзина <label th:text="${u.basket.books.size()}"/></a>
+                <a href="/orders">История заказов <label th:text="${orderNumber}"/></a>
+            </div>
+        </div>
+    </div>
+    <a class="password" href="/account/password">Изменить пароль</a><br>
+</main>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

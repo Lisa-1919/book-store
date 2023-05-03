@@ -3,8 +3,6 @@
     position: absolute;
     width: 415px;
     height: 68px;
-    left: 0;
-    top: 165px;
     border: 1px solid #F67DF9;
 }
 
@@ -21,7 +19,7 @@
     line-height: 22px;
     letter-spacing: -0.04em;
     color: #000000;
-
+    border: none;
 }
 
 .search_button {

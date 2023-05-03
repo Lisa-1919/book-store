@@ -29,7 +29,7 @@ public class WebSecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/registration", "/catalog", "/book/**", "/pick-up-points/*", "/home").permitAll()
+                        .requestMatchers("/registration", "/catalog", "/book/**", "/pick-up-points/*", "/discounts", "/home", "/example").permitAll()
                         .requestMatchers("/admin/*", "/managers/*").hasRole("ADMIN")
                         .requestMatchers("/manager/*").hasRole("MANAGER")
                         .requestMatchers("/user/*", "/basket/*", "/orders/*", "/book/**").hasRole("USER")
@@ -52,6 +52,6 @@ public class WebSecurityConfig{
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/css/**", "/js/**", "/img/**");
+        return (web) -> web.ignoring().requestMatchers("/css/**", "/js/**", "/img/**", "/book_img/**");
     }
 }

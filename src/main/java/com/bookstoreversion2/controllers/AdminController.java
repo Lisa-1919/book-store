@@ -55,7 +55,9 @@ public class AdminController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        User user = new User(email, phone, firstName, lastName, bCryptPasswordEncoder.encode(password), Collections.singleton(new Role(2, "MANAGER")));
+        User user = User.builder().username(email).phone(phone).firstName(firstName).lastName(lastName)
+                .password(bCryptPasswordEncoder.encode(password)).roles(Collections.singleton(new Role(2, "MANAGER")))
+        .build();
         userServiceImp.createNewAccount(user);
         OkHttpClient client = new OkHttpClient();
 
