@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -49,7 +46,7 @@ public class StoreController implements ErrorController {
         } else {
             books = bookServiceImp.getAllBooks();
         }
-        books.forEach(book -> bookServiceImp.is(book));
+     //   books.forEach(book -> bookServiceImp.is(book));
         model.addAttribute("books", books);
         return "catalog";
     }
@@ -64,6 +61,12 @@ public class StoreController implements ErrorController {
     public String pickUpPointsPage(Model model) {
         model.addAttribute("pickUpPoints", pickUpPointServiceImp.findAll());
         return "pick_up_points";
+    }
+
+    @PostMapping("/pick-up-points/{id}/r")
+    public String pickUpPointRating(@PathVariable Long id, @RequestParam("rating") double rating, Model model){
+        pickUpPointServiceImp.ratePickUpPoint(id, rating);
+        return "redirect:/pick-up-points";
     }
 
     @GetMapping("/discounts")

@@ -29,10 +29,10 @@ public class WebSecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/registration", "/catalog", "/book/**", "/pick-up-points/*", "/discounts", "/home", "/example").permitAll()
+                        .requestMatchers("/registration", "/catalog", "/book/*", "/pick-up-points", "/pick-up-points/*/r", "/discounts", "/home").permitAll()
                         .requestMatchers("/admin/*", "/managers/*").hasRole("ADMIN")
                         .requestMatchers("/manager/*").hasRole("MANAGER")
-                        .requestMatchers("/user/*", "/basket/*", "/orders/*", "/book/**").hasRole("USER")
+                        .requestMatchers("/user/*", "/basket/*", "/orders/*", "/book/*").hasRole("USER")
                         .requestMatchers("/account").authenticated()
                         .anyRequest().authenticated()
                 )

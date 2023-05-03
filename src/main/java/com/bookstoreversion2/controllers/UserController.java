@@ -72,7 +72,7 @@ public class UserController {
 
     @GetMapping("/basket")
     public String basketPage(Model model) {
-        getUser().getBasket().getBooks().forEach(bookInBasket -> bookServiceImp.is(bookInBasket.getBook()));
+      //  getUser().getBasket().getBooks().forEach(bookInBasket -> bookServiceImp.is(bookInBasket.getBook()));
         model.addAttribute("pickUpPoints", pickUpPointServiceImp.findAll());
         model.addAttribute("authorizedUserBasket", getUser().getBasket());
         return "basket";
@@ -154,12 +154,6 @@ public class UserController {
                 .contentLength(file.length())
                 .contentType(MediaType.parseMediaType("application/pdf"))
                 .body(resource);
-    }
-
-    @PostMapping("/pick-up-points/{id}/r")
-    public String pickUpPointRating(@PathVariable Long id, @RequestParam("rating") double rating, Model model){
-        pickUpPointServiceImp.ratePickUpPoint(id, rating);
-        return "redirect:/pick-up-points";
     }
 
 }

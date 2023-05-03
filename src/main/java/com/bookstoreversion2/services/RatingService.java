@@ -54,20 +54,23 @@ public class RatingService {
             DataModel realModel = getUserData();
             PlusAnonymousConcurrentUserDataModel plusModel = new PlusAnonymousConcurrentUserDataModel(realModel, 4);
             Long anonymousUserId = plusModel.takeAvailableUser();
-            PreferenceArray tempPrefs = new GenericUserPreferenceArray(2);
+            PreferenceArray tempPrefs = new GenericUserPreferenceArray(3);
             tempPrefs.setUserID(0, anonymousUserId);
             tempPrefs.setItemID(0, 11);
             tempPrefs.setValue(0, (float) 2.3);
             tempPrefs.setUserID(1, anonymousUserId);
             tempPrefs.setItemID(1, 16);
             tempPrefs.setValue(1, 5);
+            tempPrefs.setUserID(2, anonymousUserId);
+            tempPrefs.setItemID(2, 17);
+            tempPrefs.setValue(2, 5);
             plusModel.setTempPrefs(tempPrefs, anonymousUserId);
 
             UserSimilarity similarity = new PearsonCorrelationSimilarity(plusModel);
             UserNeighborhood neighborhood = new ThresholdUserNeighborhood(0.1, similarity, plusModel);
             Recommender recommender = new GenericUserBasedRecommender(plusModel, neighborhood, similarity);
             List<RecommendedItem> recommendedItems;
-            recommendedItems = recommender.recommend(anonymousUserId, 2);
+            recommendedItems = recommender.recommend(anonymousUserId, 5);
             plusModel.releaseUser(anonymousUserId);
             for (RecommendedItem item : recommendedItems) {
                 Book book = bookRepository.findById(item.getItemID()).get();
@@ -78,6 +81,50 @@ public class RatingService {
         }
         return recommendedBooks;
     }
+
+//public List<Book> getRecommendation(Long id) {
+//    List<Book> recommendedBooks = new ArrayList<>();
+//    try {
+//        DataModel realModel = getUserData();
+//        if(id == null) {
+//            PlusAnonymousConcurrentUserDataModel plusModel = new PlusAnonymousConcurrentUserDataModel(realModel, 4);
+//            Long anonymousUserId = plusModel.takeAvailableUser();
+//            PreferenceArray tempPrefs = new GenericUserPreferenceArray(2);
+//            tempPrefs.setUserID(0, anonymousUserId);
+//            tempPrefs.setItemID(0, 11);
+//            tempPrefs.setValue(0, (float) 2.3);
+//            tempPrefs.setUserID(1, anonymousUserId);
+//            tempPrefs.setItemID(1, 16);
+//            tempPrefs.setValue(1, 5);
+//            plusModel.setTempPrefs(tempPrefs, anonymousUserId);
+//
+//            UserSimilarity similarity = new PearsonCorrelationSimilarity(plusModel);
+//            UserNeighborhood neighborhood = new ThresholdUserNeighborhood(0.1, similarity, plusModel);
+//            Recommender recommender = new GenericUserBasedRecommender(plusModel, neighborhood, similarity);
+//            List<RecommendedItem> recommendedItems;
+//            recommendedItems = recommender.recommend(anonymousUserId, 5);
+//            plusModel.releaseUser(anonymousUserId);
+//
+//            for (RecommendedItem item : recommendedItems) {
+//                Book book = bookRepository.findById(item.getItemID()).get();
+//                recommendedBooks.add(book);
+//            }
+//        }else{
+//            UserSimilarity similarity = new PearsonCorrelationSimilarity(realModel);
+//            UserNeighborhood neighborhood = new ThresholdUserNeighborhood(0.1, similarity, realModel);
+//            Recommender recommender = new GenericUserBasedRecommender(realModel, neighborhood, similarity);
+//            List<RecommendedItem> recommendedItems;
+//            recommendedItems = recommender.recommend(id, 5);
+//            for (RecommendedItem item : recommendedItems) {
+//                Book book = bookRepository.findById(item.getItemID()).get();
+//                recommendedBooks.add(book);
+//            }
+//        }
+//    } catch (TasteException e) {
+//        throw new RuntimeException(e);
+//    }
+//    return recommendedBooks;
+//}
 
     public DataModel getUserData() {
         DataModel dataModel;

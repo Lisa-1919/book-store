@@ -35,12 +35,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Override
     public User getUserByEmail(String email) {
-        User userFindByEmail = new User();
-        for (User user : userRepository.findAll()) {
-            if (user.getUsername().equals(email))
-                userFindByEmail = user;
-        }
-        return userFindByEmail;
+        return userRepository.findByUsername(email);
     }
 
     @Override

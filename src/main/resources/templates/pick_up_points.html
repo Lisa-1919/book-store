@@ -17,7 +17,7 @@
         <p class="work_schedule" th:text="${pickUpPoint.workSchedule}"/>
         <p class="time" th:text="${pickUpPoint.startOfBusiness} + ' - ' + ${pickUpPoint.closeOfBusiness}"/>
         <p class="rating" th:text="${pickUpPoint.rating}"/>
-        <form th:action="'/pick-up-points/' + ${pickUpPoint.id} +'/r'" method="post" class="rating_form">
+        <form th:action="'/pick-up-points/' + ${pickUpPoint.id}+'/r'" method="post" class="rating_form">
             <input name="rating" type="number" min="1.0" max="5.0" step="0.1" placeholder="rating">
             <input type="submit" value="rate">
         </form>

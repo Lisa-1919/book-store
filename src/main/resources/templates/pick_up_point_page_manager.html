@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/add_book.css" th:href="@{/css/add_book.css}"/>
     <script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
     <link rel="shortcut icon" href="/img/logo.svg" type="image/png">
     <title>Personal Freedom</title>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<form th:action="'/manager/pick-up-points/' + ${pickUpPoint.id} + '/edit'" method="post" th:object="${pickUpPoint}">
-    <input th:field="*{address}" th:value="*{address}"><br>
-    <input th:field="*{workSchedule}" th:value="*{workSchedule}"><br>
-    <input type="time" th:field="*{startOfBusiness}" th:value="*{startOfBusiness}"><br>
-    <input type="time" th:field="*{closeOfBusiness}" th:value="*{closeOfBusiness}"><br>
-    <input type="submit" value="edit">
+<form th:action="'/manager/pick-up-points/' + ${pickUpPoint.id} + '/edit'" method="post" th:object="${pickUpPoint}" class="form">
+    <input type="text" th:field="*{address}" th:value="*{address}">
+    <select th:field="*{workSchedule}" required>
+        <option th:value="'пн-вс'">пн-вс</option>
+        <option th:value="'пн-пт'">пн-пт</option>
+    </select>
+    <input type="time" th:field="*{startOfBusiness}" th:value="*{startOfBusiness}">
+    <input type="time" th:field="*{closeOfBusiness}" th:value="*{closeOfBusiness}">
+    <input type="submit" value="Сохранить">
 </form>
 <form th:action="'/manager/pick-up-points/' + ${pickUpPoint.id} + '/delete'" method="get">
-    <input type="submit" onclick="return deleletconfig()" value="delete">
+    <input type="submit" onclick="return deleletconfig()" value="Удалить">
 </form>
 </body>
 </html>

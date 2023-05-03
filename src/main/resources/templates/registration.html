@@ -9,31 +9,31 @@
     <title>Personal Freedom</title>
 </head>
 <body>
+<p th:text="${error}"></p>
 <div class="wrapper">
     <a href="/home">Главная страница</a><br>
     <main class="main">
         <div class="registration_block">
             <h1>Регистрация</h1>
             <form action="/registration" method="post">
-                <input name="firstName" placeholder="first name">
+                <input name="firstName" placeholder="Имя">
                 <hr>
                 <br>
-                <input name="lastName" placeholder="last name">
+                <input name="lastName" placeholder="Фамилия">
                 <hr>
                 <br>
                 <input type="email" name="email" placeholder="email" required>
                 <hr>
                 <br>
-                <input name="phone" placeholder="phone">
+                <input name="phone" placeholder="Номер телефона">
                 <hr>
                 <br>
-                <input name="password" type="password" placeholder="password">
+                <input name="password" type="password" placeholder="Пароль">
                 <hr>
                 <br>
-                <input name="confirmPassword" type="password" placeholder="confirm password">
+                <input name="confirmPassword" type="password" placeholder="Подтверждение пароля">
                 <hr>
                 <br>
-                <a class="login_class" href="/login">Уже есть аккаунт? Войти</a>
                 <button type="submit">ГОТОВО!</button>
             </form>
         </div>

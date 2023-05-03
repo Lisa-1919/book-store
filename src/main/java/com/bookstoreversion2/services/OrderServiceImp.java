@@ -22,9 +22,6 @@ public class OrderServiceImp implements OrderService {
     private UserServiceImp userServiceImp;
     @Autowired
     private BasketRepository basketRepository;
-    @Autowired
-    private BookServiceImp bookServiceImp;
-
 
     @Override
     public Order getOrderById(Long id) {
